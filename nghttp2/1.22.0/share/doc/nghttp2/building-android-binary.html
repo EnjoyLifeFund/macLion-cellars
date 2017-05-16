@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building Android binary &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="Tutorial: HTTP/2 client" href="tutorial-client.html"/>
+        <link rel="prev" title="Contribution Guidelines" href="contribute.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Building Android binary</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-android-binary">
+<h1>Building Android binary<a class="headerlink" href="#building-android-binary" title="Permalink to this headline">¶</a></h1>
+<p>In this article, we briefly describe how to build Android binary using
+<a class="reference external" href="http://developer.android.com/tools/sdk/ndk/index.html">Android NDK</a>
+cross-compiler on Debian Linux.</p>
+<p>The easiest way to build android binary is use Dockerfile.android.
+See Dockerfile.android for more details.  If you cannot use
+Dockerfile.android for whatever reason, continue to read the rest of
+this article.</p>
+<p>We offer <code class="docutils literal"><span class="pre">android-config</span></code> and <code class="docutils literal"><span class="pre">android-make</span></code> scripts to make the
+build easier.  To make these script work, NDK toolchain must be
+installed in the following way.  First, let us introduce
+<code class="docutils literal"><span class="pre">ANDROID_HOME</span></code> environment variable.  We need to install toolchain
+under <code class="docutils literal"><span class="pre">$ANDROID_HOME/toolchain</span></code>.  An user can freely choose the path
+for <code class="docutils literal"><span class="pre">ANDROID_HOME</span></code>.  For example, to install toolchain under
+<code class="docutils literal"><span class="pre">$ANDROID_HOME/toolchain</span></code>, do this in the the directory where NDK is
+unpacked:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ build/tools/make_standalone_toolchain.py \
+  --arch arm --api 16 --stl gnustl \
+  --install-dir $ANDROID_HOME/toolchain
+</pre></div>
+</div>
+<p>The API level (<code class="docutils literal"><span class="pre">--api</span></code>) is not important here because we don't use
+Android specific C/C++ API.</p>
+<p>The dependent libraries, such as OpenSSL, libev, and c-ares should be
+built with the toolchain and installed under
+<code class="docutils literal"><span class="pre">$ANDROID_HOME/usr/local</span></code>.  We recommend to build these libraries as
+static library to make the deployment easier.  libxml2 support is
+currently disabled.</p>
+<p>Although zlib comes with Android NDK, it seems not to be a part of
+public API, so we have to built it for our own.  That also provides us
+proper .pc file as a bonus.</p>
+<p>Before running <code class="docutils literal"><span class="pre">android-config</span></code> and <code class="docutils literal"><span class="pre">android-make</span></code>,
+<code class="docutils literal"><span class="pre">ANDROID_HOME</span></code> environment variable must be set to point to the
+correct path.  Also add <code class="docutils literal"><span class="pre">$ANDROID_HOME/toolchain/bin</span></code> to <code class="docutils literal"><span class="pre">PATH</span></code>:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ export PATH=$PATH:$ANDROID_HOME/toolchain/bin
+</pre></div>
+</div>
+<p>To configure OpenSSL, use the following script:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$ANDROID_HOME</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s1">&#39;No $ANDROID_HOME specified.&#39;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/usr/local
+<span class="nv">TOOLCHAIN</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/toolchain
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLCHAIN</span>/bin:<span class="nv">$PATH</span>
+
+<span class="nb">export</span> <span class="nv">CROSS_COMPILE</span><span class="o">=</span><span class="nv">$TOOLCHAIN</span>/bin/arm-linux-androideabi-
+./Configure --prefix<span class="o">=</span><span class="nv">$PREFIX</span> android
+</pre></div>
+</div>
+<p>And run <code class="docutils literal"><span class="pre">make</span> <span class="pre">install_sw</span></code> to build and install without
+documentation.</p>
+<p>We cannot compile libev without modification.  Apply <a class="reference external" href="https://gist.github.com/tatsuhiro-t/48c45f08950f587180ed">this patch</a> before
+configuring libev.  This patch is for libev-4.19.  After applying the
+patch, to configure libev, use the following script:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$ANDROID_HOME</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s1">&#39;No $ANDROID_HOME specified.&#39;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/usr/local
+<span class="nv">TOOLCHAIN</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/toolchain
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLCHAIN</span>/bin:<span class="nv">$PATH</span>
+
+./configure <span class="se">\</span>
+    --host<span class="o">=</span>arm-linux-androideabi <span class="se">\</span>
+    --build<span class="o">=</span><span class="sb">`</span>dpkg-architecture -qDEB_BUILD_GNU_TYPE<span class="sb">`</span> <span class="se">\</span>
+    --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --disable-shared <span class="se">\</span>
+    --enable-static <span class="se">\</span>
+    <span class="nv">CPPFLAGS</span><span class="o">=</span>-I<span class="nv">$PREFIX</span>/include <span class="se">\</span>
+    <span class="nv">LDFLAGS</span><span class="o">=</span>-L<span class="nv">$PREFIX</span>/lib
+</pre></div>
+</div>
+<p>And run <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> to build and install.</p>
+<p>To configure c-ares, use the following script:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -e</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$ANDROID_HOME</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s1">&#39;No $ANDROID_HOME specified.&#39;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/usr/local
+<span class="nv">TOOLCHAIN</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/toolchain
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLCHAIN</span>/bin:<span class="nv">$PATH</span>
+
+./configure <span class="se">\</span>
+    --host<span class="o">=</span>arm-linux-androideabi <span class="se">\</span>
+    --build<span class="o">=</span><span class="sb">`</span>dpkg-architecture -qDEB_BUILD_GNU_TYPE<span class="sb">`</span> <span class="se">\</span>
+    --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --disable-shared
+</pre></div>
+</div>
+<p>To configure zlib, use the following script:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -e</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$ANDROID_HOME</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s1">&#39;No $ANDROID_HOME specified.&#39;</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+<span class="nv">PREFIX</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/usr/local
+<span class="nv">TOOLCHAIN</span><span class="o">=</span><span class="nv">$ANDROID_HOME</span>/toolchain
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$TOOLCHAIN</span>/bin:<span class="nv">$PATH</span>
+
+<span class="nv">HOST</span><span class="o">=</span>arm-linux-androideabi
+
+<span class="nv">CC</span><span class="o">=</span><span class="nv">$HOST</span>-gcc <span class="se">\</span>
+<span class="nv">AR</span><span class="o">=</span><span class="nv">$HOST</span>-ar <span class="se">\</span>
+<span class="nv">LD</span><span class="o">=</span><span class="nv">$HOST</span>-ld <span class="se">\</span>
+<span class="nv">RANLIB</span><span class="o">=</span><span class="nv">$HOST</span>-ranlib <span class="se">\</span>
+<span class="nv">STRIP</span><span class="o">=</span><span class="nv">$HOST</span>-strip <span class="se">\</span>
+./configure <span class="se">\</span>
+    --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="se">\</span>
+    --libdir<span class="o">=</span><span class="nv">$PREFIX</span>/lib <span class="se">\</span>
+    --includedir<span class="o">=</span><span class="nv">$PREFIX</span>/include <span class="se">\</span>
+    --static
+</pre></div>
+</div>
+<p>And run <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> to build and install.</p>
+<p>After prerequisite libraries are prepared, run <code class="docutils literal"><span class="pre">android-config</span></code> and
+then <code class="docutils literal"><span class="pre">android-make</span></code> to compile nghttp2 source files.</p>
+<p>If all went well, application binaries, such as nghttpx, are created
+under src directory.  Strip debugging information from the binary
+using the following command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ arm-linux-androideabi-strip src/nghttpx
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial-client.html" class="btn btn-neutral float-right" title="Tutorial: HTTP/2 client" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contribute.html" class="btn btn-neutral" title="Contribution Guidelines" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

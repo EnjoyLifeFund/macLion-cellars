@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial: HPACK API &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="nghttp(1)" href="nghttp.1.html"/>
+        <link rel="prev" title="Tutorial: HTTP/2 server" href="tutorial-server.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial: HPACK API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deflating-encoding-headers">Deflating (encoding) headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inflating-decoding-headers">Inflating (decoding) headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deflate-c">deflate.c</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Tutorial: HPACK API</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial-hpack-api">
+<h1>Tutorial: HPACK API<a class="headerlink" href="#tutorial-hpack-api" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, we describe basic use of nghttp2's HPACK API.  We
+briefly describe the APIs for deflating and inflating header fields.
+The full example of using these APIs, <a class="reference internal" href="#deflate-c">deflate.c</a>, is attached at the
+end of this page. It also resides in the examples directory in the
+archive or repository.</p>
+<div class="section" id="deflating-encoding-headers">
+<h2>Deflating (encoding) headers<a class="headerlink" href="#deflating-encoding-headers" title="Permalink to this headline">¶</a></h2>
+<p>First we need to initialize a <a class="reference internal" href="types.html#c.nghttp2_hd_deflater" title="nghttp2_hd_deflater"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_hd_deflater</span></code></a> object using
+the <a class="reference internal" href="nghttp2_hd_deflate_new.html#c.nghttp2_hd_deflate_new" title="nghttp2_hd_deflate_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_new()</span></code></a> function:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">nghttp2_hd_deflate_new</span><span class="p">(</span><span class="n">nghttp2_hd_deflater</span> <span class="o">**</span><span class="n">deflater_ptr</span><span class="p">,</span>
+                           <span class="kt">size_t</span> <span class="n">deflate_hd_table_bufsize_max</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This function allocates a <a class="reference internal" href="types.html#c.nghttp2_hd_deflater" title="nghttp2_hd_deflater"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_hd_deflater</span></code></a> object,
+initializes it, and assigns its pointer to <code class="docutils literal"><span class="pre">*deflater_ptr</span></code>. The
+<em>deflate_hd_table_bufsize_max</em> is the upper bound of header table size
+the deflater will use.  This will limit the memory usage by the
+deflater object for the dynamic header table.  If in doubt, just
+specify 4096 here, which is the default upper bound of dynamic header
+table buffer size.</p>
+<p>To encode header fields, use the <a class="reference internal" href="nghttp2_hd_deflate_hd.html#c.nghttp2_hd_deflate_hd" title="nghttp2_hd_deflate_hd"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_hd()</span></code></a> function:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">ssize_t</span> <span class="nf">nghttp2_hd_deflate_hd</span><span class="p">(</span><span class="n">nghttp2_hd_deflater</span> <span class="o">*</span><span class="n">deflater</span><span class="p">,</span>
+                              <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">buflen</span><span class="p">,</span>
+                              <span class="k">const</span> <span class="n">nghttp2_nv</span> <span class="o">*</span><span class="n">nva</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nvlen</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <em>deflater</em> is the deflater object initialized by
+<a class="reference internal" href="nghttp2_hd_deflate_new.html#c.nghttp2_hd_deflate_new" title="nghttp2_hd_deflate_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_new()</span></code></a> described above. The encoded byte string is
+written to the buffer <em>buf</em>, which has length <em>buflen</em>.  The <em>nva</em> is
+a pointer to an array of headers fields, each of type
+<a class="reference internal" href="types.html#c.nghttp2_nv" title="nghttp2_nv"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_nv</span></code></a>.  <em>nvlen</em> is the number of header fields which
+<em>nva</em> contains.</p>
+<p>It is important to initialize and assign all members of
+<a class="reference internal" href="types.html#c.nghttp2_nv" title="nghttp2_nv"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_nv</span></code></a>. For security sensitive header fields (such as
+cookies), set the <a class="reference internal" href="enums.html#c.NGHTTP2_NV_FLAG_NO_INDEX" title="NGHTTP2_NV_FLAG_NO_INDEX"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_NV_FLAG_NO_INDEX</span></code></a> flag in
+<a class="reference internal" href="types.html#c.nghttp2_nv.flags" title="nghttp2_nv.flags"><code class="xref c c-member docutils literal"><span class="pre">nghttp2_nv.flags</span></code></a>.  Setting this flag prevents recovery of
+sensitive header fields by compression based attacks: This is achieved
+by not inserting the header field into the dynamic header table.</p>
+<p><a class="reference internal" href="nghttp2_hd_deflate_hd.html#c.nghttp2_hd_deflate_hd" title="nghttp2_hd_deflate_hd"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_hd()</span></code></a> processes all headers given in <em>nva</em>.  The
+<em>nva</em> must include all request or response header fields to be sent in
+one HEADERS (or optionally following (multiple) CONTINUATION
+frame(s)).  The <em>buf</em> must have enough space to store the encoded
+result, otherwise the function will fail.  To estimate the upper bound
+of the encoded result length, use <a class="reference internal" href="nghttp2_hd_deflate_bound.html#c.nghttp2_hd_deflate_bound" title="nghttp2_hd_deflate_bound"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_bound()</span></code></a>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">size_t</span> <span class="nf">nghttp2_hd_deflate_bound</span><span class="p">(</span><span class="n">nghttp2_hd_deflater</span> <span class="o">*</span><span class="n">deflater</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">nghttp2_nv</span> <span class="o">*</span><span class="n">nva</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nvlen</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Pass this function the same parameters (<em>deflater</em>, <em>nva</em>, and
+<em>nvlen</em>) which will be passed to <a class="reference internal" href="nghttp2_hd_deflate_hd.html#c.nghttp2_hd_deflate_hd" title="nghttp2_hd_deflate_hd"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_hd()</span></code></a>.</p>
+<p>Subsequent calls to <a class="reference internal" href="nghttp2_hd_deflate_hd.html#c.nghttp2_hd_deflate_hd" title="nghttp2_hd_deflate_hd"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_hd()</span></code></a> will use the current
+encoder state and perform differential encoding, which yields HPAC's
+fundamental compression gain.</p>
+<p>If <a class="reference internal" href="nghttp2_hd_deflate_hd.html#c.nghttp2_hd_deflate_hd" title="nghttp2_hd_deflate_hd"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_hd()</span></code></a> fails, the failure is fatal and any
+further calls with the same deflater object will fail.  Thus it's very
+important to use <a class="reference internal" href="nghttp2_hd_deflate_bound.html#c.nghttp2_hd_deflate_bound" title="nghttp2_hd_deflate_bound"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_bound()</span></code></a> to determine the
+required size of the output buffer.</p>
+<p>To delete a <a class="reference internal" href="types.html#c.nghttp2_hd_deflater" title="nghttp2_hd_deflater"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_hd_deflater</span></code></a> object, use the
+<a class="reference internal" href="nghttp2_hd_deflate_del.html#c.nghttp2_hd_deflate_del" title="nghttp2_hd_deflate_del"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_deflate_del()</span></code></a> function.</p>
+</div>
+<div class="section" id="inflating-decoding-headers">
+<h2>Inflating (decoding) headers<a class="headerlink" href="#inflating-decoding-headers" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference internal" href="types.html#c.nghttp2_hd_inflater" title="nghttp2_hd_inflater"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_hd_inflater</span></code></a> object is used to inflate compressed
+header data.  To initialize the object, use
+<a class="reference internal" href="nghttp2_hd_inflate_new.html#c.nghttp2_hd_inflate_new" title="nghttp2_hd_inflate_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_new()</span></code></a>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">nghttp2_hd_inflate_new</span><span class="p">(</span><span class="n">nghttp2_hd_inflater</span> <span class="o">**</span><span class="n">inflater_ptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To inflate header data, use <a class="reference internal" href="nghttp2_hd_inflate_hd2.html#c.nghttp2_hd_inflate_hd2" title="nghttp2_hd_inflate_hd2"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_hd2()</span></code></a>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">ssize_t</span> <span class="nf">nghttp2_hd_inflate_hd2</span><span class="p">(</span><span class="n">nghttp2_hd_inflater</span> <span class="o">*</span><span class="n">inflater</span><span class="p">,</span>
+                               <span class="n">nghttp2_nv</span> <span class="o">*</span><span class="n">nv_out</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">inflate_flags</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">in</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">inlen</span><span class="p">,</span>
+                               <span class="kt">int</span> <span class="n">in_final</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="nghttp2_hd_inflate_hd2.html#c.nghttp2_hd_inflate_hd2" title="nghttp2_hd_inflate_hd2"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_hd2()</span></code></a> reads a stream of bytes and outputs a
+single header field at a time. Multiple calls are normally required to
+read a full stream of bytes and output all of the header fields.</p>
+<p>The <em>inflater</em> is the inflater object initialized above.  The <em>nv_out</em>
+is a pointer to a <a class="reference internal" href="types.html#c.nghttp2_nv" title="nghttp2_nv"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_nv</span></code></a> into which one header field may
+be stored.  The <em>in</em> is a pointer to input data, and <em>inlen</em> is its
+length.  The caller is not required to specify the whole deflated
+header data via <em>in</em> at once: Instead it can call this function
+multiple times as additional data bytes become available.  If
+<em>in_final</em> is nonzero, it tells the function that the passed data is
+the final sequence of deflated header data.</p>
+<p>The <em>inflate_flags</em> is an output parameter; on success the function
+sets it to a bitset of flags.  It will be described later.</p>
+<p>This function returns when each header field is inflated.  When this
+happens, the function sets the <a class="reference internal" href="enums.html#c.NGHTTP2_HD_INFLATE_EMIT" title="NGHTTP2_HD_INFLATE_EMIT"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_HD_INFLATE_EMIT</span></code></a> flag
+in <em>inflate_flags</em>, and a header field is stored in <em>nv_out</em>.  The
+return value indicates the number of bytes read from <em>in</em> processed so
+far, which may be less than <em>inlen</em>.  The caller should call the
+function repeatedly until all bytes are processed. Processed bytes
+should be removed from <em>in</em>, and <em>inlen</em> should be adjusted
+appropriately.</p>
+<p>If <em>in_final</em> is nonzero and all given data was processed, the
+function sets the <a class="reference internal" href="enums.html#c.NGHTTP2_HD_INFLATE_FINAL" title="NGHTTP2_HD_INFLATE_FINAL"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_HD_INFLATE_FINAL</span></code></a> flag in
+<em>inflate_flags</em>.  When you see this flag set, call the
+<a class="reference internal" href="nghttp2_hd_inflate_end_headers.html#c.nghttp2_hd_inflate_end_headers" title="nghttp2_hd_inflate_end_headers"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_end_headers()</span></code></a> function.</p>
+<p>If <em>in_final</em> is zero and the <a class="reference internal" href="enums.html#c.NGHTTP2_HD_INFLATE_EMIT" title="NGHTTP2_HD_INFLATE_EMIT"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_HD_INFLATE_EMIT</span></code></a> flag is
+not set, it indicates that all given data was processed.  The caller
+is required to pass additional data.</p>
+<p>Example usage of <a class="reference internal" href="nghttp2_hd_inflate_hd2.html#c.nghttp2_hd_inflate_hd2" title="nghttp2_hd_inflate_hd2"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_hd2()</span></code></a> is shown in the
+<code class="xref c c-func docutils literal"><span class="pre">inflate_header_block()</span></code> function in <a class="reference internal" href="#deflate-c">deflate.c</a>.</p>
+<p>Finally, to delete a <a class="reference internal" href="types.html#c.nghttp2_hd_inflater" title="nghttp2_hd_inflater"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_hd_inflater</span></code></a> object, use
+<a class="reference internal" href="nghttp2_hd_inflate_del.html#c.nghttp2_hd_inflate_del" title="nghttp2_hd_inflate_del"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_del()</span></code></a>.</p>
+</div>
+<div class="section" id="deflate-c">
+<h2>deflate.c<a class="headerlink" href="#deflate-c" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * nghttp2 - HTTP/2 C Library</span>
+<span class="cm"> *</span>
+<span class="cm"> * Copyright (c) 2014 Tatsuhiro Tsujikawa</span>
+<span class="cm"> *</span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining</span>
+<span class="cm"> * a copy of this software and associated documentation files (the</span>
+<span class="cm"> * &quot;Software&quot;), to deal in the Software without restriction, including</span>
+<span class="cm"> * without limitation the rights to use, copy, modify, merge, publish,</span>
+<span class="cm"> * distribute, sublicense, and/or sell copies of the Software, and to</span>
+<span class="cm"> * permit persons to whom the Software is furnished to do so, subject to</span>
+<span class="cm"> * the following conditions:</span>
+<span class="cm"> *</span>
+<span class="cm"> * The above copyright notice and this permission notice shall be</span>
+<span class="cm"> * included in all copies or substantial portions of the Software.</span>
+<span class="cm"> *</span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,</span>
+<span class="cm"> * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</span>
+<span class="cm"> * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</span>
+<span class="cm"> * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE</span>
+<span class="cm"> * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION</span>
+<span class="cm"> * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION</span>
+<span class="cm"> * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+<span class="cm"> */</span>
+<span class="cp">#ifdef HAVE_CONFIG_H</span>
+<span class="cp">#include</span> <span class="cpf">&lt;config.h&gt;</span><span class="cp"></span>
+<span class="cp">#endif </span><span class="cm">/* !HAVE_CONFIG_H */</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;nghttp2/nghttp2.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#define MAKE_NV(K, V)                                                          \</span>
+<span class="cp">  {                                                                            \</span>
+<span class="cp">    (uint8_t *)K, (uint8_t *)V, sizeof(K) - 1, sizeof(V) - 1,                  \</span>
+<span class="cp">        NGHTTP2_NV_FLAG_NONE                                                   \</span>
+<span class="cp">  }</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">deflate</span><span class="p">(</span><span class="n">nghttp2_hd_deflater</span> <span class="o">*</span><span class="n">deflater</span><span class="p">,</span>
+                    <span class="n">nghttp2_hd_inflater</span> <span class="o">*</span><span class="n">inflater</span><span class="p">,</span> <span class="k">const</span> <span class="n">nghttp2_nv</span> <span class="o">*</span><span class="k">const</span> <span class="n">nva</span><span class="p">,</span>
+                    <span class="kt">size_t</span> <span class="n">nvlen</span><span class="p">);</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">inflate_header_block</span><span class="p">(</span><span class="n">nghttp2_hd_inflater</span> <span class="o">*</span><span class="n">inflater</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">in</span><span class="p">,</span>
+                                <span class="kt">size_t</span> <span class="n">inlen</span><span class="p">,</span> <span class="kt">int</span> <span class="n">final</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">rv</span><span class="p">;</span>
+  <span class="n">nghttp2_hd_deflater</span> <span class="o">*</span><span class="n">deflater</span><span class="p">;</span>
+  <span class="n">nghttp2_hd_inflater</span> <span class="o">*</span><span class="n">inflater</span><span class="p">;</span>
+  <span class="cm">/* Define 1st header set.  This is looks like a HTTP request. */</span>
+  <span class="n">nghttp2_nv</span> <span class="n">nva1</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;:scheme&quot;</span><span class="p">,</span> <span class="s">&quot;https&quot;</span><span class="p">),</span> <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;:authority&quot;</span><span class="p">,</span> <span class="s">&quot;example.org&quot;</span><span class="p">),</span>
+      <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;:path&quot;</span><span class="p">,</span> <span class="s">&quot;/&quot;</span><span class="p">),</span> <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;user-agent&quot;</span><span class="p">,</span> <span class="s">&quot;libnghttp2&quot;</span><span class="p">),</span>
+      <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;accept-encoding&quot;</span><span class="p">,</span> <span class="s">&quot;gzip, deflate&quot;</span><span class="p">)};</span>
+  <span class="cm">/* Define 2nd header set */</span>
+  <span class="n">nghttp2_nv</span> <span class="n">nva2</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;:scheme&quot;</span><span class="p">,</span> <span class="s">&quot;https&quot;</span><span class="p">),</span>
+                       <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;:authority&quot;</span><span class="p">,</span> <span class="s">&quot;example.org&quot;</span><span class="p">),</span>
+                       <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;:path&quot;</span><span class="p">,</span> <span class="s">&quot;/stylesheet/style.css&quot;</span><span class="p">),</span>
+                       <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;user-agent&quot;</span><span class="p">,</span> <span class="s">&quot;libnghttp2&quot;</span><span class="p">),</span>
+                       <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;accept-encoding&quot;</span><span class="p">,</span> <span class="s">&quot;gzip, deflate&quot;</span><span class="p">),</span>
+                       <span class="n">MAKE_NV</span><span class="p">(</span><span class="s">&quot;referer&quot;</span><span class="p">,</span> <span class="s">&quot;https://example.org&quot;</span><span class="p">)};</span>
+
+  <span class="n">rv</span> <span class="o">=</span> <span class="n">nghttp2_hd_deflate_new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">deflater</span><span class="p">,</span> <span class="mi">4096</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">rv</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;nghttp2_hd_deflate_init failed with error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+            <span class="n">nghttp2_strerror</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">rv</span> <span class="o">=</span> <span class="n">nghttp2_hd_inflate_new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">inflater</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">rv</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;nghttp2_hd_inflate_init failed with error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+            <span class="n">nghttp2_strerror</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/* Encode and decode 1st header set */</span>
+  <span class="n">deflate</span><span class="p">(</span><span class="n">deflater</span><span class="p">,</span> <span class="n">inflater</span><span class="p">,</span> <span class="n">nva1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">nva1</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">nva1</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+
+  <span class="cm">/* Encode and decode 2nd header set, using differential encoding</span>
+<span class="cm">     using state after encoding 1st header set. */</span>
+  <span class="n">deflate</span><span class="p">(</span><span class="n">deflater</span><span class="p">,</span> <span class="n">inflater</span><span class="p">,</span> <span class="n">nva2</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">nva2</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">nva2</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+
+  <span class="n">nghttp2_hd_inflate_del</span><span class="p">(</span><span class="n">inflater</span><span class="p">);</span>
+  <span class="n">nghttp2_hd_deflate_del</span><span class="p">(</span><span class="n">deflater</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">deflate</span><span class="p">(</span><span class="n">nghttp2_hd_deflater</span> <span class="o">*</span><span class="n">deflater</span><span class="p">,</span>
+                    <span class="n">nghttp2_hd_inflater</span> <span class="o">*</span><span class="n">inflater</span><span class="p">,</span> <span class="k">const</span> <span class="n">nghttp2_nv</span> <span class="o">*</span><span class="k">const</span> <span class="n">nva</span><span class="p">,</span>
+                    <span class="kt">size_t</span> <span class="n">nvlen</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">ssize_t</span> <span class="n">rv</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">buflen</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">outlen</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">i</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">sum</span><span class="p">;</span>
+
+  <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nvlen</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">nva</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">namelen</span> <span class="o">+</span> <span class="n">nva</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">valuelen</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Input (%zu byte(s)):</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nvlen</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fwrite</span><span class="p">(</span><span class="n">nva</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nva</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">namelen</span><span class="p">,</span> <span class="n">stdout</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">);</span>
+    <span class="n">fwrite</span><span class="p">(</span><span class="n">nva</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">value</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nva</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">valuelen</span><span class="p">,</span> <span class="n">stdout</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">buflen</span> <span class="o">=</span> <span class="n">nghttp2_hd_deflate_bound</span><span class="p">(</span><span class="n">deflater</span><span class="p">,</span> <span class="n">nva</span><span class="p">,</span> <span class="n">nvlen</span><span class="p">);</span>
+  <span class="n">buf</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">buflen</span><span class="p">);</span>
+
+  <span class="n">rv</span> <span class="o">=</span> <span class="n">nghttp2_hd_deflate_hd</span><span class="p">(</span><span class="n">deflater</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">buflen</span><span class="p">,</span> <span class="n">nva</span><span class="p">,</span> <span class="n">nvlen</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">rv</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;nghttp2_hd_deflate_hd() failed with error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+            <span class="n">nghttp2_strerror</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">rv</span><span class="p">));</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+
+    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">outlen</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">rv</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Deflate (%zu byte(s), ratio %.02f):</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">outlen</span><span class="p">,</span>
+         <span class="n">sum</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">outlen</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">sum</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">outlen</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mh">0x0fu</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%08zX: &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%02X &quot;</span><span class="p">,</span> <span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+    <span class="k">if</span> <span class="p">(((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x0fu</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Inflate:</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+  <span class="cm">/* We pass 1 to final parameter, because buf contains whole deflated</span>
+<span class="cm">     header data. */</span>
+  <span class="n">rv</span> <span class="o">=</span> <span class="n">inflate_header_block</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">outlen</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">rv</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+
+    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">-----------------------------------------------------------&quot;</span>
+         <span class="s">&quot;--------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+  <span class="n">free</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">inflate_header_block</span><span class="p">(</span><span class="n">nghttp2_hd_inflater</span> <span class="o">*</span><span class="n">inflater</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">in</span><span class="p">,</span>
+                         <span class="kt">size_t</span> <span class="n">inlen</span><span class="p">,</span> <span class="kt">int</span> <span class="n">final</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">ssize_t</span> <span class="n">rv</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+    <span class="n">nghttp2_nv</span> <span class="n">nv</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">inflate_flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">proclen</span><span class="p">;</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">nghttp2_hd_inflate_hd</span><span class="p">(</span><span class="n">inflater</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">nv</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">inflate_flags</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">inlen</span><span class="p">,</span> <span class="n">final</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">rv</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;inflate failed with error code %zd&quot;</span><span class="p">,</span> <span class="n">rv</span><span class="p">);</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">proclen</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">rv</span><span class="p">;</span>
+
+    <span class="n">in</span> <span class="o">+=</span> <span class="n">proclen</span><span class="p">;</span>
+    <span class="n">inlen</span> <span class="o">-=</span> <span class="n">proclen</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">inflate_flags</span> <span class="o">&amp;</span> <span class="n">NGHTTP2_HD_INFLATE_EMIT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">fwrite</span><span class="p">(</span><span class="n">nv</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nv</span><span class="p">.</span><span class="n">namelen</span><span class="p">,</span> <span class="n">stderr</span><span class="p">);</span>
+      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;: &quot;</span><span class="p">);</span>
+      <span class="n">fwrite</span><span class="p">(</span><span class="n">nv</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nv</span><span class="p">.</span><span class="n">valuelen</span><span class="p">,</span> <span class="n">stderr</span><span class="p">);</span>
+      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">inflate_flags</span> <span class="o">&amp;</span> <span class="n">NGHTTP2_HD_INFLATE_FINAL</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">nghttp2_hd_inflate_end_headers</span><span class="p">(</span><span class="n">inflater</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">inflate_flags</span> <span class="o">&amp;</span> <span class="n">NGHTTP2_HD_INFLATE_EMIT</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">inlen</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nghttp.1.html" class="btn btn-neutral float-right" title="nghttp(1)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial-server.html" class="btn btn-neutral" title="Tutorial: HTTP/2 server" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

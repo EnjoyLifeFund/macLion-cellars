@@ -1,0 +1,1781 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Types (structs, unions and typedefs) &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="up" title="API Reference" href="apiref.html"/>
+        <link rel="next" title="nghttp2_check_header_name" href="nghttp2_check_header_name.html"/>
+        <link rel="prev" title="Enums" href="enums.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="apiref.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">Enums</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Types (structs, unions and typedefs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_check_header_name.html">nghttp2_check_header_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_check_header_value.html">nghttp2_check_header_value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_bound.html">nghttp2_hd_deflate_bound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_change_table_size.html">nghttp2_hd_deflate_change_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_del.html">nghttp2_hd_deflate_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_dynamic_table_size.html">nghttp2_hd_deflate_get_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_max_dynamic_table_size.html">nghttp2_hd_deflate_get_max_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_num_table_entries.html">nghttp2_hd_deflate_get_num_table_entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_table_entry.html">nghttp2_hd_deflate_get_table_entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_hd.html">nghttp2_hd_deflate_hd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_hd_vec.html">nghttp2_hd_deflate_hd_vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_new.html">nghttp2_hd_deflate_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_new2.html">nghttp2_hd_deflate_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_change_table_size.html">nghttp2_hd_inflate_change_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_del.html">nghttp2_hd_inflate_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_end_headers.html">nghttp2_hd_inflate_end_headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_dynamic_table_size.html">nghttp2_hd_inflate_get_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_max_dynamic_table_size.html">nghttp2_hd_inflate_get_max_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_num_table_entries.html">nghttp2_hd_inflate_get_num_table_entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_table_entry.html">nghttp2_hd_inflate_get_table_entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_hd.html">nghttp2_hd_inflate_hd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_hd2.html">nghttp2_hd_inflate_hd2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_new.html">nghttp2_hd_inflate_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_new2.html">nghttp2_hd_inflate_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_http2_strerror.html">nghttp2_http2_strerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_is_fatal.html">nghttp2_is_fatal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_nv_compare_name.html">nghttp2_nv_compare_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_del.html">nghttp2_option_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_new.html">nghttp2_option_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_builtin_recv_extension_type.html">nghttp2_option_set_builtin_recv_extension_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_deflate_dynamic_table_size.html">nghttp2_option_set_max_deflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_reserved_remote_streams.html">nghttp2_option_set_max_reserved_remote_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_send_header_block_length.html">nghttp2_option_set_max_send_header_block_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_auto_ping_ack.html">nghttp2_option_set_no_auto_ping_ack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_auto_window_update.html">nghttp2_option_set_no_auto_window_update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_closed_streams.html">nghttp2_option_set_no_closed_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_http_messaging.html">nghttp2_option_set_no_http_messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_recv_client_magic.html">nghttp2_option_set_no_recv_client_magic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_peer_max_concurrent_streams.html">nghttp2_option_set_peer_max_concurrent_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_user_recv_extension_type.html">nghttp2_option_set_user_recv_extension_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_pack_settings_payload.html">nghttp2_pack_settings_payload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_check_default.html">nghttp2_priority_spec_check_default</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_default_init.html">nghttp2_priority_spec_default_init</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_init.html">nghttp2_priority_spec_init</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_decref.html">nghttp2_rcbuf_decref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_get_buf.html">nghttp2_rcbuf_get_buf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_incref.html">nghttp2_rcbuf_incref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_select_next_protocol.html">nghttp2_select_next_protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_del.html">nghttp2_session_callbacks_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_new.html">nghttp2_session_callbacks_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_before_frame_send_callback.html">nghttp2_session_callbacks_set_before_frame_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_data_source_read_length_callback.html">nghttp2_session_callbacks_set_data_source_read_length_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_error_callback.html">nghttp2_session_callbacks_set_error_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_frame_callback.html">nghttp2_session_callbacks_set_on_begin_frame_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_headers_callback.html">nghttp2_session_callbacks_set_on_begin_headers_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_data_chunk_recv_callback.html">nghttp2_session_callbacks_set_on_data_chunk_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_extension_chunk_recv_callback.html">nghttp2_session_callbacks_set_on_extension_chunk_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_not_send_callback.html">nghttp2_session_callbacks_set_on_frame_not_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_recv_callback.html">nghttp2_session_callbacks_set_on_frame_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_send_callback.html">nghttp2_session_callbacks_set_on_frame_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_header_callback.html">nghttp2_session_callbacks_set_on_header_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_header_callback2.html">nghttp2_session_callbacks_set_on_header_callback2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_frame_recv_callback.html">nghttp2_session_callbacks_set_on_invalid_frame_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_header_callback.html">nghttp2_session_callbacks_set_on_invalid_header_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_header_callback2.html">nghttp2_session_callbacks_set_on_invalid_header_callback2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_stream_close_callback.html">nghttp2_session_callbacks_set_on_stream_close_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_pack_extension_callback.html">nghttp2_session_callbacks_set_pack_extension_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_recv_callback.html">nghttp2_session_callbacks_set_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_select_padding_callback.html">nghttp2_session_callbacks_set_select_padding_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_send_callback.html">nghttp2_session_callbacks_set_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_send_data_callback.html">nghttp2_session_callbacks_set_send_data_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_unpack_extension_callback.html">nghttp2_session_callbacks_set_unpack_extension_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_change_stream_priority.html">nghttp2_session_change_stream_priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_check_request_allowed.html">nghttp2_session_check_request_allowed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_check_server_session.html">nghttp2_session_check_server_session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new.html">nghttp2_session_client_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new2.html">nghttp2_session_client_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new3.html">nghttp2_session_client_new3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume.html">nghttp2_session_consume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume_connection.html">nghttp2_session_consume_connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume_stream.html">nghttp2_session_consume_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_create_idle_stream.html">nghttp2_session_create_idle_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_del.html">nghttp2_session_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_find_stream.html">nghttp2_session_find_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_effective_local_window_size.html">nghttp2_session_get_effective_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_effective_recv_data_length.html">nghttp2_session_get_effective_recv_data_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_hd_deflate_dynamic_table_size.html">nghttp2_session_get_hd_deflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_hd_inflate_dynamic_table_size.html">nghttp2_session_get_hd_inflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_last_proc_stream_id.html">nghttp2_session_get_last_proc_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_local_settings.html">nghttp2_session_get_local_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_local_window_size.html">nghttp2_session_get_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_next_stream_id.html">nghttp2_session_get_next_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_outbound_queue_size.html">nghttp2_session_get_outbound_queue_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_remote_settings.html">nghttp2_session_get_remote_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_remote_window_size.html">nghttp2_session_get_remote_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_root_stream.html">nghttp2_session_get_root_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_effective_local_window_size.html">nghttp2_session_get_stream_effective_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_effective_recv_data_length.html">nghttp2_session_get_stream_effective_recv_data_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_local_close.html">nghttp2_session_get_stream_local_close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_local_window_size.html">nghttp2_session_get_stream_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_remote_close.html">nghttp2_session_get_stream_remote_close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_remote_window_size.html">nghttp2_session_get_stream_remote_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_user_data.html">nghttp2_session_get_stream_user_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_mem_recv.html">nghttp2_session_mem_recv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_mem_send.html">nghttp2_session_mem_send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_recv.html">nghttp2_session_recv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_resume_data.html">nghttp2_session_resume_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_send.html">nghttp2_session_send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new.html">nghttp2_session_server_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new2.html">nghttp2_session_server_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new3.html">nghttp2_session_server_new3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_local_window_size.html">nghttp2_session_set_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_next_stream_id.html">nghttp2_session_set_next_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_stream_user_data.html">nghttp2_session_set_stream_user_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_terminate_session.html">nghttp2_session_terminate_session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_terminate_session2.html">nghttp2_session_terminate_session2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_upgrade.html">nghttp2_session_upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_upgrade2.html">nghttp2_session_upgrade2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_want_read.html">nghttp2_session_want_read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_want_write.html">nghttp2_session_want_write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_set_debug_vprintf_callback.html">nghttp2_set_debug_vprintf_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_first_child.html">nghttp2_stream_get_first_child</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_next_sibling.html">nghttp2_stream_get_next_sibling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_parent.html">nghttp2_stream_get_parent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_previous_sibling.html">nghttp2_stream_get_previous_sibling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_state.html">nghttp2_stream_get_state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_sum_dependency_weight.html">nghttp2_stream_get_sum_dependency_weight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_weight.html">nghttp2_stream_get_weight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_strerror.html">nghttp2_strerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_altsvc.html">nghttp2_submit_altsvc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_data.html">nghttp2_submit_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_extension.html">nghttp2_submit_extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_goaway.html">nghttp2_submit_goaway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_headers.html">nghttp2_submit_headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_ping.html">nghttp2_submit_ping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_priority.html">nghttp2_submit_priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_push_promise.html">nghttp2_submit_push_promise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_request.html">nghttp2_submit_request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_response.html">nghttp2_submit_response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_rst_stream.html">nghttp2_submit_rst_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_settings.html">nghttp2_submit_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_shutdown_notice.html">nghttp2_submit_shutdown_notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_trailer.html">nghttp2_submit_trailer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_window_update.html">nghttp2_submit_window_update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_version.html">nghttp2_version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="apiref.html">API Reference</a> &raquo;</li>
+      
+    <li>Types (structs, unions and typedefs)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="types-structs-unions-and-typedefs">
+<h1>Types (structs, unions and typedefs)<a class="headerlink" href="#types-structs-unions-and-typedefs" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="c.nghttp2_session">
+<code class="descname">nghttp2_session</code><a class="headerlink" href="#c.nghttp2_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>The primary structure to hold the resources needed for a HTTP/2
+session.  The details of this structure are intentionally hidden
+from the public API.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_info">
+<code class="descname">nghttp2_info</code><a class="headerlink" href="#c.nghttp2_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>This struct is what <a class="reference internal" href="nghttp2_version.html#c.nghttp2_version" title="nghttp2_version"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_version()</span></code></a> returns.  It holds
+information about the particular nghttp2 version.</p>
+<dl class="member">
+<dt id="c.nghttp2_info.age">
+int <code class="descname">age</code><a class="headerlink" href="#c.nghttp2_info.age" title="Permalink to this definition">¶</a></dt>
+<dd><p>Age of this struct.  This instance of nghttp2 sets it to
+<a class="reference internal" href="macros.html#c.NGHTTP2_VERSION_AGE" title="NGHTTP2_VERSION_AGE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_VERSION_AGE</span></code></a> but a future version may bump it and
+add more struct fields at the bottom</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_info.version_num">
+int <code class="descname">version_num</code><a class="headerlink" href="#c.nghttp2_info.version_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>the <a class="reference internal" href="macros.html#c.NGHTTP2_VERSION_NUM" title="NGHTTP2_VERSION_NUM"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_VERSION_NUM</span></code></a> number (since age ==1)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_info.version_str">
+const char *<code class="descname">version_str</code><a class="headerlink" href="#c.nghttp2_info.version_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>points to the <a class="reference internal" href="macros.html#c.NGHTTP2_VERSION" title="NGHTTP2_VERSION"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_VERSION</span></code></a> string (since age ==1)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_info.proto_str">
+const char *<code class="descname">proto_str</code><a class="headerlink" href="#c.nghttp2_info.proto_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>points to the <a class="reference internal" href="macros.html#c.NGHTTP2_PROTO_VERSION_ID" title="NGHTTP2_PROTO_VERSION_ID"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_PROTO_VERSION_ID</span></code></a> string this
+instance implements (since age ==1)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_vec">
+<code class="descname">nghttp2_vec</code><a class="headerlink" href="#c.nghttp2_vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The object representing single contiguous buffer.</p>
+<dl class="member">
+<dt id="c.nghttp2_vec.base">
+uint8_t *<code class="descname">base</code><a class="headerlink" href="#c.nghttp2_vec.base" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pointer to the buffer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_vec.len">
+size_t <code class="descname">len</code><a class="headerlink" href="#c.nghttp2_vec.len" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the buffer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_rcbuf">
+<code class="descname">nghttp2_rcbuf</code><a class="headerlink" href="#c.nghttp2_rcbuf" title="Permalink to this definition">¶</a></dt>
+<dd><p>The object representing reference counted buffer.  The details of
+this structure are intentionally hidden from the public API.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_nv">
+<code class="descname">nghttp2_nv</code><a class="headerlink" href="#c.nghttp2_nv" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name/value pair, which mainly used to represent header fields.</p>
+<dl class="member">
+<dt id="c.nghttp2_nv.name">
+uint8_t *<code class="descname">name</code><a class="headerlink" href="#c.nghttp2_nv.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <em>name</em> byte string.  If this struct is presented from library
+(e.g., <a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a>), <em>name</em> is
+guaranteed to be NULL-terminated.  For some callbacks
+(<a class="reference internal" href="#c.nghttp2_before_frame_send_callback" title="nghttp2_before_frame_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_before_frame_send_callback</span></code></a>,
+<a class="reference internal" href="#c.nghttp2_on_frame_send_callback" title="nghttp2_on_frame_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_send_callback</span></code></a>, and
+<a class="reference internal" href="#c.nghttp2_on_frame_not_send_callback" title="nghttp2_on_frame_not_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_not_send_callback</span></code></a>), it may not be
+NULL-terminated if header field is passed from application with
+the flag <a class="reference internal" href="enums.html#c.NGHTTP2_NV_FLAG_NO_COPY_NAME" title="NGHTTP2_NV_FLAG_NO_COPY_NAME"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_NV_FLAG_NO_COPY_NAME</span></code></a>).  When application
+is constructing this struct, <em>name</em> is not required to be
+NULL-terminated.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_nv.value">
+uint8_t *<code class="descname">value</code><a class="headerlink" href="#c.nghttp2_nv.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <em>value</em> byte string.  If this struct is presented from
+library (e.g., <a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a>), <em>value</em>
+is guaranteed to be NULL-terminated.  For some callbacks
+(<a class="reference internal" href="#c.nghttp2_before_frame_send_callback" title="nghttp2_before_frame_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_before_frame_send_callback</span></code></a>,
+<a class="reference internal" href="#c.nghttp2_on_frame_send_callback" title="nghttp2_on_frame_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_send_callback</span></code></a>, and
+<a class="reference internal" href="#c.nghttp2_on_frame_not_send_callback" title="nghttp2_on_frame_not_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_not_send_callback</span></code></a>), it may not be
+NULL-terminated if header field is passed from application with
+the flag <a class="reference internal" href="enums.html#c.NGHTTP2_NV_FLAG_NO_COPY_VALUE" title="NGHTTP2_NV_FLAG_NO_COPY_VALUE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_NV_FLAG_NO_COPY_VALUE</span></code></a>).  When
+application is constructing this struct, <em>value</em> is not required
+to be NULL-terminated.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_nv.namelen">
+size_t <code class="descname">namelen</code><a class="headerlink" href="#c.nghttp2_nv.namelen" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the <em>name</em>, excluding terminating NULL.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_nv.valuelen">
+size_t <code class="descname">valuelen</code><a class="headerlink" href="#c.nghttp2_nv.valuelen" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the <em>value</em>, excluding terminating NULL.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_nv.flags">
+uint8_t <code class="descname">flags</code><a class="headerlink" href="#c.nghttp2_nv.flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bitwise OR of one or more of <a class="reference internal" href="enums.html#c.nghttp2_nv_flag" title="nghttp2_nv_flag"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_nv_flag</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_frame_hd">
+<code class="descname">nghttp2_frame_hd</code><a class="headerlink" href="#c.nghttp2_frame_hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+<dl class="member">
+<dt id="c.nghttp2_frame_hd.length">
+size_t <code class="descname">length</code><a class="headerlink" href="#c.nghttp2_frame_hd.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length field of this frame, excluding frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame_hd.stream_id">
+int32_t <code class="descname">stream_id</code><a class="headerlink" href="#c.nghttp2_frame_hd.stream_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The stream identifier (aka, stream ID)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame_hd.type">
+uint8_t <code class="descname">type</code><a class="headerlink" href="#c.nghttp2_frame_hd.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of this frame.  See <a class="reference internal" href="enums.html#c.nghttp2_frame_type" title="nghttp2_frame_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_frame_type()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame_hd.flags">
+uint8_t <code class="descname">flags</code><a class="headerlink" href="#c.nghttp2_frame_hd.flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>The flags.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame_hd.reserved">
+uint8_t <code class="descname">reserved</code><a class="headerlink" href="#c.nghttp2_frame_hd.reserved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserved bit in frame header.  Currently, this is always set to 0
+and application should not expect something useful in here.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_data_source">
+<code class="descname">nghttp2_data_source</code><a class="headerlink" href="#c.nghttp2_data_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>This union represents the some kind of data source passed to
+<a class="reference internal" href="#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_data_source_read_callback</span></code></a>.</p>
+<dl class="member">
+<dt id="c.nghttp2_data_source.fd">
+int <code class="descname">fd</code><a class="headerlink" href="#c.nghttp2_data_source.fd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The integer field, suitable for a file descriptor.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_data_source.ptr">
+void *<code class="descname">ptr</code><a class="headerlink" href="#c.nghttp2_data_source.ptr" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pointer to an arbitrary object.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_data_source_read_callback">
+typedef ssize_t <code class="descname">(*nghttp2_data_source_read_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, int32_t<em>&nbsp;stream_id</em>, uint8_t<em>&nbsp;*buf</em>, size_t<em>&nbsp;length</em>, uint32_t<em>&nbsp;*data_flags</em>, <a class="reference internal" href="#c.nghttp2_data_source" title="nghttp2_data_source">nghttp2_data_source</a><em>&nbsp;*source</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_data_source_read_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when the library wants to read data from
+the <em>source</em>.  The read data is sent in the stream <em>stream_id</em>.
+The implementation of this function must read at most <em>length</em>
+bytes of data from <em>source</em> (or possibly other places) and store
+them in <em>buf</em> and return number of data stored in <em>buf</em>.  If EOF is
+reached, set <a class="reference internal" href="enums.html#c.NGHTTP2_DATA_FLAG_EOF" title="NGHTTP2_DATA_FLAG_EOF"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA_FLAG_EOF</span></code></a> flag in <em>*data_flags</em>.</p>
+<p>Sometime it is desirable to avoid copying data into <em>buf</em> and let
+application to send data directly.  To achieve this, set
+<a class="reference internal" href="enums.html#c.NGHTTP2_DATA_FLAG_NO_COPY" title="NGHTTP2_DATA_FLAG_NO_COPY"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA_FLAG_NO_COPY</span></code></a> to <em>*data_flags</em> (and possibly
+other flags, just like when we do copy), and return the number of
+bytes to send without copying data into <em>buf</em>.  The library, seeing
+<a class="reference internal" href="enums.html#c.NGHTTP2_DATA_FLAG_NO_COPY" title="NGHTTP2_DATA_FLAG_NO_COPY"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA_FLAG_NO_COPY</span></code></a>, will invoke
+<a class="reference internal" href="#c.nghttp2_send_data_callback" title="nghttp2_send_data_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_send_data_callback</span></code></a>.  The application must send
+complete DATA frame in that callback.</p>
+<p>If this callback is set by <a class="reference internal" href="nghttp2_submit_request.html#c.nghttp2_submit_request" title="nghttp2_submit_request"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_request()</span></code></a>,
+<a class="reference internal" href="nghttp2_submit_response.html#c.nghttp2_submit_response" title="nghttp2_submit_response"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_response()</span></code></a> or <a class="reference internal" href="nghttp2_submit_headers.html#c.nghttp2_submit_headers" title="nghttp2_submit_headers"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_headers()</span></code></a> and
+<a class="reference internal" href="nghttp2_submit_data.html#c.nghttp2_submit_data" title="nghttp2_submit_data"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_data()</span></code></a> with flag parameter
+<a class="reference internal" href="enums.html#c.NGHTTP2_FLAG_END_STREAM" title="NGHTTP2_FLAG_END_STREAM"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_FLAG_END_STREAM</span></code></a> set, and
+<a class="reference internal" href="enums.html#c.NGHTTP2_DATA_FLAG_EOF" title="NGHTTP2_DATA_FLAG_EOF"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA_FLAG_EOF</span></code></a> flag is set to <em>*data_flags</em>, DATA
+frame will have END_STREAM flag set.  Usually, this is expected
+behaviour and all are fine.  One exception is send trailer fields.
+You cannot send trailer fields after sending frame with END_STREAM
+set.  To avoid this problem, one can set
+<a class="reference internal" href="enums.html#c.NGHTTP2_DATA_FLAG_NO_END_STREAM" title="NGHTTP2_DATA_FLAG_NO_END_STREAM"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA_FLAG_NO_END_STREAM</span></code></a> along with
+<a class="reference internal" href="enums.html#c.NGHTTP2_DATA_FLAG_EOF" title="NGHTTP2_DATA_FLAG_EOF"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA_FLAG_EOF</span></code></a> to signal the library not to set
+END_STREAM in DATA frame.  Then application can use
+<a class="reference internal" href="nghttp2_submit_trailer.html#c.nghttp2_submit_trailer" title="nghttp2_submit_trailer"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_trailer()</span></code></a> to send trailer fields.
+<a class="reference internal" href="nghttp2_submit_trailer.html#c.nghttp2_submit_trailer" title="nghttp2_submit_trailer"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_trailer()</span></code></a> can be called inside this callback.</p>
+<p>If the application wants to postpone DATA frames (e.g.,
+asynchronous I/O, or reading data blocks for long time), it is
+achieved by returning <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_DEFERRED" title="NGHTTP2_ERR_DEFERRED"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_DEFERRED</span></code></a> without reading
+any data in this invocation.  The library removes DATA frame from
+the outgoing queue temporarily.  To move back deferred DATA frame
+to outgoing queue, call <a class="reference internal" href="nghttp2_session_resume_data.html#c.nghttp2_session_resume_data" title="nghttp2_session_resume_data"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_resume_data()</span></code></a>.</p>
+<p>By default, <em>length</em> is limited to 16KiB at maximum.  If peer
+allows larger frames, application can enlarge transmission buffer
+size.  See <a class="reference internal" href="#c.nghttp2_data_source_read_length_callback" title="nghttp2_data_source_read_length_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_data_source_read_length_callback</span></code></a> for
+more details.</p>
+<p>If the application just wants to return from
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> or <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> without
+sending anything, return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_PAUSE" title="NGHTTP2_ERR_PAUSE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_PAUSE</span></code></a>.</p>
+<p>In case of error, there are 2 choices. Returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a> will close the stream
+by issuing RST_STREAM with <a class="reference internal" href="enums.html#c.NGHTTP2_INTERNAL_ERROR" title="NGHTTP2_INTERNAL_ERROR"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_INTERNAL_ERROR</span></code></a>.  If a
+different error code is desirable, use
+<a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a> with a desired error code and then
+return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.  Returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a> will signal the entire session
+failure.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_data_provider">
+<code class="descname">nghttp2_data_provider</code><a class="headerlink" href="#c.nghttp2_data_provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>This struct represents the data source and the way to read a chunk
+of data from it.</p>
+<dl class="member">
+<dt id="c.nghttp2_data_provider.source">
+<a class="reference internal" href="#c.nghttp2_data_source" title="nghttp2_data_source">nghttp2_data_source</a> <code class="descname">source</code><a class="headerlink" href="#c.nghttp2_data_provider.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data source.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_data_provider.read_callback">
+<a class="reference internal" href="#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback">nghttp2_data_source_read_callback</a> <code class="descname">read_callback</code><a class="headerlink" href="#c.nghttp2_data_provider.read_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>The callback function to read a chunk of data from the <em>source</em>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_data">
+<code class="descname">nghttp2_data</code><a class="headerlink" href="#c.nghttp2_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The DATA frame.  The received data is delivered via
+<a class="reference internal" href="#c.nghttp2_on_data_chunk_recv_callback" title="nghttp2_on_data_chunk_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_data_chunk_recv_callback</span></code></a>.</p>
+<dl class="member">
+<dt id="c.nghttp2_data.padlen">
+size_t <code class="descname">padlen</code><a class="headerlink" href="#c.nghttp2_data.padlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the padding in this frame.  This includes PAD_HIGH
+and PAD_LOW.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_priority_spec">
+<code class="descname">nghttp2_priority_spec</code><a class="headerlink" href="#c.nghttp2_priority_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The structure to specify stream dependency.</p>
+<dl class="member">
+<dt id="c.nghttp2_priority_spec.stream_id">
+int32_t <code class="descname">stream_id</code><a class="headerlink" href="#c.nghttp2_priority_spec.stream_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The stream ID of the stream to depend on.  Specifying 0 makes
+stream not depend any other stream.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_priority_spec.weight">
+int32_t <code class="descname">weight</code><a class="headerlink" href="#c.nghttp2_priority_spec.weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>The weight of this dependency.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_priority_spec.exclusive">
+uint8_t <code class="descname">exclusive</code><a class="headerlink" href="#c.nghttp2_priority_spec.exclusive" title="Permalink to this definition">¶</a></dt>
+<dd><p>nonzero means exclusive dependency</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_headers">
+<code class="descname">nghttp2_headers</code><a class="headerlink" href="#c.nghttp2_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HEADERS frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_headers.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_headers.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_headers.padlen">
+size_t <code class="descname">padlen</code><a class="headerlink" href="#c.nghttp2_headers.padlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the padding in this frame.  This includes PAD_HIGH
+and PAD_LOW.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_headers.pri_spec">
+<a class="reference internal" href="#c.nghttp2_priority_spec" title="nghttp2_priority_spec">nghttp2_priority_spec</a> <code class="descname">pri_spec</code><a class="headerlink" href="#c.nghttp2_headers.pri_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The priority specification</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_headers.nva">
+<a class="reference internal" href="#c.nghttp2_nv" title="nghttp2_nv">nghttp2_nv</a> *<code class="descname">nva</code><a class="headerlink" href="#c.nghttp2_headers.nva" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name/value pairs.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_headers.nvlen">
+size_t <code class="descname">nvlen</code><a class="headerlink" href="#c.nghttp2_headers.nvlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of name/value pairs in <em>nva</em>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_headers.cat">
+<a class="reference internal" href="enums.html#c.nghttp2_headers_category" title="nghttp2_headers_category">nghttp2_headers_category</a> <code class="descname">cat</code><a class="headerlink" href="#c.nghttp2_headers.cat" title="Permalink to this definition">¶</a></dt>
+<dd><p>The category of this HEADERS frame.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_priority">
+<code class="descname">nghttp2_priority</code><a class="headerlink" href="#c.nghttp2_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>The PRIORITY frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_priority.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_priority.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_priority.pri_spec">
+<a class="reference internal" href="#c.nghttp2_priority_spec" title="nghttp2_priority_spec">nghttp2_priority_spec</a> <code class="descname">pri_spec</code><a class="headerlink" href="#c.nghttp2_priority.pri_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The priority specification.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_rst_stream">
+<code class="descname">nghttp2_rst_stream</code><a class="headerlink" href="#c.nghttp2_rst_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>The RST_STREAM frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_rst_stream.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_rst_stream.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_rst_stream.error_code">
+uint32_t <code class="descname">error_code</code><a class="headerlink" href="#c.nghttp2_rst_stream.error_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>The error code.  See <a class="reference internal" href="enums.html#c.nghttp2_error_code" title="nghttp2_error_code"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_error_code</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_settings_entry">
+<code class="descname">nghttp2_settings_entry</code><a class="headerlink" href="#c.nghttp2_settings_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SETTINGS ID/Value pair.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_settings_entry.settings_id">
+int32_t <code class="descname">settings_id</code><a class="headerlink" href="#c.nghttp2_settings_entry.settings_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SETTINGS ID.  See <a class="reference internal" href="enums.html#c.nghttp2_settings_id" title="nghttp2_settings_id"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_settings_id</span></code></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_settings_entry.value">
+uint32_t <code class="descname">value</code><a class="headerlink" href="#c.nghttp2_settings_entry.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value of this entry.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_settings">
+<code class="descname">nghttp2_settings</code><a class="headerlink" href="#c.nghttp2_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SETTINGS frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_settings.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_settings.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_settings.niv">
+size_t <code class="descname">niv</code><a class="headerlink" href="#c.nghttp2_settings.niv" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of SETTINGS ID/Value pairs in <em>iv</em>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_settings.iv">
+<a class="reference internal" href="#c.nghttp2_settings_entry" title="nghttp2_settings_entry">nghttp2_settings_entry</a> *<code class="descname">iv</code><a class="headerlink" href="#c.nghttp2_settings.iv" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pointer to the array of SETTINGS ID/Value pair.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_push_promise">
+<code class="descname">nghttp2_push_promise</code><a class="headerlink" href="#c.nghttp2_push_promise" title="Permalink to this definition">¶</a></dt>
+<dd><p>The PUSH_PROMISE frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_push_promise.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_push_promise.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_push_promise.padlen">
+size_t <code class="descname">padlen</code><a class="headerlink" href="#c.nghttp2_push_promise.padlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the padding in this frame.  This includes PAD_HIGH
+and PAD_LOW.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_push_promise.nva">
+<a class="reference internal" href="#c.nghttp2_nv" title="nghttp2_nv">nghttp2_nv</a> *<code class="descname">nva</code><a class="headerlink" href="#c.nghttp2_push_promise.nva" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name/value pairs.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_push_promise.nvlen">
+size_t <code class="descname">nvlen</code><a class="headerlink" href="#c.nghttp2_push_promise.nvlen" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of name/value pairs in <em>nva</em>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_push_promise.promised_stream_id">
+int32_t <code class="descname">promised_stream_id</code><a class="headerlink" href="#c.nghttp2_push_promise.promised_stream_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The promised stream ID</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_push_promise.reserved">
+uint8_t <code class="descname">reserved</code><a class="headerlink" href="#c.nghttp2_push_promise.reserved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserved bit.  Currently this is always set to 0 and application
+should not expect something useful in here.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_ping">
+<code class="descname">nghttp2_ping</code><a class="headerlink" href="#c.nghttp2_ping" title="Permalink to this definition">¶</a></dt>
+<dd><p>The PING frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_ping.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_ping.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt>
+<code class="descname">uint8_t opaque_data[8]</code></dt>
+<dd><p>The opaque data</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_goaway">
+<code class="descname">nghttp2_goaway</code><a class="headerlink" href="#c.nghttp2_goaway" title="Permalink to this definition">¶</a></dt>
+<dd><p>The GOAWAY frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_goaway.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_goaway.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_goaway.last_stream_id">
+int32_t <code class="descname">last_stream_id</code><a class="headerlink" href="#c.nghttp2_goaway.last_stream_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The last stream stream ID.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_goaway.error_code">
+uint32_t <code class="descname">error_code</code><a class="headerlink" href="#c.nghttp2_goaway.error_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>The error code.  See <a class="reference internal" href="enums.html#c.nghttp2_error_code" title="nghttp2_error_code"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_error_code</span></code></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_goaway.opaque_data">
+uint8_t *<code class="descname">opaque_data</code><a class="headerlink" href="#c.nghttp2_goaway.opaque_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The additional debug data</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_goaway.opaque_data_len">
+size_t <code class="descname">opaque_data_len</code><a class="headerlink" href="#c.nghttp2_goaway.opaque_data_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of <em>opaque_data</em> member.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_goaway.reserved">
+uint8_t <code class="descname">reserved</code><a class="headerlink" href="#c.nghttp2_goaway.reserved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserved bit.  Currently this is always set to 0 and application
+should not expect something useful in here.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_window_update">
+<code class="descname">nghttp2_window_update</code><a class="headerlink" href="#c.nghttp2_window_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>The WINDOW_UPDATE frame.  It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_window_update.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_window_update.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_window_update.window_size_increment">
+int32_t <code class="descname">window_size_increment</code><a class="headerlink" href="#c.nghttp2_window_update.window_size_increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>The window size increment.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_window_update.reserved">
+uint8_t <code class="descname">reserved</code><a class="headerlink" href="#c.nghttp2_window_update.reserved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserved bit.  Currently this is always set to 0 and application
+should not expect something useful in here.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_extension">
+<code class="descname">nghttp2_extension</code><a class="headerlink" href="#c.nghttp2_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>The extension frame.  It has following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_extension.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_extension.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_extension.payload">
+void *<code class="descname">payload</code><a class="headerlink" href="#c.nghttp2_extension.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pointer to extension payload.  The exact pointer type is
+determined by hd.type.</p>
+<p>Currently, no extension is supported.  This is a place holder for
+the future extensions.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_frame">
+<code class="descname">nghttp2_frame</code><a class="headerlink" href="#c.nghttp2_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>This union includes all frames to pass them to various function
+calls as nghttp2_frame type.  The CONTINUATION frame is omitted
+from here because the library deals with it internally.</p>
+<dl class="member">
+<dt id="c.nghttp2_frame.hd">
+<a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a> <code class="descname">hd</code><a class="headerlink" href="#c.nghttp2_frame.hd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame header, which is convenient to inspect frame header.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.data">
+<a class="reference internal" href="#c.nghttp2_data" title="nghttp2_data">nghttp2_data</a> <code class="descname">data</code><a class="headerlink" href="#c.nghttp2_frame.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The DATA frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.headers">
+<a class="reference internal" href="#c.nghttp2_headers" title="nghttp2_headers">nghttp2_headers</a> <code class="descname">headers</code><a class="headerlink" href="#c.nghttp2_frame.headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The HEADERS frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.priority">
+<a class="reference internal" href="#c.nghttp2_priority" title="nghttp2_priority">nghttp2_priority</a> <code class="descname">priority</code><a class="headerlink" href="#c.nghttp2_frame.priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>The PRIORITY frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.rst_stream">
+<a class="reference internal" href="#c.nghttp2_rst_stream" title="nghttp2_rst_stream">nghttp2_rst_stream</a> <code class="descname">rst_stream</code><a class="headerlink" href="#c.nghttp2_frame.rst_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>The RST_STREAM frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.settings">
+<a class="reference internal" href="#c.nghttp2_settings" title="nghttp2_settings">nghttp2_settings</a> <code class="descname">settings</code><a class="headerlink" href="#c.nghttp2_frame.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SETTINGS frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.push_promise">
+<a class="reference internal" href="#c.nghttp2_push_promise" title="nghttp2_push_promise">nghttp2_push_promise</a> <code class="descname">push_promise</code><a class="headerlink" href="#c.nghttp2_frame.push_promise" title="Permalink to this definition">¶</a></dt>
+<dd><p>The PUSH_PROMISE frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.ping">
+<a class="reference internal" href="#c.nghttp2_ping" title="nghttp2_ping">nghttp2_ping</a> <code class="descname">ping</code><a class="headerlink" href="#c.nghttp2_frame.ping" title="Permalink to this definition">¶</a></dt>
+<dd><p>The PING frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.goaway">
+<a class="reference internal" href="#c.nghttp2_goaway" title="nghttp2_goaway">nghttp2_goaway</a> <code class="descname">goaway</code><a class="headerlink" href="#c.nghttp2_frame.goaway" title="Permalink to this definition">¶</a></dt>
+<dd><p>The GOAWAY frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.window_update">
+<a class="reference internal" href="#c.nghttp2_window_update" title="nghttp2_window_update">nghttp2_window_update</a> <code class="descname">window_update</code><a class="headerlink" href="#c.nghttp2_frame.window_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>The WINDOW_UPDATE frame.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_frame.ext">
+<a class="reference internal" href="#c.nghttp2_extension" title="nghttp2_extension">nghttp2_extension</a> <code class="descname">ext</code><a class="headerlink" href="#c.nghttp2_frame.ext" title="Permalink to this definition">¶</a></dt>
+<dd><p>The extension frame.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_send_callback">
+typedef ssize_t <code class="descname">(*nghttp2_send_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const uint8_t<em>&nbsp;*data</em>, size_t<em>&nbsp;length</em>, int<em>&nbsp;flags</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_send_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when <em>session</em> wants to send data to the
+remote peer.  The implementation of this function must send at most
+<em>length</em> bytes of data stored in <em>data</em>.  The <em>flags</em> is currently
+not used and always 0. It must return the number of bytes sent if
+it succeeds.  If it cannot send any single byte without blocking,
+it must return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_WOULDBLOCK" title="NGHTTP2_ERR_WOULDBLOCK"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_WOULDBLOCK</span></code></a>.  For other errors,
+it must return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  The
+<em>user_data</em> pointer is the third argument passed in to the call to
+<a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or <a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>This callback is required if the application uses
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> to send data to the remote endpoint.  If
+the application uses solely <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> instead,
+this callback function is unnecessary.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_send_callback.html#c.nghttp2_session_callbacks_set_send_callback" title="nghttp2_session_callbacks_set_send_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_send_callback()</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em>length</em> may be very small.  If that is the case, and
+application disables Nagle algorithm (<code class="docutils literal"><span class="pre">TCP_NODELAY</span></code>), then just
+writing <em>data</em> to the network stack leads to very small packet,
+and it is very inefficient.  An application should be responsible
+to buffer up small chunks of data as necessary to avoid this
+situation.</p>
+</div>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_send_data_callback">
+typedef int <code class="descname">(*nghttp2_send_data_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, const uint8_t<em>&nbsp;*framehd</em>, size_t<em>&nbsp;length</em>, <a class="reference internal" href="#c.nghttp2_data_source" title="nghttp2_data_source">nghttp2_data_source</a><em>&nbsp;*source</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_send_data_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when <a class="reference internal" href="enums.html#c.NGHTTP2_DATA_FLAG_NO_COPY" title="NGHTTP2_DATA_FLAG_NO_COPY"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA_FLAG_NO_COPY</span></code></a> is
+used in <a class="reference internal" href="#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_data_source_read_callback</span></code></a> to send complete
+DATA frame.</p>
+<p>The <em>frame</em> is a DATA frame to send.  The <em>framehd</em> is the
+serialized frame header (9 bytes). The <em>length</em> is the length of
+application data to send (this does not include padding).  The
+<em>source</em> is the same pointer passed to
+<a class="reference internal" href="#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_data_source_read_callback</span></code></a>.</p>
+<p>The application first must send frame header <em>framehd</em> of length 9
+bytes.  If <code class="docutils literal"><span class="pre">frame-&gt;data.padlen</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, send 1 byte of value
+<code class="docutils literal"><span class="pre">frame-&gt;data.padlen</span> <span class="pre">-</span> <span class="pre">1</span></code>.  Then send exactly <em>length</em> bytes of
+application data.  Finally, if <code class="docutils literal"><span class="pre">frame-&gt;data.padlen</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>, send
+<code class="docutils literal"><span class="pre">frame-&gt;data.padlen</span> <span class="pre">-</span> <span class="pre">1</span></code> bytes of zero as padding.</p>
+<p>The application has to send complete DATA frame in this callback.
+If all data were written successfully, return 0.</p>
+<p>If it cannot send any data at all, just return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_WOULDBLOCK" title="NGHTTP2_ERR_WOULDBLOCK"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_WOULDBLOCK</span></code></a>; the library will call this callback
+with the same parameters later (It is recommended to send complete
+DATA frame at once in this function to deal with error; if partial
+frame data has already sent, it is impossible to send another data
+in that state, and all we can do is tear down connection).  When
+data is fully processed, but application wants to make
+<a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> or <a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> return
+immediately without processing next frames, return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_PAUSE" title="NGHTTP2_ERR_PAUSE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_PAUSE</span></code></a>.  If application decided to reset this
+stream, return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>, then
+the library will send RST_STREAM with INTERNAL_ERROR as error code.
+The application can also return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>, which will result in
+connection closure.  Returning any other value is treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a> is returned.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_recv_callback">
+typedef ssize_t <code class="descname">(*nghttp2_recv_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, uint8_t<em>&nbsp;*buf</em>, size_t<em>&nbsp;length</em>, int<em>&nbsp;flags</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_recv_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when <em>session</em> wants to receive data from
+the remote peer.  The implementation of this function must read at
+most <em>length</em> bytes of data and store it in <em>buf</em>.  The <em>flags</em> is
+currently not used and always 0.  It must return the number of
+bytes written in <em>buf</em> if it succeeds.  If it cannot read any
+single byte without blocking, it must return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_WOULDBLOCK" title="NGHTTP2_ERR_WOULDBLOCK"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_WOULDBLOCK</span></code></a>.  If it gets EOF before it reads any
+single byte, it must return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_EOF" title="NGHTTP2_ERR_EOF"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_EOF</span></code></a>.  For other
+errors, it must return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.
+Returning 0 is treated as <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_WOULDBLOCK" title="NGHTTP2_ERR_WOULDBLOCK"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_WOULDBLOCK</span></code></a>.  The
+<em>user_data</em> pointer is the third argument passed in to the call to
+<a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or <a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>This callback is required if the application uses
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> to receive data from the remote endpoint.
+If the application uses solely <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a>
+instead, this callback function is unnecessary.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_recv_callback.html#c.nghttp2_session_callbacks_set_recv_callback" title="nghttp2_session_callbacks_set_recv_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_recv_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_frame_recv_callback">
+typedef int <code class="descname">(*nghttp2_on_frame_recv_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_frame_recv_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked by <a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and
+<a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> when a frame is received.  The
+<em>user_data</em> pointer is the third argument passed in to the call to
+<a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or <a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>If frame is HEADERS or PUSH_PROMISE, the <code class="docutils literal"><span class="pre">nva</span></code> and <code class="docutils literal"><span class="pre">nvlen</span></code>
+member of their data structure are always <code class="docutils literal"><span class="pre">NULL</span></code> and 0
+respectively.  The header name/value pairs are emitted via
+<a class="reference internal" href="#c.nghttp2_on_header_callback" title="nghttp2_on_header_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_header_callback</span></code></a>.</p>
+<p>For HEADERS, PUSH_PROMISE and DATA frames, this callback may be
+called after stream is closed (see
+<a class="reference internal" href="#c.nghttp2_on_stream_close_callback" title="nghttp2_on_stream_close_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_stream_close_callback</span></code></a>).  The application should
+check that stream is still alive using its own stream management or
+<a class="reference internal" href="nghttp2_session_get_stream_user_data.html#c.nghttp2_session_get_stream_user_data" title="nghttp2_session_get_stream_user_data"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_get_stream_user_data()</span></code></a>.</p>
+<p>Only HEADERS and DATA frame can signal the end of incoming data.
+If <code class="docutils literal"><span class="pre">frame-&gt;hd.flags</span> <span class="pre">&amp;</span> <span class="pre">NGHTTP2_FLAG_END_STREAM</span></code> is nonzero, the
+<em>frame</em> is the last frame from the remote peer in this stream.</p>
+<p>This callback won't be called for CONTINUATION frames.
+HEADERS/PUSH_PROMISE + CONTINUATIONs are treated as single frame.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+If nonzero value is returned, it is treated as fatal error and
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_recv_callback.html#c.nghttp2_session_callbacks_set_on_frame_recv_callback" title="nghttp2_session_callbacks_set_on_frame_recv_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_frame_recv_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_invalid_frame_recv_callback">
+typedef int <code class="descname">(*nghttp2_on_invalid_frame_recv_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, int<em>&nbsp;lib_error_code</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_invalid_frame_recv_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked by <a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and
+<a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> when an invalid non-DATA frame is
+received.  The error is indicated by the <em>lib_error_code</em>, which is
+one of the values defined in <a class="reference internal" href="enums.html#c.nghttp2_error" title="nghttp2_error"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_error</span></code></a>.  When this
+callback function is invoked, the library automatically submits
+either RST_STREAM or GOAWAY frame.  The <em>user_data</em> pointer is the
+third argument passed in to the call to
+<a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or <a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>If frame is HEADERS or PUSH_PROMISE, the <code class="docutils literal"><span class="pre">nva</span></code> and <code class="docutils literal"><span class="pre">nvlen</span></code>
+member of their data structure are always <code class="docutils literal"><span class="pre">NULL</span></code> and 0
+respectively.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+If nonzero is returned, it is treated as fatal error and
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_frame_recv_callback.html#c.nghttp2_session_callbacks_set_on_invalid_frame_recv_callback" title="nghttp2_session_callbacks_set_on_invalid_frame_recv_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_invalid_frame_recv_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_data_chunk_recv_callback">
+typedef int <code class="descname">(*nghttp2_on_data_chunk_recv_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, uint8_t<em>&nbsp;flags</em>, int32_t<em>&nbsp;stream_id</em>, const uint8_t<em>&nbsp;*data</em>, size_t<em>&nbsp;len</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_data_chunk_recv_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when a chunk of data in DATA frame is
+received.  The <em>stream_id</em> is the stream ID this DATA frame belongs
+to.  The <em>flags</em> is the flags of DATA frame which this data chunk
+is contained.  <code class="docutils literal"><span class="pre">(flags</span> <span class="pre">&amp;</span> <span class="pre">NGHTTP2_FLAG_END_STREAM)</span> <span class="pre">!=</span> <span class="pre">0</span></code> does not
+necessarily mean this chunk of data is the last one in the stream.
+You should use <a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a> to know all
+data frames are received.  The <em>user_data</em> pointer is the third
+argument passed in to the call to <a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or
+<a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>If the application uses <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a>, it can return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_PAUSE" title="NGHTTP2_ERR_PAUSE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_PAUSE</span></code></a> to make <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a>
+return without processing further input bytes.  The memory by
+pointed by the <em>data</em> is retained until
+<a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> or <a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> is called.
+The application must retain the input bytes which was used to
+produce the <em>data</em> parameter, because it may refer to the memory
+region included in the input bytes.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+If nonzero is returned, it is treated as fatal error, and
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_data_chunk_recv_callback.html#c.nghttp2_session_callbacks_set_on_data_chunk_recv_callback" title="nghttp2_session_callbacks_set_on_data_chunk_recv_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_data_chunk_recv_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_before_frame_send_callback">
+typedef int <code class="descname">(*nghttp2_before_frame_send_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_before_frame_send_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked just before the non-DATA frame <em>frame</em> is
+sent.  The <em>user_data</em> pointer is the third argument passed in to
+the call to <a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or
+<a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+It can also return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CANCEL" title="NGHTTP2_ERR_CANCEL"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CANCEL</span></code></a> to cancel the
+transmission of the given frame.</p>
+<p>If there is a fatal error while executing this callback, the
+implementation should return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>,
+which makes <a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> and
+<a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> functions immediately return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>If the other value is returned, it is treated as if
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a> is returned.  But the
+implementation should not rely on this since the library may define
+new return value to extend its capability.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_before_frame_send_callback.html#c.nghttp2_session_callbacks_set_before_frame_send_callback" title="nghttp2_session_callbacks_set_before_frame_send_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_before_frame_send_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_frame_send_callback">
+typedef int <code class="descname">(*nghttp2_on_frame_send_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_frame_send_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked after the frame <em>frame</em> is sent.  The
+<em>user_data</em> pointer is the third argument passed in to the call to
+<a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or <a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+If nonzero is returned, it is treated as fatal error and
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_send_callback.html#c.nghttp2_session_callbacks_set_on_frame_send_callback" title="nghttp2_session_callbacks_set_on_frame_send_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_frame_send_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_frame_not_send_callback">
+typedef int <code class="descname">(*nghttp2_on_frame_not_send_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, int<em>&nbsp;lib_error_code</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_frame_not_send_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked after the non-DATA frame <em>frame</em> is not
+sent because of the error.  The error is indicated by the
+<em>lib_error_code</em>, which is one of the values defined in
+<a class="reference internal" href="enums.html#c.nghttp2_error" title="nghttp2_error"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_error</span></code></a>.  The <em>user_data</em> pointer is the third
+argument passed in to the call to <a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or
+<a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+If nonzero is returned, it is treated as fatal error and
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p><a class="reference internal" href="nghttp2_session_get_stream_user_data.html#c.nghttp2_session_get_stream_user_data" title="nghttp2_session_get_stream_user_data"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_get_stream_user_data()</span></code></a> can be used to get
+associated data.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_not_send_callback.html#c.nghttp2_session_callbacks_set_on_frame_not_send_callback" title="nghttp2_session_callbacks_set_on_frame_not_send_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_frame_not_send_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_stream_close_callback">
+typedef int <code class="descname">(*nghttp2_on_stream_close_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, int32_t<em>&nbsp;stream_id</em>, uint32_t<em>&nbsp;error_code</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_stream_close_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when the stream <em>stream_id</em> is closed.
+The reason of closure is indicated by the <em>error_code</em>.  The
+<em>error_code</em> is usually one of <a class="reference internal" href="enums.html#c.nghttp2_error_code" title="nghttp2_error_code"><code class="xref c c-macro docutils literal"><span class="pre">nghttp2_error_code</span></code></a>, but that
+is not guaranteed.  The stream_user_data, which was specified in
+<a class="reference internal" href="nghttp2_submit_request.html#c.nghttp2_submit_request" title="nghttp2_submit_request"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_request()</span></code></a> or <a class="reference internal" href="nghttp2_submit_headers.html#c.nghttp2_submit_headers" title="nghttp2_submit_headers"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_headers()</span></code></a>, is still
+available in this function.  The <em>user_data</em> pointer is the third
+argument passed in to the call to <a class="reference internal" href="nghttp2_session_client_new.html#c.nghttp2_session_client_new" title="nghttp2_session_client_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new()</span></code></a> or
+<a class="reference internal" href="nghttp2_session_server_new.html#c.nghttp2_session_server_new" title="nghttp2_session_server_new"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new()</span></code></a>.</p>
+<p>This function is also called for a stream in reserved state.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+If nonzero is returned, it is treated as fatal error and
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a>, <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a>,
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a>, and <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a>
+functions immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_stream_close_callback.html#c.nghttp2_session_callbacks_set_on_stream_close_callback" title="nghttp2_session_callbacks_set_on_stream_close_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_stream_close_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_begin_headers_callback">
+typedef int <code class="descname">(*nghttp2_on_begin_headers_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_begin_headers_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when the reception of header block in
+HEADERS or PUSH_PROMISE is started.  Each header name/value pair
+will be emitted by <a class="reference internal" href="#c.nghttp2_on_header_callback" title="nghttp2_on_header_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_header_callback</span></code></a>.</p>
+<p>The <code class="docutils literal"><span class="pre">frame-&gt;hd.flags</span></code> may not have
+<a class="reference internal" href="enums.html#c.NGHTTP2_FLAG_END_HEADERS" title="NGHTTP2_FLAG_END_HEADERS"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_FLAG_END_HEADERS</span></code></a> flag set, which indicates that one
+or more CONTINUATION frames are involved.  But the application does
+not need to care about that because the header name/value pairs are
+emitted transparently regardless of CONTINUATION frames.</p>
+<p>The server applications probably create an object to store
+information about new stream if <code class="docutils literal"><span class="pre">frame-&gt;hd.type</span> <span class="pre">==</span>
+<span class="pre">NGHTTP2_HEADERS</span></code> and <code class="docutils literal"><span class="pre">frame-&gt;headers.cat</span> <span class="pre">==</span>
+<span class="pre">NGHTTP2_HCAT_REQUEST</span></code>.  If <em>session</em> is configured as server side,
+<code class="docutils literal"><span class="pre">frame-&gt;headers.cat</span></code> is either <code class="docutils literal"><span class="pre">NGHTTP2_HCAT_REQUEST</span></code>
+containing request headers or <code class="docutils literal"><span class="pre">NGHTTP2_HCAT_HEADERS</span></code> containing
+trailer fields and never get PUSH_PROMISE in this callback.</p>
+<p>For the client applications, <code class="docutils literal"><span class="pre">frame-&gt;hd.type</span></code> is either
+<code class="docutils literal"><span class="pre">NGHTTP2_HEADERS</span></code> or <code class="docutils literal"><span class="pre">NGHTTP2_PUSH_PROMISE</span></code>.  In case of
+<code class="docutils literal"><span class="pre">NGHTTP2_HEADERS</span></code>, <code class="docutils literal"><span class="pre">frame-&gt;headers.cat</span> <span class="pre">==</span>
+<span class="pre">NGHTTP2_HCAT_RESPONSE</span></code> means that it is the first response
+headers, but it may be non-final response which is indicated by 1xx
+status code.  In this case, there may be zero or more HEADERS frame
+with <code class="docutils literal"><span class="pre">frame-&gt;headers.cat</span> <span class="pre">==</span> <span class="pre">NGHTTP2_HCAT_HEADERS</span></code> which has
+non-final response code and finally client gets exactly one HEADERS
+frame with <code class="docutils literal"><span class="pre">frame-&gt;headers.cat</span> <span class="pre">==</span> <span class="pre">NGHTTP2_HCAT_HEADERS</span></code>
+containing final response headers (non-1xx status code).  The
+trailer fields also has <code class="docutils literal"><span class="pre">frame-&gt;headers.cat</span> <span class="pre">==</span>
+<span class="pre">NGHTTP2_HCAT_HEADERS</span></code> which does not contain any status code.</p>
+<p>Returning <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a> will close
+the stream (promised stream if frame is PUSH_PROMISE) by issuing
+RST_STREAM with <a class="reference internal" href="enums.html#c.NGHTTP2_INTERNAL_ERROR" title="NGHTTP2_INTERNAL_ERROR"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_INTERNAL_ERROR</span></code></a>.  In this case,
+<a class="reference internal" href="#c.nghttp2_on_header_callback" title="nghttp2_on_header_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_header_callback</span></code></a> and
+<a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a> will not be invoked.  If a
+different error code is desirable, use
+<a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a> with a desired error code and then
+return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.  Again, use
+<code class="docutils literal"><span class="pre">frame-&gt;push_promise.promised_stream_id</span></code> as stream_id parameter
+in <a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a> if frame is PUSH_PROMISE.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+It can return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a> to
+reset the stream (promised stream if frame is PUSH_PROMISE).  For
+critical errors, it must return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  If the other value is
+returned, it is treated as if <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>
+is returned.  If <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a> is returned,
+<a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> function will immediately return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_headers_callback.html#c.nghttp2_session_callbacks_set_on_begin_headers_callback" title="nghttp2_session_callbacks_set_on_begin_headers_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_begin_headers_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_header_callback">
+typedef int <code class="descname">(*nghttp2_on_header_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, const uint8_t<em>&nbsp;*name</em>, size_t<em>&nbsp;namelen</em>, const uint8_t<em>&nbsp;*value</em>, size_t<em>&nbsp;valuelen</em>, uint8_t<em>&nbsp;flags</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_header_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when a header name/value pair is received
+for the <em>frame</em>.  The <em>name</em> of length <em>namelen</em> is header name.
+The <em>value</em> of length <em>valuelen</em> is header value.  The <em>flags</em> is
+bitwise OR of one or more of <a class="reference internal" href="enums.html#c.nghttp2_nv_flag" title="nghttp2_nv_flag"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_nv_flag</span></code></a>.</p>
+<p>If <a class="reference internal" href="enums.html#c.NGHTTP2_NV_FLAG_NO_INDEX" title="NGHTTP2_NV_FLAG_NO_INDEX"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_NV_FLAG_NO_INDEX</span></code></a> is set in <em>flags</em>, the receiver
+must not index this name/value pair when forwarding it to the next
+hop.  More specifically, &quot;Literal Header Field never Indexed&quot;
+representation must be used in HPACK encoding.</p>
+<p>When this callback is invoked, <code class="docutils literal"><span class="pre">frame-&gt;hd.type</span></code> is either
+<a class="reference internal" href="enums.html#c.NGHTTP2_HEADERS" title="NGHTTP2_HEADERS"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_HEADERS</span></code></a> or <a class="reference internal" href="enums.html#c.NGHTTP2_PUSH_PROMISE" title="NGHTTP2_PUSH_PROMISE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_PUSH_PROMISE</span></code></a>.  After all
+header name/value pairs are processed with this callback, and no
+error has been detected, <a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a>
+will be invoked.  If there is an error in decompression,
+<a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a> for the <em>frame</em> will not be
+invoked.</p>
+<p>Both <em>name</em> and <em>value</em> are guaranteed to be NULL-terminated.  The
+<em>namelen</em> and <em>valuelen</em> do not include terminal NULL.  If
+<a class="reference internal" href="nghttp2_option_set_no_http_messaging.html#c.nghttp2_option_set_no_http_messaging" title="nghttp2_option_set_no_http_messaging"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_no_http_messaging()</span></code></a> is used with nonzero
+value, NULL character may be included in <em>name</em> or <em>value</em> before
+terminating NULL.</p>
+<p>Please note that unless <a class="reference internal" href="nghttp2_option_set_no_http_messaging.html#c.nghttp2_option_set_no_http_messaging" title="nghttp2_option_set_no_http_messaging"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_no_http_messaging()</span></code></a> is
+used, nghttp2 library does perform validation against the <em>name</em>
+and the <em>value</em> using <a class="reference internal" href="nghttp2_check_header_name.html#c.nghttp2_check_header_name" title="nghttp2_check_header_name"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_check_header_name()</span></code></a> and
+<a class="reference internal" href="nghttp2_check_header_value.html#c.nghttp2_check_header_value" title="nghttp2_check_header_value"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_check_header_value()</span></code></a>.  In addition to this, nghttp2
+performs validation based on HTTP Messaging rule, which is briefly
+explained in <a class="reference internal" href="programmers-guide.html#http-messaging"><span class="std std-ref">HTTP Messaging</span></a> section.</p>
+<p>If the application uses <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a>, it can return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_PAUSE" title="NGHTTP2_ERR_PAUSE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_PAUSE</span></code></a> to make <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a>
+return without processing further input bytes.  The memory pointed
+by <em>frame</em>, <em>name</em> and <em>value</em> parameters are retained until
+<a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> or <a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> is called.
+The application must retain the input bytes which was used to
+produce these parameters, because it may refer to the memory region
+included in the input bytes.</p>
+<p>Returning <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a> will close
+the stream (promised stream if frame is PUSH_PROMISE) by issuing
+RST_STREAM with <a class="reference internal" href="enums.html#c.NGHTTP2_INTERNAL_ERROR" title="NGHTTP2_INTERNAL_ERROR"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_INTERNAL_ERROR</span></code></a>.  In this case,
+<a class="reference internal" href="#c.nghttp2_on_header_callback" title="nghttp2_on_header_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_header_callback</span></code></a> and
+<a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a> will not be invoked.  If a
+different error code is desirable, use
+<a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a> with a desired error code and then
+return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.  Again, use
+<code class="docutils literal"><span class="pre">frame-&gt;push_promise.promised_stream_id</span></code> as stream_id parameter
+in <a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a> if frame is PUSH_PROMISE.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+It may return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_PAUSE" title="NGHTTP2_ERR_PAUSE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_PAUSE</span></code></a> or
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.  For other critical
+failures, it must return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  If
+the other nonzero value is returned, it is treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  If
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a> is returned,
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_header_callback.html#c.nghttp2_session_callbacks_set_on_header_callback" title="nghttp2_session_callbacks_set_on_header_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_header_callback()</span></code></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Application should properly limit the total buffer size to store
+incoming header fields.  Without it, peer may send large number
+of header fields or large header fields to cause out of memory in
+local endpoint.  Due to how HPACK works, peer can do this
+effectively without using much memory on their own.</p>
+</div>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_header_callback2">
+typedef int <code class="descname">(*nghttp2_on_header_callback2)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, <a class="reference internal" href="#c.nghttp2_rcbuf" title="nghttp2_rcbuf">nghttp2_rcbuf</a><em>&nbsp;*name</em>, <a class="reference internal" href="#c.nghttp2_rcbuf" title="nghttp2_rcbuf">nghttp2_rcbuf</a><em>&nbsp;*value</em>, uint8_t<em>&nbsp;flags</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_header_callback2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when a header name/value pair is received
+for the <em>frame</em>.  The <em>name</em> is header name.  The <em>value</em> is header
+value.  The <em>flags</em> is bitwise OR of one or more of
+<a class="reference internal" href="enums.html#c.nghttp2_nv_flag" title="nghttp2_nv_flag"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_nv_flag</span></code></a>.</p>
+<p>This callback behaves like <a class="reference internal" href="#c.nghttp2_on_header_callback" title="nghttp2_on_header_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_header_callback</span></code></a>,
+except that <em>name</em> and <em>value</em> are stored in reference counted
+buffer.  If application wishes to keep these references without
+copying them, use <a class="reference internal" href="nghttp2_rcbuf_incref.html#c.nghttp2_rcbuf_incref" title="nghttp2_rcbuf_incref"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_rcbuf_incref()</span></code></a> to increment their
+reference count.  It is the application's responsibility to call
+<a class="reference internal" href="nghttp2_rcbuf_decref.html#c.nghttp2_rcbuf_decref" title="nghttp2_rcbuf_decref"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_rcbuf_decref()</span></code></a> if they called <a class="reference internal" href="nghttp2_rcbuf_incref.html#c.nghttp2_rcbuf_incref" title="nghttp2_rcbuf_incref"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_rcbuf_incref()</span></code></a> so
+as not to leak memory.  If the <em>session</em> is created by
+<a class="reference internal" href="nghttp2_session_server_new3.html#c.nghttp2_session_server_new3" title="nghttp2_session_server_new3"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_server_new3()</span></code></a> or <a class="reference internal" href="nghttp2_session_client_new3.html#c.nghttp2_session_client_new3" title="nghttp2_session_client_new3"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_client_new3()</span></code></a>,
+the function to free memory is the one belongs to the mem
+parameter.  As long as this free function alives, <em>name</em> and
+<em>value</em> can live after <em>session</em> was destroyed.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_invalid_header_callback">
+typedef int <code class="descname">(*nghttp2_on_invalid_header_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, const uint8_t<em>&nbsp;*name</em>, size_t<em>&nbsp;namelen</em>, const uint8_t<em>&nbsp;*value</em>, size_t<em>&nbsp;valuelen</em>, uint8_t<em>&nbsp;flags</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_invalid_header_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when a invalid header name/value pair is
+received for the <em>frame</em>.</p>
+<p>The parameter and behaviour are similar to
+<a class="reference internal" href="#c.nghttp2_on_header_callback" title="nghttp2_on_header_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_header_callback</span></code></a>.  The difference is that this
+callback is only invoked when a invalid header name/value pair is
+received which is silently ignored if this callback is not set.
+Only invalid regular header field are passed to this callback.  In
+other words, invalid pseudo header field is not passed to this
+callback.  Also header fields which includes upper cased latter are
+also treated as error without passing them to this callback.</p>
+<p>This callback is only considered if HTTP messaging validation is
+turned on (which is on by default, see
+<a class="reference internal" href="nghttp2_option_set_no_http_messaging.html#c.nghttp2_option_set_no_http_messaging" title="nghttp2_option_set_no_http_messaging"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_no_http_messaging()</span></code></a>).</p>
+<p>With this callback, application inspects the incoming invalid
+field, and it also can reset stream from this callback by returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.  By default, the
+error code is <a class="reference internal" href="enums.html#c.NGHTTP2_INTERNAL_ERROR" title="NGHTTP2_INTERNAL_ERROR"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_INTERNAL_ERROR</span></code></a>.  To change the error
+code, call <a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a> with the error code of
+choice in addition to returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_invalid_header_callback2">
+typedef int <code class="descname">(*nghttp2_on_invalid_header_callback2)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, <a class="reference internal" href="#c.nghttp2_rcbuf" title="nghttp2_rcbuf">nghttp2_rcbuf</a><em>&nbsp;*name</em>, <a class="reference internal" href="#c.nghttp2_rcbuf" title="nghttp2_rcbuf">nghttp2_rcbuf</a><em>&nbsp;*value</em>, uint8_t<em>&nbsp;flags</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_invalid_header_callback2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when a invalid header name/value pair is
+received for the <em>frame</em>.</p>
+<p>The parameter and behaviour are similar to
+<a class="reference internal" href="#c.nghttp2_on_header_callback2" title="nghttp2_on_header_callback2"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_header_callback2</span></code></a>.  The difference is that this
+callback is only invoked when a invalid header name/value pair is
+received which is silently ignored if this callback is not set.
+Only invalid regular header field are passed to this callback.  In
+other words, invalid pseudo header field is not passed to this
+callback.  Also header fields which includes upper cased latter are
+also treated as error without passing them to this callback.</p>
+<p>This callback is only considered if HTTP messaging validation is
+turned on (which is on by default, see
+<a class="reference internal" href="nghttp2_option_set_no_http_messaging.html#c.nghttp2_option_set_no_http_messaging" title="nghttp2_option_set_no_http_messaging"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_no_http_messaging()</span></code></a>).</p>
+<p>With this callback, application inspects the incoming invalid
+field, and it also can reset stream from this callback by returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.  By default, the
+error code is <a class="reference internal" href="enums.html#c.NGHTTP2_INTERNAL_ERROR" title="NGHTTP2_INTERNAL_ERROR"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_INTERNAL_ERROR</span></code></a>.  To change the error
+code, call <a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a> with the error code of
+choice in addition to returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_select_padding_callback">
+typedef ssize_t <code class="descname">(*nghttp2_select_padding_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, size_t<em>&nbsp;max_payloadlen</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_select_padding_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when the library asks application how
+many padding bytes are required for the transmission of the
+<em>frame</em>.  The application must choose the total length of payload
+including padded bytes in range [frame-&gt;hd.length, max_payloadlen],
+inclusive.  Choosing number not in this range will be treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  Returning
+<code class="docutils literal"><span class="pre">frame-&gt;hd.length</span></code> means no padding is added.  Returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a> will make
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_select_padding_callback.html#c.nghttp2_session_callbacks_set_select_padding_callback" title="nghttp2_session_callbacks_set_select_padding_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_select_padding_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_data_source_read_length_callback">
+typedef ssize_t <code class="descname">(*nghttp2_data_source_read_length_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, uint8_t<em>&nbsp;frame_type</em>, int32_t<em>&nbsp;stream_id</em>, int32_t<em>&nbsp;session_remote_window_size</em>, int32_t<em>&nbsp;stream_remote_window_size</em>, uint32_t<em>&nbsp;remote_max_frame_size</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_data_source_read_length_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when library wants to get max length of
+data to send data to the remote peer.  The implementation of this
+function should return a value in the following range.  [1,
+min(<em>session_remote_window_size</em>, <em>stream_remote_window_size</em>,
+<em>remote_max_frame_size</em>)].  If a value greater than this range is
+returned than the max allow value will be used.  Returning a value
+smaller than this range is treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  The <em>frame_type</em> is provided
+for future extensibility and identifies the type of frame (see
+<a class="reference internal" href="enums.html#c.nghttp2_frame_type" title="nghttp2_frame_type"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_frame_type</span></code></a>) for which to get the length for.
+Currently supported frame types are: <a class="reference internal" href="enums.html#c.NGHTTP2_DATA" title="NGHTTP2_DATA"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_DATA</span></code></a>.</p>
+<p>This callback can be used to control the length in bytes for which
+<a class="reference internal" href="#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_data_source_read_callback</span></code></a> is allowed to send to the
+remote endpoint.  This callback is optional.  Returning
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a> will signal the entire session
+failure.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_data_source_read_length_callback.html#c.nghttp2_session_callbacks_set_data_source_read_length_callback" title="nghttp2_session_callbacks_set_data_source_read_length_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_data_source_read_length_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_begin_frame_callback">
+typedef int <code class="descname">(*nghttp2_on_begin_frame_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a><em>&nbsp;*hd</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_begin_frame_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when a frame header is received.  The
+<em>hd</em> points to received frame header.</p>
+<p>Unlike <a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a>, this callback will
+also be called when frame header of CONTINUATION frame is received.</p>
+<p>If both <a class="reference internal" href="#c.nghttp2_on_begin_frame_callback" title="nghttp2_on_begin_frame_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_begin_frame_callback</span></code></a> and
+<a class="reference internal" href="#c.nghttp2_on_begin_headers_callback" title="nghttp2_on_begin_headers_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_begin_headers_callback</span></code></a> are set and HEADERS or
+PUSH_PROMISE is received, <a class="reference internal" href="#c.nghttp2_on_begin_frame_callback" title="nghttp2_on_begin_frame_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_begin_frame_callback</span></code></a>
+will be called first.</p>
+<p>The implementation of this function must return 0 if it succeeds.
+If nonzero value is returned, it is treated as fatal error and
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+<p>To set this callback to <a class="reference internal" href="#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>, use
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_frame_callback.html#c.nghttp2_session_callbacks_set_on_begin_frame_callback" title="nghttp2_session_callbacks_set_on_begin_frame_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_begin_frame_callback()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_on_extension_chunk_recv_callback">
+typedef int <code class="descname">(*nghttp2_on_extension_chunk_recv_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const <a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a><em>&nbsp;*hd</em>, const uint8_t<em>&nbsp;*data</em>, size_t<em>&nbsp;len</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_on_extension_chunk_recv_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when chunk of extension frame payload is
+received.  The <em>hd</em> points to frame header.  The received
+chunk is <em>data</em> of length <em>len</em>.</p>
+<p>The implementation of this function must return 0 if it succeeds.</p>
+<p>To abort processing this extension frame, return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CANCEL" title="NGHTTP2_ERR_CANCEL"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CANCEL</span></code></a>.</p>
+<p>If fatal error occurred, application should return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  In this case,
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  If the
+other values are returned, currently they are treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_unpack_extension_callback">
+typedef int <code class="descname">(*nghttp2_unpack_extension_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, void<em>&nbsp;**payload</em>, const <a class="reference internal" href="#c.nghttp2_frame_hd" title="nghttp2_frame_hd">nghttp2_frame_hd</a><em>&nbsp;*hd</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_unpack_extension_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when library asks the application to
+unpack extension payload from its wire format.  The extension
+payload has been passed to the application using
+<a class="reference internal" href="#c.nghttp2_on_extension_chunk_recv_callback" title="nghttp2_on_extension_chunk_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_extension_chunk_recv_callback</span></code></a>.  The frame header
+is already unpacked by the library and provided as <em>hd</em>.</p>
+<p>To receive extension frames, the application must tell desired
+extension frame type to the library using
+<a class="reference internal" href="nghttp2_option_set_user_recv_extension_type.html#c.nghttp2_option_set_user_recv_extension_type" title="nghttp2_option_set_user_recv_extension_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_user_recv_extension_type()</span></code></a>.</p>
+<p>The implementation of this function may store the pointer to the
+created object as a result of unpacking in <em>*payload</em>, and returns
+0.  The pointer stored in <em>*payload</em> is opaque to the library, and
+the library does not own its pointer.  <em>*payload</em> is initialized as
+<code class="docutils literal"><span class="pre">NULL</span></code>.  The <em>*payload</em> is available as <code class="docutils literal"><span class="pre">frame-&gt;ext.payload</span></code> in
+<a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a>.  Therefore if application
+can free that memory inside <a class="reference internal" href="#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a>
+callback.  Of course, application has a liberty not ot use
+<em>*payload</em>, and do its own mechanism to process extension frames.</p>
+<p>To abort processing this extension frame, return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CANCEL" title="NGHTTP2_ERR_CANCEL"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CANCEL</span></code></a>.</p>
+<p>If fatal error occurred, application should return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  In this case,
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  If the
+other values are returned, currently they are treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_pack_extension_callback">
+typedef ssize_t <code class="descname">(*nghttp2_pack_extension_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, uint8_t<em>&nbsp;*buf</em>, size_t<em>&nbsp;len</em>, const <a class="reference internal" href="#c.nghttp2_frame" title="nghttp2_frame">nghttp2_frame</a><em>&nbsp;*frame</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_pack_extension_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when library asks the application to pack
+extension payload in its wire format.  The frame header will be
+packed by library.  Application must pack payload only.
+<code class="docutils literal"><span class="pre">frame-&gt;ext.payload</span></code> is the object passed to
+<a class="reference internal" href="nghttp2_submit_extension.html#c.nghttp2_submit_extension" title="nghttp2_submit_extension"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_extension()</span></code></a> as payload parameter.  Application
+must pack extension payload to the <em>buf</em> of its capacity <em>len</em>
+bytes.  The <em>len</em> is at least 16KiB.</p>
+<p>The implementation of this function should return the number of
+bytes written into <em>buf</em> when it succeeds.</p>
+<p>To abort processing this extension frame, return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CANCEL" title="NGHTTP2_ERR_CANCEL"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CANCEL</span></code></a>, and
+<a class="reference internal" href="#c.nghttp2_on_frame_not_send_callback" title="nghttp2_on_frame_not_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_not_send_callback</span></code></a> will be invoked.</p>
+<p>If fatal error occurred, application should return
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  In this case,
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> functions
+immediately return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  If the
+other values are returned, currently they are treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  If the return value is
+strictly larger than <em>len</em>, it is treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_error_callback">
+typedef int <code class="descname">(*nghttp2_error_callback)</code><span class="sig-paren">(</span><a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session">nghttp2_session</a><em>&nbsp;*session</em>, const char<em>&nbsp;*msg</em>, size_t<em>&nbsp;len</em>, void<em>&nbsp;*user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_error_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when library provides the error message
+intended for human consumption.  This callback is solely for
+debugging purpose.  The <em>msg</em> is typically NULL-terminated string
+of length <em>len</em>.  <em>len</em> does not include the sentinel NULL
+character.</p>
+<p>The format of error message may change between nghttp2 library
+versions.  The application should not depend on the particular
+format.</p>
+<p>Normally, application should return 0 from this callback.  If fatal
+error occurred while doing something in this callback, application
+should return <a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  In this case,
+library will return immediately with return value
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>.  Currently, if nonzero value
+is returned from this callback, they are treated as
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="NGHTTP2_ERR_CALLBACK_FAILURE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_CALLBACK_FAILURE</span></code></a>, but application should not
+rely on this details.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_session_callbacks">
+<code class="descname">nghttp2_session_callbacks</code><a class="headerlink" href="#c.nghttp2_session_callbacks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback functions for <a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a>.  The details of
+this structure are intentionally hidden from the public API.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_malloc">
+typedef void *<code class="descname">(*nghttp2_malloc)</code><span class="sig-paren">(</span>size_t<em>&nbsp;size</em>, void<em>&nbsp;*mem_user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_malloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom memory allocator to replace malloc().  The <em>mem_user_data</em>
+is the mem_user_data member of <a class="reference internal" href="#c.nghttp2_mem" title="nghttp2_mem"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_mem</span></code></a> structure.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_free">
+typedef void <code class="descname">(*nghttp2_free)</code><span class="sig-paren">(</span>void<em>&nbsp;*ptr</em>, void<em>&nbsp;*mem_user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_free" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom memory allocator to replace free().  The <em>mem_user_data</em> is
+the mem_user_data member of <a class="reference internal" href="#c.nghttp2_mem" title="nghttp2_mem"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_mem</span></code></a> structure.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_calloc">
+typedef void *<code class="descname">(*nghttp2_calloc)</code><span class="sig-paren">(</span>size_t<em>&nbsp;nmemb</em>, size_t<em>&nbsp;size</em>, void<em>&nbsp;*mem_user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_calloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom memory allocator to replace calloc().  The <em>mem_user_data</em>
+is the mem_user_data member of <a class="reference internal" href="#c.nghttp2_mem" title="nghttp2_mem"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_mem</span></code></a> structure.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_realloc">
+typedef void *<code class="descname">(*nghttp2_realloc)</code><span class="sig-paren">(</span>void<em>&nbsp;*ptr</em>, size_t<em>&nbsp;size</em>, void<em>&nbsp;*mem_user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_realloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom memory allocator to replace realloc().  The <em>mem_user_data</em>
+is the mem_user_data member of <a class="reference internal" href="#c.nghttp2_mem" title="nghttp2_mem"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_mem</span></code></a> structure.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_mem">
+<code class="descname">nghttp2_mem</code><a class="headerlink" href="#c.nghttp2_mem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom memory allocator functions and user defined pointer.  The
+<em>mem_user_data</em> member is passed to each allocator function.  This
+can be used, for example, to achieve per-session memory pool.</p>
+<p>In the following example code, <code class="docutils literal"><span class="pre">my_malloc</span></code>, <code class="docutils literal"><span class="pre">my_free</span></code>,
+<code class="docutils literal"><span class="pre">my_calloc</span></code> and <code class="docutils literal"><span class="pre">my_realloc</span></code> are the replacement of the
+standard allocators <code class="docutils literal"><span class="pre">malloc</span></code>, <code class="docutils literal"><span class="pre">free</span></code>, <code class="docutils literal"><span class="pre">calloc</span></code> and
+<code class="docutils literal"><span class="pre">realloc</span></code> respectively:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="o">*</span><span class="nf">my_malloc_cb</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">mem_user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">my_malloc</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">my_free_cb</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">mem_user_data</span><span class="p">)</span> <span class="p">{</span> <span class="n">my_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">my_calloc_cb</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">nmemb</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">mem_user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">my_calloc</span><span class="p">(</span><span class="n">nmemb</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="o">*</span><span class="nf">my_realloc_cb</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">mem_user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">my_realloc</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">session_new</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">nghttp2_session</span> <span class="o">*</span><span class="n">session</span><span class="p">;</span>
+  <span class="n">nghttp2_session_callbacks</span> <span class="o">*</span><span class="n">callbacks</span><span class="p">;</span>
+  <span class="n">nghttp2_mem</span> <span class="n">mem</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">my_malloc_cb</span><span class="p">,</span> <span class="n">my_free_cb</span><span class="p">,</span> <span class="n">my_calloc_cb</span><span class="p">,</span>
+                     <span class="n">my_realloc_cb</span><span class="p">};</span>
+
+  <span class="p">...</span>
+
+  <span class="n">nghttp2_session_client_new3</span><span class="p">(</span><span class="o">&amp;</span><span class="n">session</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mem</span><span class="p">);</span>
+
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="member">
+<dt id="c.nghttp2_mem.mem_user_data">
+void *<code class="descname">mem_user_data</code><a class="headerlink" href="#c.nghttp2_mem.mem_user_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>An arbitrary user supplied data.  This is passed to each
+allocator function.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_mem.malloc">
+<a class="reference internal" href="#c.nghttp2_malloc" title="nghttp2_malloc">nghttp2_malloc</a> <code class="descname">malloc</code><a class="headerlink" href="#c.nghttp2_mem.malloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom allocator function to replace malloc().</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_mem.free">
+<a class="reference internal" href="#c.nghttp2_free" title="nghttp2_free">nghttp2_free</a> <code class="descname">free</code><a class="headerlink" href="#c.nghttp2_mem.free" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom allocator function to replace free().</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_mem.calloc">
+<a class="reference internal" href="#c.nghttp2_calloc" title="nghttp2_calloc">nghttp2_calloc</a> <code class="descname">calloc</code><a class="headerlink" href="#c.nghttp2_mem.calloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom allocator function to replace calloc().</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_mem.realloc">
+<a class="reference internal" href="#c.nghttp2_realloc" title="nghttp2_realloc">nghttp2_realloc</a> <code class="descname">realloc</code><a class="headerlink" href="#c.nghttp2_mem.realloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom allocator function to replace realloc().</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_option">
+<code class="descname">nghttp2_option</code><a class="headerlink" href="#c.nghttp2_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration options for <a class="reference internal" href="#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a>.  The details of
+this structure are intentionally hidden from the public API.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_ext_altsvc">
+<code class="descname">nghttp2_ext_altsvc</code><a class="headerlink" href="#c.nghttp2_ext_altsvc" title="Permalink to this definition">¶</a></dt>
+<dd><p>The payload of ALTSVC frame.  ALTSVC frame is a non-critical
+extension to HTTP/2.  If this frame is received, and
+<a class="reference internal" href="nghttp2_option_set_user_recv_extension_type.html#c.nghttp2_option_set_user_recv_extension_type" title="nghttp2_option_set_user_recv_extension_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_user_recv_extension_type()</span></code></a> is not set, and
+<a class="reference internal" href="nghttp2_option_set_builtin_recv_extension_type.html#c.nghttp2_option_set_builtin_recv_extension_type" title="nghttp2_option_set_builtin_recv_extension_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_builtin_recv_extension_type()</span></code></a> is set for
+<a class="reference internal" href="enums.html#c.NGHTTP2_ALTSVC" title="NGHTTP2_ALTSVC"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ALTSVC</span></code></a>, <code class="docutils literal"><span class="pre">nghttp2_extension.payload</span></code> will point to
+this struct.</p>
+<p>It has the following members:</p>
+<dl class="member">
+<dt id="c.nghttp2_ext_altsvc.origin">
+uint8_t *<code class="descname">origin</code><a class="headerlink" href="#c.nghttp2_ext_altsvc.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pointer to origin which this alternative service is
+associated with.  This is not necessarily NULL-terminated.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_ext_altsvc.origin_len">
+size_t <code class="descname">origin_len</code><a class="headerlink" href="#c.nghttp2_ext_altsvc.origin_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the <em>origin</em>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_ext_altsvc.field_value">
+uint8_t *<code class="descname">field_value</code><a class="headerlink" href="#c.nghttp2_ext_altsvc.field_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The pointer to Alt-Svc field value contained in ALTSVC frame.
+This is not necessarily NULL-terminated.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="c.nghttp2_ext_altsvc.field_value_len">
+size_t <code class="descname">field_value_len</code><a class="headerlink" href="#c.nghttp2_ext_altsvc.field_value_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>The length of the <em>field_value</em>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_hd_deflater">
+<code class="descname">nghttp2_hd_deflater</code><a class="headerlink" href="#c.nghttp2_hd_deflater" title="Permalink to this definition">¶</a></dt>
+<dd><p>HPACK deflater object.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_hd_inflater">
+<code class="descname">nghttp2_hd_inflater</code><a class="headerlink" href="#c.nghttp2_hd_inflater" title="Permalink to this definition">¶</a></dt>
+<dd><p>HPACK inflater object.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_stream">
+<code class="descname">nghttp2_stream</code><a class="headerlink" href="#c.nghttp2_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>The structure to represent HTTP/2 stream.  The details of this
+structure are intentionally hidden from the public API.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_debug_vprintf_callback">
+typedef void <code class="descname">(*nghttp2_debug_vprintf_callback)</code><span class="sig-paren">(</span>const char<em>&nbsp;*format</em>, va_list<em>&nbsp;args</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_debug_vprintf_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function invoked when the library outputs debug logging.
+The function is called with arguments suitable for <code class="docutils literal"><span class="pre">vfprintf(3)</span></code></p>
+<p>The debug output is only enabled if the library is built with
+<code class="docutils literal"><span class="pre">DEBUGBUILD</span></code> macro defined.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nghttp2_check_header_name.html" class="btn btn-neutral float-right" title="nghttp2_check_header_name" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="enums.html" class="btn btn-neutral" title="Enums" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

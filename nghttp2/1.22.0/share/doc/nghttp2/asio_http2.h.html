@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>asio_http2.h &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="prev" title="asio_http2_client.h" href="asio_http2_client.h.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>asio_http2.h</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="asio-http2-h">
+<h1>asio_http2.h<a class="headerlink" href="#asio-http2-h" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * nghttp2 - HTTP/2 C Library</span>
+<span class="cm"> *</span>
+<span class="cm"> * Copyright (c) 2014 Tatsuhiro Tsujikawa</span>
+<span class="cm"> *</span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining</span>
+<span class="cm"> * a copy of this software and associated documentation files (the</span>
+<span class="cm"> * &quot;Software&quot;), to deal in the Software without restriction, including</span>
+<span class="cm"> * without limitation the rights to use, copy, modify, merge, publish,</span>
+<span class="cm"> * distribute, sublicense, and/or sell copies of the Software, and to</span>
+<span class="cm"> * permit persons to whom the Software is furnished to do so, subject to</span>
+<span class="cm"> * the following conditions:</span>
+<span class="cm"> *</span>
+<span class="cm"> * The above copyright notice and this permission notice shall be</span>
+<span class="cm"> * included in all copies or substantial portions of the Software.</span>
+<span class="cm"> *</span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,</span>
+<span class="cm"> * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</span>
+<span class="cm"> * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</span>
+<span class="cm"> * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE</span>
+<span class="cm"> * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION</span>
+<span class="cm"> * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION</span>
+<span class="cm"> * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+<span class="cm"> */</span>
+<span class="cp">#ifndef ASIO_HTTP2_H</span>
+<span class="cp">#define ASIO_HTTP2_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;boost/system/error_code.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/asio.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/asio/ssl.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;nghttp2/nghttp2.h&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">nghttp2</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="n">asio_http2</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">header_value</span> <span class="p">{</span>
+  <span class="c1">// header field value</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">value</span><span class="p">;</span>
+  <span class="c1">// true if the header field value is sensitive information, such as</span>
+  <span class="c1">// authorization information or short length secret cookies.  If</span>
+  <span class="c1">// true, those header fields are not indexed by HPACK (but still</span>
+  <span class="c1">// huffman-encoded), which results in lesser compression.</span>
+  <span class="kt">bool</span> <span class="n">sensitive</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// header fields.  The header field name must be lower-cased.</span>
+<span class="k">using</span> <span class="n">header_map</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">multimap</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">header_value</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_category</span> <span class="o">&amp;</span><span class="n">nghttp2_category</span><span class="p">()</span> <span class="k">noexcept</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">uri_ref</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">scheme</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">host</span><span class="p">;</span>
+  <span class="c1">// form after percent-encoding decoded</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">path</span><span class="p">;</span>
+  <span class="c1">// original path, percent-encoded</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">raw_path</span><span class="p">;</span>
+  <span class="c1">// original query, percent-encoded</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">raw_query</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">fragment</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Callback function when data is arrived.  EOF is indicated by</span>
+<span class="c1">// passing 0 to the second parameter.</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">data_cb</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">void_cb</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">error_cb</span><span class="p">;</span>
+<span class="c1">// Callback function when request and response are finished.  The</span>
+<span class="c1">// parameter indicates the cause of closure.</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">close_cb</span><span class="p">;</span>
+
+<span class="c1">// Callback function to generate response body.  This function has the</span>
+<span class="c1">// same semantics with nghttp2_data_source_read_callback.  Just source</span>
+<span class="c1">// and user_data parameters are removed.</span>
+<span class="c1">//</span>
+<span class="c1">// Basically, write at most |len| bytes to |data| and returns the</span>
+<span class="c1">// number of bytes written.  If there is no data left to send, set</span>
+<span class="c1">// NGHTTP2_DATA_FLAG_EOF to *data_flags (e.g., *data_flags |=</span>
+<span class="c1">// NGHTTP2_DATA_FLAG_EOF).  If there is still data to send but they</span>
+<span class="c1">// are not available right now, return NGHTTP2_ERR_DEFERRED.  In case</span>
+<span class="c1">// of the error and request/response must be closed, return</span>
+<span class="c1">// NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE.</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">ssize_t</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span>
+                              <span class="kt">uint32_t</span> <span class="o">*</span><span class="n">data_flags</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="n">generator_cb</span><span class="p">;</span>
+
+<span class="c1">// Convenient function to create function to read file denoted by</span>
+<span class="c1">// |path|.  This can be passed to response::end().</span>
+<span class="n">generator_cb</span> <span class="nf">file_generator</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
+
+<span class="c1">// Like file_generator(const std::string&amp;), but it takes opened file</span>
+<span class="c1">// descriptor.  The passed descriptor will be closed when returned</span>
+<span class="c1">// function object is destroyed.</span>
+<span class="n">generator_cb</span> <span class="nf">file_generator_from_fd</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">);</span>
+
+<span class="c1">// Validates path so that it does not contain directory traversal</span>
+<span class="c1">// vector.  Returns true if path is safe.  The |path| must start with</span>
+<span class="c1">// &quot;/&quot; otherwise returns false.  This function should be called after</span>
+<span class="c1">// percent-decode was performed.</span>
+<span class="kt">bool</span> <span class="nf">check_path</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
+
+<span class="c1">// Performs percent-decode against string |s|.</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">percent_decode</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">);</span>
+
+<span class="c1">// Returns HTTP date representation of current posix time |t|.</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">http_date</span><span class="p">(</span><span class="kt">int64_t</span> <span class="n">t</span><span class="p">);</span>
+
+<span class="c1">// Parses |uri| and extract scheme, host and service.  The service is</span>
+<span class="c1">// port component of URI (e.g., &quot;8443&quot;) if available, otherwise it is</span>
+<span class="c1">// scheme (e.g., &quot;https&quot;).</span>
+<span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">host_service_from_uri</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">,</span>
+                                                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">scheme</span><span class="p">,</span>
+                                                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span>
+                                                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">service</span><span class="p">,</span>
+                                                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">uri</span><span class="p">);</span>
+
+<span class="k">enum</span> <span class="n">nghttp2_asio_error</span> <span class="p">{</span>
+  <span class="n">NGHTTP2_ASIO_ERR_NO_ERROR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">NGHTTP2_ASIO_ERR_TLS_NO_APP_PROTO_NEGOTIATED</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace asio_http2</span>
+
+<span class="p">}</span> <span class="c1">// namespace nghttp2</span>
+
+<span class="k">namespace</span> <span class="n">boost</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="n">system</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="n">is_error_code_enum</span><span class="o">&lt;</span><span class="n">nghttp2_error</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="n">BOOST_STATIC_CONSTANT</span><span class="p">(</span><span class="kt">bool</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="nb">true</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="n">is_error_code_enum</span><span class="o">&lt;</span><span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="o">::</span><span class="n">nghttp2_asio_error</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="n">BOOST_STATIC_CONSTANT</span><span class="p">(</span><span class="kt">bool</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="nb">true</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace system</span>
+
+<span class="p">}</span> <span class="c1">// namespace boost</span>
+
+<span class="cp">#endif </span><span class="c1">// ASIO_HTTP2_H</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="asio_http2_client.h.html" class="btn btn-neutral" title="asio_http2_client.h" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

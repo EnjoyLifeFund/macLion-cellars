@@ -1,0 +1,1178 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Enums &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="up" title="API Reference" href="apiref.html"/>
+        <link rel="next" title="Types (structs, unions and typedefs)" href="types.html"/>
+        <link rel="prev" title="Macros" href="macros.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="apiref.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html">Types (structs, unions and typedefs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_check_header_name.html">nghttp2_check_header_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_check_header_value.html">nghttp2_check_header_value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_bound.html">nghttp2_hd_deflate_bound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_change_table_size.html">nghttp2_hd_deflate_change_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_del.html">nghttp2_hd_deflate_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_dynamic_table_size.html">nghttp2_hd_deflate_get_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_max_dynamic_table_size.html">nghttp2_hd_deflate_get_max_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_num_table_entries.html">nghttp2_hd_deflate_get_num_table_entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_table_entry.html">nghttp2_hd_deflate_get_table_entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_hd.html">nghttp2_hd_deflate_hd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_hd_vec.html">nghttp2_hd_deflate_hd_vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_new.html">nghttp2_hd_deflate_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_new2.html">nghttp2_hd_deflate_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_change_table_size.html">nghttp2_hd_inflate_change_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_del.html">nghttp2_hd_inflate_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_end_headers.html">nghttp2_hd_inflate_end_headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_dynamic_table_size.html">nghttp2_hd_inflate_get_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_max_dynamic_table_size.html">nghttp2_hd_inflate_get_max_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_num_table_entries.html">nghttp2_hd_inflate_get_num_table_entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_table_entry.html">nghttp2_hd_inflate_get_table_entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_hd.html">nghttp2_hd_inflate_hd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_hd2.html">nghttp2_hd_inflate_hd2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_new.html">nghttp2_hd_inflate_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_new2.html">nghttp2_hd_inflate_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_http2_strerror.html">nghttp2_http2_strerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_is_fatal.html">nghttp2_is_fatal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_nv_compare_name.html">nghttp2_nv_compare_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_del.html">nghttp2_option_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_new.html">nghttp2_option_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_builtin_recv_extension_type.html">nghttp2_option_set_builtin_recv_extension_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_deflate_dynamic_table_size.html">nghttp2_option_set_max_deflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_reserved_remote_streams.html">nghttp2_option_set_max_reserved_remote_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_send_header_block_length.html">nghttp2_option_set_max_send_header_block_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_auto_ping_ack.html">nghttp2_option_set_no_auto_ping_ack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_auto_window_update.html">nghttp2_option_set_no_auto_window_update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_closed_streams.html">nghttp2_option_set_no_closed_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_http_messaging.html">nghttp2_option_set_no_http_messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_recv_client_magic.html">nghttp2_option_set_no_recv_client_magic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_peer_max_concurrent_streams.html">nghttp2_option_set_peer_max_concurrent_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_user_recv_extension_type.html">nghttp2_option_set_user_recv_extension_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_pack_settings_payload.html">nghttp2_pack_settings_payload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_check_default.html">nghttp2_priority_spec_check_default</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_default_init.html">nghttp2_priority_spec_default_init</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_init.html">nghttp2_priority_spec_init</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_decref.html">nghttp2_rcbuf_decref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_get_buf.html">nghttp2_rcbuf_get_buf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_incref.html">nghttp2_rcbuf_incref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_select_next_protocol.html">nghttp2_select_next_protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_del.html">nghttp2_session_callbacks_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_new.html">nghttp2_session_callbacks_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_before_frame_send_callback.html">nghttp2_session_callbacks_set_before_frame_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_data_source_read_length_callback.html">nghttp2_session_callbacks_set_data_source_read_length_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_error_callback.html">nghttp2_session_callbacks_set_error_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_frame_callback.html">nghttp2_session_callbacks_set_on_begin_frame_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_headers_callback.html">nghttp2_session_callbacks_set_on_begin_headers_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_data_chunk_recv_callback.html">nghttp2_session_callbacks_set_on_data_chunk_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_extension_chunk_recv_callback.html">nghttp2_session_callbacks_set_on_extension_chunk_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_not_send_callback.html">nghttp2_session_callbacks_set_on_frame_not_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_recv_callback.html">nghttp2_session_callbacks_set_on_frame_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_send_callback.html">nghttp2_session_callbacks_set_on_frame_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_header_callback.html">nghttp2_session_callbacks_set_on_header_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_header_callback2.html">nghttp2_session_callbacks_set_on_header_callback2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_frame_recv_callback.html">nghttp2_session_callbacks_set_on_invalid_frame_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_header_callback.html">nghttp2_session_callbacks_set_on_invalid_header_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_header_callback2.html">nghttp2_session_callbacks_set_on_invalid_header_callback2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_stream_close_callback.html">nghttp2_session_callbacks_set_on_stream_close_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_pack_extension_callback.html">nghttp2_session_callbacks_set_pack_extension_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_recv_callback.html">nghttp2_session_callbacks_set_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_select_padding_callback.html">nghttp2_session_callbacks_set_select_padding_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_send_callback.html">nghttp2_session_callbacks_set_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_send_data_callback.html">nghttp2_session_callbacks_set_send_data_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_unpack_extension_callback.html">nghttp2_session_callbacks_set_unpack_extension_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_change_stream_priority.html">nghttp2_session_change_stream_priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_check_request_allowed.html">nghttp2_session_check_request_allowed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_check_server_session.html">nghttp2_session_check_server_session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new.html">nghttp2_session_client_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new2.html">nghttp2_session_client_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new3.html">nghttp2_session_client_new3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume.html">nghttp2_session_consume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume_connection.html">nghttp2_session_consume_connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume_stream.html">nghttp2_session_consume_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_create_idle_stream.html">nghttp2_session_create_idle_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_del.html">nghttp2_session_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_find_stream.html">nghttp2_session_find_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_effective_local_window_size.html">nghttp2_session_get_effective_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_effective_recv_data_length.html">nghttp2_session_get_effective_recv_data_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_hd_deflate_dynamic_table_size.html">nghttp2_session_get_hd_deflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_hd_inflate_dynamic_table_size.html">nghttp2_session_get_hd_inflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_last_proc_stream_id.html">nghttp2_session_get_last_proc_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_local_settings.html">nghttp2_session_get_local_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_local_window_size.html">nghttp2_session_get_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_next_stream_id.html">nghttp2_session_get_next_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_outbound_queue_size.html">nghttp2_session_get_outbound_queue_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_remote_settings.html">nghttp2_session_get_remote_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_remote_window_size.html">nghttp2_session_get_remote_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_root_stream.html">nghttp2_session_get_root_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_effective_local_window_size.html">nghttp2_session_get_stream_effective_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_effective_recv_data_length.html">nghttp2_session_get_stream_effective_recv_data_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_local_close.html">nghttp2_session_get_stream_local_close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_local_window_size.html">nghttp2_session_get_stream_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_remote_close.html">nghttp2_session_get_stream_remote_close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_remote_window_size.html">nghttp2_session_get_stream_remote_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_user_data.html">nghttp2_session_get_stream_user_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_mem_recv.html">nghttp2_session_mem_recv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_mem_send.html">nghttp2_session_mem_send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_recv.html">nghttp2_session_recv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_resume_data.html">nghttp2_session_resume_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_send.html">nghttp2_session_send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new.html">nghttp2_session_server_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new2.html">nghttp2_session_server_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new3.html">nghttp2_session_server_new3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_local_window_size.html">nghttp2_session_set_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_next_stream_id.html">nghttp2_session_set_next_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_stream_user_data.html">nghttp2_session_set_stream_user_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_terminate_session.html">nghttp2_session_terminate_session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_terminate_session2.html">nghttp2_session_terminate_session2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_upgrade.html">nghttp2_session_upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_upgrade2.html">nghttp2_session_upgrade2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_want_read.html">nghttp2_session_want_read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_want_write.html">nghttp2_session_want_write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_set_debug_vprintf_callback.html">nghttp2_set_debug_vprintf_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_first_child.html">nghttp2_stream_get_first_child</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_next_sibling.html">nghttp2_stream_get_next_sibling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_parent.html">nghttp2_stream_get_parent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_previous_sibling.html">nghttp2_stream_get_previous_sibling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_state.html">nghttp2_stream_get_state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_sum_dependency_weight.html">nghttp2_stream_get_sum_dependency_weight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_weight.html">nghttp2_stream_get_weight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_strerror.html">nghttp2_strerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_altsvc.html">nghttp2_submit_altsvc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_data.html">nghttp2_submit_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_extension.html">nghttp2_submit_extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_goaway.html">nghttp2_submit_goaway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_headers.html">nghttp2_submit_headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_ping.html">nghttp2_submit_ping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_priority.html">nghttp2_submit_priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_push_promise.html">nghttp2_submit_push_promise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_request.html">nghttp2_submit_request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_response.html">nghttp2_submit_response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_rst_stream.html">nghttp2_submit_rst_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_settings.html">nghttp2_submit_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_shutdown_notice.html">nghttp2_submit_shutdown_notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_trailer.html">nghttp2_submit_trailer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_window_update.html">nghttp2_submit_window_update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_version.html">nghttp2_version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="apiref.html">API Reference</a> &raquo;</li>
+      
+    <li>Enums</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="enums">
+<h1>Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="c.nghttp2_error">
+<code class="descname">nghttp2_error</code><a class="headerlink" href="#c.nghttp2_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error codes used in this library.  The code range is [-999, -500],
+inclusive. The following values are defined:</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INVALID_ARGUMENT">
+<code class="descname">NGHTTP2_ERR_INVALID_ARGUMENT</code><a class="headerlink" href="#c.NGHTTP2_ERR_INVALID_ARGUMENT" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-501</span></code>)
+Invalid argument passed.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_BUFFER_ERROR">
+<code class="descname">NGHTTP2_ERR_BUFFER_ERROR</code><a class="headerlink" href="#c.NGHTTP2_ERR_BUFFER_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-502</span></code>)
+Out of buffer space.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_UNSUPPORTED_VERSION">
+<code class="descname">NGHTTP2_ERR_UNSUPPORTED_VERSION</code><a class="headerlink" href="#c.NGHTTP2_ERR_UNSUPPORTED_VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-503</span></code>)
+The specified protocol version is not supported.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_WOULDBLOCK">
+<code class="descname">NGHTTP2_ERR_WOULDBLOCK</code><a class="headerlink" href="#c.NGHTTP2_ERR_WOULDBLOCK" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-504</span></code>)
+Used as a return value from <a class="reference internal" href="types.html#c.nghttp2_send_callback" title="nghttp2_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_send_callback</span></code></a>,
+<a class="reference internal" href="types.html#c.nghttp2_recv_callback" title="nghttp2_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_recv_callback</span></code></a> and
+<a class="reference internal" href="types.html#c.nghttp2_send_data_callback" title="nghttp2_send_data_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_send_data_callback</span></code></a> to indicate that the operation
+would block.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_PROTO">
+<code class="descname">NGHTTP2_ERR_PROTO</code><a class="headerlink" href="#c.NGHTTP2_ERR_PROTO" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-505</span></code>)
+General protocol error</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INVALID_FRAME">
+<code class="descname">NGHTTP2_ERR_INVALID_FRAME</code><a class="headerlink" href="#c.NGHTTP2_ERR_INVALID_FRAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-506</span></code>)
+The frame is invalid.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_EOF">
+<code class="descname">NGHTTP2_ERR_EOF</code><a class="headerlink" href="#c.NGHTTP2_ERR_EOF" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-507</span></code>)
+The peer performed a shutdown on the connection.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_DEFERRED">
+<code class="descname">NGHTTP2_ERR_DEFERRED</code><a class="headerlink" href="#c.NGHTTP2_ERR_DEFERRED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-508</span></code>)
+Used as a return value from
+<a class="reference internal" href="types.html#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_data_source_read_callback()</span></code></a> to indicate that data
+transfer is postponed.  See
+<a class="reference internal" href="types.html#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_data_source_read_callback()</span></code></a> for details.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_STREAM_ID_NOT_AVAILABLE">
+<code class="descname">NGHTTP2_ERR_STREAM_ID_NOT_AVAILABLE</code><a class="headerlink" href="#c.NGHTTP2_ERR_STREAM_ID_NOT_AVAILABLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-509</span></code>)
+Stream ID has reached the maximum value.  Therefore no stream ID
+is available.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_STREAM_CLOSED">
+<code class="descname">NGHTTP2_ERR_STREAM_CLOSED</code><a class="headerlink" href="#c.NGHTTP2_ERR_STREAM_CLOSED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-510</span></code>)
+The stream is already closed; or the stream ID is invalid.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_STREAM_CLOSING">
+<code class="descname">NGHTTP2_ERR_STREAM_CLOSING</code><a class="headerlink" href="#c.NGHTTP2_ERR_STREAM_CLOSING" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-511</span></code>)
+RST_STREAM has been added to the outbound queue.  The stream is
+in closing state.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_STREAM_SHUT_WR">
+<code class="descname">NGHTTP2_ERR_STREAM_SHUT_WR</code><a class="headerlink" href="#c.NGHTTP2_ERR_STREAM_SHUT_WR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-512</span></code>)
+The transmission is not allowed for this stream (e.g., a frame
+with END_STREAM flag set has already sent).</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INVALID_STREAM_ID">
+<code class="descname">NGHTTP2_ERR_INVALID_STREAM_ID</code><a class="headerlink" href="#c.NGHTTP2_ERR_INVALID_STREAM_ID" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-513</span></code>)
+The stream ID is invalid.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INVALID_STREAM_STATE">
+<code class="descname">NGHTTP2_ERR_INVALID_STREAM_STATE</code><a class="headerlink" href="#c.NGHTTP2_ERR_INVALID_STREAM_STATE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-514</span></code>)
+The state of the stream is not valid (e.g., DATA cannot be sent
+to the stream if response HEADERS has not been sent).</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_DEFERRED_DATA_EXIST">
+<code class="descname">NGHTTP2_ERR_DEFERRED_DATA_EXIST</code><a class="headerlink" href="#c.NGHTTP2_ERR_DEFERRED_DATA_EXIST" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-515</span></code>)
+Another DATA frame has already been deferred.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_START_STREAM_NOT_ALLOWED">
+<code class="descname">NGHTTP2_ERR_START_STREAM_NOT_ALLOWED</code><a class="headerlink" href="#c.NGHTTP2_ERR_START_STREAM_NOT_ALLOWED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-516</span></code>)
+Starting new stream is not allowed (e.g., GOAWAY has been sent
+and/or received).</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_GOAWAY_ALREADY_SENT">
+<code class="descname">NGHTTP2_ERR_GOAWAY_ALREADY_SENT</code><a class="headerlink" href="#c.NGHTTP2_ERR_GOAWAY_ALREADY_SENT" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-517</span></code>)
+GOAWAY has already been sent.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INVALID_HEADER_BLOCK">
+<code class="descname">NGHTTP2_ERR_INVALID_HEADER_BLOCK</code><a class="headerlink" href="#c.NGHTTP2_ERR_INVALID_HEADER_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-518</span></code>)
+The received frame contains the invalid header block (e.g., There
+are duplicate header names; or the header names are not encoded
+in US-ASCII character set and not lower cased; or the header name
+is zero-length string; or the header value contains multiple
+in-sequence NUL bytes).</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INVALID_STATE">
+<code class="descname">NGHTTP2_ERR_INVALID_STATE</code><a class="headerlink" href="#c.NGHTTP2_ERR_INVALID_STATE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-519</span></code>)
+Indicates that the context is not suitable to perform the
+requested operation.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE">
+<code class="descname">NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE</code><a class="headerlink" href="#c.NGHTTP2_ERR_TEMPORAL_CALLBACK_FAILURE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-521</span></code>)
+The user callback function failed due to the temporal error.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_FRAME_SIZE_ERROR">
+<code class="descname">NGHTTP2_ERR_FRAME_SIZE_ERROR</code><a class="headerlink" href="#c.NGHTTP2_ERR_FRAME_SIZE_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-522</span></code>)
+The length of the frame is invalid, either too large or too small.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_HEADER_COMP">
+<code class="descname">NGHTTP2_ERR_HEADER_COMP</code><a class="headerlink" href="#c.NGHTTP2_ERR_HEADER_COMP" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-523</span></code>)
+Header block inflate/deflate error.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_FLOW_CONTROL">
+<code class="descname">NGHTTP2_ERR_FLOW_CONTROL</code><a class="headerlink" href="#c.NGHTTP2_ERR_FLOW_CONTROL" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-524</span></code>)
+Flow control error</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INSUFF_BUFSIZE">
+<code class="descname">NGHTTP2_ERR_INSUFF_BUFSIZE</code><a class="headerlink" href="#c.NGHTTP2_ERR_INSUFF_BUFSIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-525</span></code>)
+Insufficient buffer size given to function.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_PAUSE">
+<code class="descname">NGHTTP2_ERR_PAUSE</code><a class="headerlink" href="#c.NGHTTP2_ERR_PAUSE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-526</span></code>)
+Callback was paused by the application</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_TOO_MANY_INFLIGHT_SETTINGS">
+<code class="descname">NGHTTP2_ERR_TOO_MANY_INFLIGHT_SETTINGS</code><a class="headerlink" href="#c.NGHTTP2_ERR_TOO_MANY_INFLIGHT_SETTINGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-527</span></code>)
+There are too many in-flight SETTING frame and no more
+transmission of SETTINGS is allowed.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_PUSH_DISABLED">
+<code class="descname">NGHTTP2_ERR_PUSH_DISABLED</code><a class="headerlink" href="#c.NGHTTP2_ERR_PUSH_DISABLED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-528</span></code>)
+The server push is disabled.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_DATA_EXIST">
+<code class="descname">NGHTTP2_ERR_DATA_EXIST</code><a class="headerlink" href="#c.NGHTTP2_ERR_DATA_EXIST" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-529</span></code>)
+DATA or HEADERS frame for a given stream has been already
+submitted and has not been fully processed yet.  Application
+should wait for the transmission of the previously submitted
+frame before submitting another.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_SESSION_CLOSING">
+<code class="descname">NGHTTP2_ERR_SESSION_CLOSING</code><a class="headerlink" href="#c.NGHTTP2_ERR_SESSION_CLOSING" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-530</span></code>)
+The current session is closing due to a connection error or
+<a class="reference internal" href="nghttp2_session_terminate_session.html#c.nghttp2_session_terminate_session" title="nghttp2_session_terminate_session"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_terminate_session()</span></code></a> is called.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_HTTP_HEADER">
+<code class="descname">NGHTTP2_ERR_HTTP_HEADER</code><a class="headerlink" href="#c.NGHTTP2_ERR_HTTP_HEADER" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-531</span></code>)
+Invalid HTTP header field was received and stream is going to be
+closed.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_HTTP_MESSAGING">
+<code class="descname">NGHTTP2_ERR_HTTP_MESSAGING</code><a class="headerlink" href="#c.NGHTTP2_ERR_HTTP_MESSAGING" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-532</span></code>)
+Violation in HTTP messaging rule.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_REFUSED_STREAM">
+<code class="descname">NGHTTP2_ERR_REFUSED_STREAM</code><a class="headerlink" href="#c.NGHTTP2_ERR_REFUSED_STREAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-533</span></code>)
+Stream was refused.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_INTERNAL">
+<code class="descname">NGHTTP2_ERR_INTERNAL</code><a class="headerlink" href="#c.NGHTTP2_ERR_INTERNAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-534</span></code>)
+Unexpected internal error, but recovered.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_CANCEL">
+<code class="descname">NGHTTP2_ERR_CANCEL</code><a class="headerlink" href="#c.NGHTTP2_ERR_CANCEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-535</span></code>)
+Indicates that a processing was canceled.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_FATAL">
+<code class="descname">NGHTTP2_ERR_FATAL</code><a class="headerlink" href="#c.NGHTTP2_ERR_FATAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-900</span></code>)
+The errors &lt; <a class="reference internal" href="#c.NGHTTP2_ERR_FATAL" title="NGHTTP2_ERR_FATAL"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_FATAL</span></code></a> mean that the library is
+under unexpected condition and processing was terminated (e.g.,
+out of memory).  If application receives this error code, it must
+stop using that <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> object and only allowed
+operation for that object is deallocate it using
+<a class="reference internal" href="nghttp2_session_del.html#c.nghttp2_session_del" title="nghttp2_session_del"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_del()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_NOMEM">
+<code class="descname">NGHTTP2_ERR_NOMEM</code><a class="headerlink" href="#c.NGHTTP2_ERR_NOMEM" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-901</span></code>)
+Out of memory.  This is a fatal error.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_CALLBACK_FAILURE">
+<code class="descname">NGHTTP2_ERR_CALLBACK_FAILURE</code><a class="headerlink" href="#c.NGHTTP2_ERR_CALLBACK_FAILURE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-902</span></code>)
+The user callback function failed.  This is a fatal error.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_BAD_CLIENT_MAGIC">
+<code class="descname">NGHTTP2_ERR_BAD_CLIENT_MAGIC</code><a class="headerlink" href="#c.NGHTTP2_ERR_BAD_CLIENT_MAGIC" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-903</span></code>)
+Invalid client magic (see <a class="reference internal" href="macros.html#c.NGHTTP2_CLIENT_MAGIC" title="NGHTTP2_CLIENT_MAGIC"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_CLIENT_MAGIC</span></code></a>) was
+received and further processing is not possible.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ERR_FLOODED">
+<code class="descname">NGHTTP2_ERR_FLOODED</code><a class="headerlink" href="#c.NGHTTP2_ERR_FLOODED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">-904</span></code>)
+Possible flooding by peer was detected in this HTTP/2 session.
+Flooding is measured by how many PING and SETTINGS frames with
+ACK flag set are queued for transmission.  These frames are
+response for the peer initiated frames, and peer can cause memory
+exhaustion on server side to send these frames forever and does
+not read network.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_nv_flag">
+<code class="descname">nghttp2_nv_flag</code><a class="headerlink" href="#c.nghttp2_nv_flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>The flags for header field name/value pair.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_NV_FLAG_NONE">
+<code class="descname">NGHTTP2_NV_FLAG_NONE</code><a class="headerlink" href="#c.NGHTTP2_NV_FLAG_NONE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0</span></code>)
+No flag set.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_NV_FLAG_NO_INDEX">
+<code class="descname">NGHTTP2_NV_FLAG_NO_INDEX</code><a class="headerlink" href="#c.NGHTTP2_NV_FLAG_NO_INDEX" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+Indicates that this name/value pair must not be indexed (&quot;Literal
+Header Field never Indexed&quot; representation must be used in HPACK
+encoding).  Other implementation calls this bit as &quot;sensitive&quot;.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_NV_FLAG_NO_COPY_NAME">
+<code class="descname">NGHTTP2_NV_FLAG_NO_COPY_NAME</code><a class="headerlink" href="#c.NGHTTP2_NV_FLAG_NO_COPY_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x02</span></code>)
+This flag is set solely by application.  If this flag is set, the
+library does not make a copy of header field name.  This could
+improve performance.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_NV_FLAG_NO_COPY_VALUE">
+<code class="descname">NGHTTP2_NV_FLAG_NO_COPY_VALUE</code><a class="headerlink" href="#c.NGHTTP2_NV_FLAG_NO_COPY_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x04</span></code>)
+This flag is set solely by application.  If this flag is set, the
+library does not make a copy of header field value.  This could
+improve performance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_frame_type">
+<code class="descname">nghttp2_frame_type</code><a class="headerlink" href="#c.nghttp2_frame_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The frame types in HTTP/2 specification.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_DATA">
+<code class="descname">NGHTTP2_DATA</code><a class="headerlink" href="#c.NGHTTP2_DATA" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0</span></code>)
+The DATA frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_HEADERS">
+<code class="descname">NGHTTP2_HEADERS</code><a class="headerlink" href="#c.NGHTTP2_HEADERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+The HEADERS frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_PRIORITY">
+<code class="descname">NGHTTP2_PRIORITY</code><a class="headerlink" href="#c.NGHTTP2_PRIORITY" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x02</span></code>)
+The PRIORITY frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_RST_STREAM">
+<code class="descname">NGHTTP2_RST_STREAM</code><a class="headerlink" href="#c.NGHTTP2_RST_STREAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x03</span></code>)
+The RST_STREAM frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS">
+<code class="descname">NGHTTP2_SETTINGS</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x04</span></code>)
+The SETTINGS frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_PUSH_PROMISE">
+<code class="descname">NGHTTP2_PUSH_PROMISE</code><a class="headerlink" href="#c.NGHTTP2_PUSH_PROMISE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x05</span></code>)
+The PUSH_PROMISE frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_PING">
+<code class="descname">NGHTTP2_PING</code><a class="headerlink" href="#c.NGHTTP2_PING" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x06</span></code>)
+The PING frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_GOAWAY">
+<code class="descname">NGHTTP2_GOAWAY</code><a class="headerlink" href="#c.NGHTTP2_GOAWAY" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x07</span></code>)
+The GOAWAY frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_WINDOW_UPDATE">
+<code class="descname">NGHTTP2_WINDOW_UPDATE</code><a class="headerlink" href="#c.NGHTTP2_WINDOW_UPDATE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x08</span></code>)
+The WINDOW_UPDATE frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_CONTINUATION">
+<code class="descname">NGHTTP2_CONTINUATION</code><a class="headerlink" href="#c.NGHTTP2_CONTINUATION" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x09</span></code>)
+The CONTINUATION frame.  This frame type won't be passed to any
+callbacks because the library processes this frame type and its
+preceding HEADERS/PUSH_PROMISE as a single frame.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ALTSVC">
+<code class="descname">NGHTTP2_ALTSVC</code><a class="headerlink" href="#c.NGHTTP2_ALTSVC" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x0a</span></code>)
+The ALTSVC frame, which is defined in <a class="reference external" href="https://tools.ietf.org/html/rfc7838#section-4">RFC 7383</a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_flag">
+<code class="descname">nghttp2_flag</code><a class="headerlink" href="#c.nghttp2_flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>The flags for HTTP/2 frames.  This enum defines all flags for all
+frames.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_FLAG_NONE">
+<code class="descname">NGHTTP2_FLAG_NONE</code><a class="headerlink" href="#c.NGHTTP2_FLAG_NONE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0</span></code>)
+No flag set.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_FLAG_END_STREAM">
+<code class="descname">NGHTTP2_FLAG_END_STREAM</code><a class="headerlink" href="#c.NGHTTP2_FLAG_END_STREAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+The END_STREAM flag.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_FLAG_END_HEADERS">
+<code class="descname">NGHTTP2_FLAG_END_HEADERS</code><a class="headerlink" href="#c.NGHTTP2_FLAG_END_HEADERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x04</span></code>)
+The END_HEADERS flag.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_FLAG_ACK">
+<code class="descname">NGHTTP2_FLAG_ACK</code><a class="headerlink" href="#c.NGHTTP2_FLAG_ACK" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+The ACK flag.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_FLAG_PADDED">
+<code class="descname">NGHTTP2_FLAG_PADDED</code><a class="headerlink" href="#c.NGHTTP2_FLAG_PADDED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x08</span></code>)
+The PADDED flag.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_FLAG_PRIORITY">
+<code class="descname">NGHTTP2_FLAG_PRIORITY</code><a class="headerlink" href="#c.NGHTTP2_FLAG_PRIORITY" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x20</span></code>)
+The PRIORITY flag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_settings_id">
+<code class="descname">nghttp2_settings_id</code><a class="headerlink" href="#c.nghttp2_settings_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SETTINGS ID.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS_HEADER_TABLE_SIZE">
+<code class="descname">NGHTTP2_SETTINGS_HEADER_TABLE_SIZE</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS_HEADER_TABLE_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+SETTINGS_HEADER_TABLE_SIZE</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS_ENABLE_PUSH">
+<code class="descname">NGHTTP2_SETTINGS_ENABLE_PUSH</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS_ENABLE_PUSH" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x02</span></code>)
+SETTINGS_ENABLE_PUSH</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS_MAX_CONCURRENT_STREAMS">
+<code class="descname">NGHTTP2_SETTINGS_MAX_CONCURRENT_STREAMS</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS_MAX_CONCURRENT_STREAMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x03</span></code>)
+SETTINGS_MAX_CONCURRENT_STREAMS</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS_INITIAL_WINDOW_SIZE">
+<code class="descname">NGHTTP2_SETTINGS_INITIAL_WINDOW_SIZE</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS_INITIAL_WINDOW_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x04</span></code>)
+SETTINGS_INITIAL_WINDOW_SIZE</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS_MAX_FRAME_SIZE">
+<code class="descname">NGHTTP2_SETTINGS_MAX_FRAME_SIZE</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS_MAX_FRAME_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x05</span></code>)
+SETTINGS_MAX_FRAME_SIZE</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS_MAX_HEADER_LIST_SIZE">
+<code class="descname">NGHTTP2_SETTINGS_MAX_HEADER_LIST_SIZE</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS_MAX_HEADER_LIST_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x06</span></code>)
+SETTINGS_MAX_HEADER_LIST_SIZE</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_error_code">
+<code class="descname">nghttp2_error_code</code><a class="headerlink" href="#c.nghttp2_error_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>The status codes for the RST_STREAM and GOAWAY frames.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_NO_ERROR">
+<code class="descname">NGHTTP2_NO_ERROR</code><a class="headerlink" href="#c.NGHTTP2_NO_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x00</span></code>)
+No errors.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_PROTOCOL_ERROR">
+<code class="descname">NGHTTP2_PROTOCOL_ERROR</code><a class="headerlink" href="#c.NGHTTP2_PROTOCOL_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+PROTOCOL_ERROR</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_INTERNAL_ERROR">
+<code class="descname">NGHTTP2_INTERNAL_ERROR</code><a class="headerlink" href="#c.NGHTTP2_INTERNAL_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x02</span></code>)
+INTERNAL_ERROR</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_FLOW_CONTROL_ERROR">
+<code class="descname">NGHTTP2_FLOW_CONTROL_ERROR</code><a class="headerlink" href="#c.NGHTTP2_FLOW_CONTROL_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x03</span></code>)
+FLOW_CONTROL_ERROR</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_SETTINGS_TIMEOUT">
+<code class="descname">NGHTTP2_SETTINGS_TIMEOUT</code><a class="headerlink" href="#c.NGHTTP2_SETTINGS_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x04</span></code>)
+SETTINGS_TIMEOUT</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_STREAM_CLOSED">
+<code class="descname">NGHTTP2_STREAM_CLOSED</code><a class="headerlink" href="#c.NGHTTP2_STREAM_CLOSED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x05</span></code>)
+STREAM_CLOSED</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_FRAME_SIZE_ERROR">
+<code class="descname">NGHTTP2_FRAME_SIZE_ERROR</code><a class="headerlink" href="#c.NGHTTP2_FRAME_SIZE_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x06</span></code>)
+FRAME_SIZE_ERROR</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_REFUSED_STREAM">
+<code class="descname">NGHTTP2_REFUSED_STREAM</code><a class="headerlink" href="#c.NGHTTP2_REFUSED_STREAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x07</span></code>)
+REFUSED_STREAM</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_CANCEL">
+<code class="descname">NGHTTP2_CANCEL</code><a class="headerlink" href="#c.NGHTTP2_CANCEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x08</span></code>)
+CANCEL</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_COMPRESSION_ERROR">
+<code class="descname">NGHTTP2_COMPRESSION_ERROR</code><a class="headerlink" href="#c.NGHTTP2_COMPRESSION_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x09</span></code>)
+COMPRESSION_ERROR</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_CONNECT_ERROR">
+<code class="descname">NGHTTP2_CONNECT_ERROR</code><a class="headerlink" href="#c.NGHTTP2_CONNECT_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x0a</span></code>)
+CONNECT_ERROR</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_ENHANCE_YOUR_CALM">
+<code class="descname">NGHTTP2_ENHANCE_YOUR_CALM</code><a class="headerlink" href="#c.NGHTTP2_ENHANCE_YOUR_CALM" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x0b</span></code>)
+ENHANCE_YOUR_CALM</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_INADEQUATE_SECURITY">
+<code class="descname">NGHTTP2_INADEQUATE_SECURITY</code><a class="headerlink" href="#c.NGHTTP2_INADEQUATE_SECURITY" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x0c</span></code>)
+INADEQUATE_SECURITY</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_HTTP_1_1_REQUIRED">
+<code class="descname">NGHTTP2_HTTP_1_1_REQUIRED</code><a class="headerlink" href="#c.NGHTTP2_HTTP_1_1_REQUIRED" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x0d</span></code>)
+HTTP_1_1_REQUIRED</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_data_flag">
+<code class="descname">nghttp2_data_flag</code><a class="headerlink" href="#c.nghttp2_data_flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>The flags used to set in <em>data_flags</em> output parameter in
+<a class="reference internal" href="types.html#c.nghttp2_data_source_read_callback" title="nghttp2_data_source_read_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_data_source_read_callback</span></code></a>.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_DATA_FLAG_NONE">
+<code class="descname">NGHTTP2_DATA_FLAG_NONE</code><a class="headerlink" href="#c.NGHTTP2_DATA_FLAG_NONE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0</span></code>)
+No flag set.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_DATA_FLAG_EOF">
+<code class="descname">NGHTTP2_DATA_FLAG_EOF</code><a class="headerlink" href="#c.NGHTTP2_DATA_FLAG_EOF" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+Indicates EOF was sensed.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_DATA_FLAG_NO_END_STREAM">
+<code class="descname">NGHTTP2_DATA_FLAG_NO_END_STREAM</code><a class="headerlink" href="#c.NGHTTP2_DATA_FLAG_NO_END_STREAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x02</span></code>)
+Indicates that END_STREAM flag must not be set even if
+NGHTTP2_DATA_FLAG_EOF is set.  Usually this flag is used to send
+trailer fields with <a class="reference internal" href="nghttp2_submit_request.html#c.nghttp2_submit_request" title="nghttp2_submit_request"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_request()</span></code></a> or
+<a class="reference internal" href="nghttp2_submit_response.html#c.nghttp2_submit_response" title="nghttp2_submit_response"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_response()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_DATA_FLAG_NO_COPY">
+<code class="descname">NGHTTP2_DATA_FLAG_NO_COPY</code><a class="headerlink" href="#c.NGHTTP2_DATA_FLAG_NO_COPY" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x04</span></code>)
+Indicates that application will send complete DATA frame in
+<a class="reference internal" href="types.html#c.nghttp2_send_data_callback" title="nghttp2_send_data_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_send_data_callback</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_headers_category">
+<code class="descname">nghttp2_headers_category</code><a class="headerlink" href="#c.nghttp2_headers_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>The category of HEADERS, which indicates the role of the frame.  In
+HTTP/2 spec, request, response, push response and other arbitrary
+headers (e.g., trailer fields) are all called just HEADERS.  To
+give the application the role of incoming HEADERS frame, we define
+several categories.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_HCAT_REQUEST">
+<code class="descname">NGHTTP2_HCAT_REQUEST</code><a class="headerlink" href="#c.NGHTTP2_HCAT_REQUEST" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0</span></code>)
+The HEADERS frame is opening new stream, which is analogous to
+SYN_STREAM in SPDY.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_HCAT_RESPONSE">
+<code class="descname">NGHTTP2_HCAT_RESPONSE</code><a class="headerlink" href="#c.NGHTTP2_HCAT_RESPONSE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">1</span></code>)
+The HEADERS frame is the first response headers, which is
+analogous to SYN_REPLY in SPDY.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_HCAT_PUSH_RESPONSE">
+<code class="descname">NGHTTP2_HCAT_PUSH_RESPONSE</code><a class="headerlink" href="#c.NGHTTP2_HCAT_PUSH_RESPONSE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">2</span></code>)
+The HEADERS frame is the first headers sent against reserved
+stream.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_HCAT_HEADERS">
+<code class="descname">NGHTTP2_HCAT_HEADERS</code><a class="headerlink" href="#c.NGHTTP2_HCAT_HEADERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">3</span></code>)
+The HEADERS frame which does not apply for the above categories,
+which is analogous to HEADERS in SPDY.  If non-final response
+(e.g., status 1xx) is used, final response HEADERS frame will be
+categorized here.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_hd_inflate_flag">
+<code class="descname">nghttp2_hd_inflate_flag</code><a class="headerlink" href="#c.nghttp2_hd_inflate_flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>The flags for header inflation.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_HD_INFLATE_NONE">
+<code class="descname">NGHTTP2_HD_INFLATE_NONE</code><a class="headerlink" href="#c.NGHTTP2_HD_INFLATE_NONE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0</span></code>)
+No flag set.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_HD_INFLATE_FINAL">
+<code class="descname">NGHTTP2_HD_INFLATE_FINAL</code><a class="headerlink" href="#c.NGHTTP2_HD_INFLATE_FINAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x01</span></code>)
+Indicates all headers were inflated.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_HD_INFLATE_EMIT">
+<code class="descname">NGHTTP2_HD_INFLATE_EMIT</code><a class="headerlink" href="#c.NGHTTP2_HD_INFLATE_EMIT" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">0x02</span></code>)
+Indicates a header was emitted.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="c.nghttp2_stream_proto_state">
+<code class="descname">nghttp2_stream_proto_state</code><a class="headerlink" href="#c.nghttp2_stream_proto_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>State of stream as described in RFC 7540.</p>
+<dl class="macro">
+<dt id="c.NGHTTP2_STREAM_STATE_IDLE">
+<code class="descname">NGHTTP2_STREAM_STATE_IDLE</code><a class="headerlink" href="#c.NGHTTP2_STREAM_STATE_IDLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="docutils literal"><span class="pre">1</span></code>)
+idle state.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt>
+<code class="descname">NGHTTP2_STREAM_STATE_OPEN,</code></dt>
+<dd><p>open state.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt>
+<code class="descname">NGHTTP2_STREAM_STATE_RESERVED_LOCAL,</code></dt>
+<dd><p>reserved (local) state.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt>
+<code class="descname">NGHTTP2_STREAM_STATE_RESERVED_REMOTE,</code></dt>
+<dd><p>reserved (remote) state.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt>
+<code class="descname">NGHTTP2_STREAM_STATE_HALF_CLOSED_LOCAL,</code></dt>
+<dd><p>half closed (local) state.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt>
+<code class="descname">NGHTTP2_STREAM_STATE_HALF_CLOSED_REMOTE,</code></dt>
+<dd><p>half closed (remote) state.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NGHTTP2_STREAM_STATE_CLOSED">
+<code class="descname">NGHTTP2_STREAM_STATE_CLOSED</code><a class="headerlink" href="#c.NGHTTP2_STREAM_STATE_CLOSED" title="Permalink to this definition">¶</a></dt>
+<dd><p>closed state.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="types.html" class="btn btn-neutral float-right" title="Types (structs, unions and typedefs)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="macros.html" class="btn btn-neutral" title="Macros" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

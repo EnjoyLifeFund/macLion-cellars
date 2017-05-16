@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>asio_http2_client.h &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="asio_http2.h" href="asio_http2.h.html"/>
+        <link rel="prev" title="asio_http2_server.h" href="asio_http2_server.h.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>asio_http2_client.h</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="asio-http2-client-h">
+<h1>asio_http2_client.h<a class="headerlink" href="#asio-http2-client-h" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * nghttp2 - HTTP/2 C Library</span>
+<span class="cm"> *</span>
+<span class="cm"> * Copyright (c) 2015 Tatsuhiro Tsujikawa</span>
+<span class="cm"> *</span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining</span>
+<span class="cm"> * a copy of this software and associated documentation files (the</span>
+<span class="cm"> * &quot;Software&quot;), to deal in the Software without restriction, including</span>
+<span class="cm"> * without limitation the rights to use, copy, modify, merge, publish,</span>
+<span class="cm"> * distribute, sublicense, and/or sell copies of the Software, and to</span>
+<span class="cm"> * permit persons to whom the Software is furnished to do so, subject to</span>
+<span class="cm"> * the following conditions:</span>
+<span class="cm"> *</span>
+<span class="cm"> * The above copyright notice and this permission notice shall be</span>
+<span class="cm"> * included in all copies or substantial portions of the Software.</span>
+<span class="cm"> *</span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,</span>
+<span class="cm"> * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</span>
+<span class="cm"> * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</span>
+<span class="cm"> * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE</span>
+<span class="cm"> * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION</span>
+<span class="cm"> * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION</span>
+<span class="cm"> * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span>
+<span class="cm"> */</span>
+<span class="cp">#ifndef ASIO_HTTP2_CLIENT_H</span>
+<span class="cp">#define ASIO_HTTP2_CLIENT_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2.h&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">nghttp2</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="n">asio_http2</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="n">client</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">response_impl</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">response</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Application must not call this directly.</span>
+  <span class="n">response</span><span class="p">();</span>
+  <span class="o">~</span><span class="n">response</span><span class="p">();</span>
+
+  <span class="c1">// Sets callback which is invoked when chunk of response body is</span>
+  <span class="c1">// received.</span>
+  <span class="kt">void</span> <span class="nf">on_data</span><span class="p">(</span><span class="n">data_cb</span> <span class="n">cb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Returns status code.</span>
+  <span class="kt">int</span> <span class="nf">status_code</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Returns content-length.  -1 if it is unknown.</span>
+  <span class="kt">int64_t</span> <span class="nf">content_length</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Returns the response header fields.  The pusedo header fields,</span>
+  <span class="c1">// which start with colon (:), are exluced from this list.</span>
+  <span class="k">const</span> <span class="n">header_map</span> <span class="o">&amp;</span><span class="n">header</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Application must not call this directly.</span>
+  <span class="n">response_impl</span> <span class="o">&amp;</span><span class="n">impl</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">response_impl</span><span class="o">&gt;</span> <span class="n">impl_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">request</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="n">response_cb</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">request_cb</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="n">request</span> <span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">connect_cb</span> <span class="o">=</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ip</span><span class="o">::</span><span class="n">tcp</span><span class="o">::</span><span class="n">resolver</span><span class="o">::</span><span class="n">iterator</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">request_impl</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">request</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Application must not call this directly.</span>
+  <span class="n">request</span><span class="p">();</span>
+  <span class="o">~</span><span class="n">request</span><span class="p">();</span>
+
+  <span class="c1">// Sets callback which is invoked when response header is received.</span>
+  <span class="kt">void</span> <span class="nf">on_response</span><span class="p">(</span><span class="n">response_cb</span> <span class="n">cb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Sets callback which is invoked when push request header is</span>
+  <span class="c1">// received.</span>
+  <span class="kt">void</span> <span class="nf">on_push</span><span class="p">(</span><span class="n">request_cb</span> <span class="n">cb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Sets callback which is invoked when this request and response are</span>
+  <span class="c1">// finished.  After the invocation of this callback, the application</span>
+  <span class="c1">// must not access request and response object.</span>
+  <span class="kt">void</span> <span class="nf">on_close</span><span class="p">(</span><span class="n">close_cb</span> <span class="n">cb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Write trailer part.  This must be called after setting both</span>
+  <span class="c1">// NGHTTP2_DATA_FLAG_EOF and NGHTTP2_DATA_FLAG_NO_END_STREAM set in</span>
+  <span class="c1">// *data_flag parameter in generator_cb passed to session::submit()</span>
+  <span class="c1">// function.</span>
+  <span class="kt">void</span> <span class="nf">write_trailer</span><span class="p">(</span><span class="n">header_map</span> <span class="n">h</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Cancels this request and response with given error code.</span>
+  <span class="kt">void</span> <span class="nf">cancel</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">error_code</span> <span class="o">=</span> <span class="n">NGHTTP2_INTERNAL_ERROR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Resumes deferred uploading.</span>
+  <span class="kt">void</span> <span class="nf">resume</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Returns method (e.g., GET).</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Returns request URI, split into components.</span>
+  <span class="k">const</span> <span class="n">uri_ref</span> <span class="o">&amp;</span><span class="n">uri</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Returns request header fields.  The pusedo header fields, which</span>
+  <span class="c1">// start with colon (:), are exluced from this list.</span>
+  <span class="k">const</span> <span class="n">header_map</span> <span class="o">&amp;</span><span class="n">header</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Application must not call this directly.</span>
+  <span class="n">request_impl</span> <span class="o">&amp;</span><span class="n">impl</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">request_impl</span><span class="o">&gt;</span> <span class="n">impl_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Wrapper around an nghttp2_priority_spec.</span>
+<span class="k">class</span> <span class="nc">priority_spec</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// The default ctor is used only by sentinel values.</span>
+  <span class="n">priority_spec</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+  <span class="c1">// Create a priority spec with the given priority settings.</span>
+  <span class="k">explicit</span> <span class="nf">priority_spec</span><span class="p">(</span><span class="k">const</span> <span class="kt">int32_t</span> <span class="n">stream_id</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int32_t</span> <span class="n">weight</span><span class="p">,</span>
+                         <span class="k">const</span> <span class="kt">bool</span> <span class="n">exclusive</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+
+  <span class="c1">// Return a pointer to a valid nghttp2 priority spec, or null.</span>
+  <span class="k">const</span> <span class="n">nghttp2_priority_spec</span> <span class="o">*</span><span class="nf">get</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Indicates whether or not this spec is valid (i.e. was constructed with</span>
+  <span class="c1">// values).</span>
+  <span class="k">const</span> <span class="kt">bool</span> <span class="nf">valid</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">nghttp2_priority_spec</span> <span class="n">spec_</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">valid_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">session_impl</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">session</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Starts HTTP/2 session by connecting to |host| and |service|</span>
+  <span class="c1">// (e.g., &quot;80&quot;) using clear text TCP connection with connect timeout</span>
+  <span class="c1">// 60 seconds.</span>
+  <span class="n">session</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="o">&amp;</span><span class="n">io_service</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">service</span><span class="p">);</span>
+
+  <span class="c1">// Starts HTTP/2 session by connecting to |host| and |service|</span>
+  <span class="c1">// (e.g., &quot;80&quot;) using clear text TCP connection with given connect</span>
+  <span class="c1">// timeout.</span>
+  <span class="n">session</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="o">&amp;</span><span class="n">io_service</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">service</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">time_duration</span> <span class="o">&amp;</span><span class="n">connect_timeout</span><span class="p">);</span>
+
+  <span class="c1">// Starts HTTP/2 session by connecting to |host| and |service|</span>
+  <span class="c1">// (e.g., &quot;443&quot;) using encrypted SSL/TLS connection with connect</span>
+  <span class="c1">// timeout 60 seconds.</span>
+  <span class="n">session</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="o">&amp;</span><span class="n">io_service</span><span class="p">,</span>
+          <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span> <span class="o">&amp;</span><span class="n">tls_context</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">service</span><span class="p">);</span>
+
+  <span class="c1">// Starts HTTP/2 session by connecting to |host| and |service|</span>
+  <span class="c1">// (e.g., &quot;443&quot;) using encrypted SSL/TLS connection with given</span>
+  <span class="c1">// connect timeout.</span>
+  <span class="n">session</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="o">&amp;</span><span class="n">io_service</span><span class="p">,</span>
+          <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span> <span class="o">&amp;</span><span class="n">tls_context</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">service</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">time_duration</span> <span class="o">&amp;</span><span class="n">connect_timeout</span><span class="p">);</span>
+
+  <span class="o">~</span><span class="n">session</span><span class="p">();</span>
+
+  <span class="n">session</span><span class="p">(</span><span class="n">session</span> <span class="o">&amp;&amp;</span><span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+  <span class="n">session</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">session</span> <span class="o">&amp;&amp;</span><span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+
+  <span class="c1">// Sets callback which is invoked after connection is established.</span>
+  <span class="kt">void</span> <span class="nf">on_connect</span><span class="p">(</span><span class="n">connect_cb</span> <span class="n">cb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Sets callback which is invoked there is connection level error</span>
+  <span class="c1">// and session is terminated.</span>
+  <span class="kt">void</span> <span class="nf">on_error</span><span class="p">(</span><span class="n">error_cb</span> <span class="n">cb</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Sets read timeout, which defaults to 60 seconds.</span>
+  <span class="kt">void</span> <span class="nf">read_timeout</span><span class="p">(</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">posix_time</span><span class="o">::</span><span class="n">time_duration</span> <span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+
+  <span class="c1">// Shutdowns connection.</span>
+  <span class="kt">void</span> <span class="nf">shutdown</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Returns underlying io_service object.</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="o">&amp;</span><span class="n">io_service</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Submits request to server using |method| (e.g., &quot;GET&quot;), |uri|</span>
+  <span class="c1">// (e.g., &quot;http://localhost/&quot;) and optionally additional header</span>
+  <span class="c1">// fields.  This function returns pointer to request object if it</span>
+  <span class="c1">// succeeds, or nullptr and |ec| contains error message.</span>
+  <span class="k">const</span> <span class="n">request</span> <span class="o">*</span><span class="nf">submit</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">uri</span><span class="p">,</span>
+                        <span class="n">header_map</span> <span class="n">h</span> <span class="o">=</span> <span class="n">header_map</span><span class="p">{},</span>
+                        <span class="n">priority_spec</span> <span class="n">prio</span> <span class="o">=</span> <span class="n">priority_spec</span><span class="p">())</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Submits request to server using |method| (e.g., &quot;GET&quot;), |uri|</span>
+  <span class="c1">// (e.g., &quot;http://localhost/&quot;) and optionally additional header</span>
+  <span class="c1">// fields.  The |data| is request body.  This function returns</span>
+  <span class="c1">// pointer to request object if it succeeds, or nullptr and |ec|</span>
+  <span class="c1">// contains error message.</span>
+  <span class="k">const</span> <span class="n">request</span> <span class="o">*</span><span class="nf">submit</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">uri</span><span class="p">,</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">data</span><span class="p">,</span> <span class="n">header_map</span> <span class="n">h</span> <span class="o">=</span> <span class="n">header_map</span><span class="p">{},</span>
+                        <span class="n">priority_spec</span> <span class="n">prio</span> <span class="o">=</span> <span class="n">priority_spec</span><span class="p">())</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="c1">// Submits request to server using |method| (e.g., &quot;GET&quot;), |uri|</span>
+  <span class="c1">// (e.g., &quot;http://localhost/&quot;) and optionally additional header</span>
+  <span class="c1">// fields.  The |cb| is used to generate request body.  This</span>
+  <span class="c1">// function returns pointer to request object if it succeeds, or</span>
+  <span class="c1">// nullptr and |ec| contains error message.</span>
+  <span class="k">const</span> <span class="n">request</span> <span class="o">*</span><span class="nf">submit</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">method</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">uri</span><span class="p">,</span>
+                        <span class="n">generator_cb</span> <span class="n">cb</span><span class="p">,</span> <span class="n">header_map</span> <span class="n">h</span> <span class="o">=</span> <span class="n">header_map</span><span class="p">{},</span>
+                        <span class="n">priority_spec</span> <span class="n">prio</span> <span class="o">=</span> <span class="n">priority_spec</span><span class="p">())</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">session_impl</span><span class="o">&gt;</span> <span class="n">impl_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// configure |tls_ctx| for client use.  Currently, we just set NPN</span>
+<span class="c1">// callback for HTTP/2.</span>
+<span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span>
+<span class="n">configure_tls_context</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">,</span>
+                      <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span> <span class="o">&amp;</span><span class="n">tls_ctx</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// namespace client</span>
+
+<span class="p">}</span> <span class="c1">// namespace asio_http2</span>
+
+<span class="p">}</span> <span class="c1">// namespace nghttp2</span>
+
+<span class="cp">#endif </span><span class="c1">// ASIO_HTTP2_CLIENT_H</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="asio_http2.h.html" class="btn btn-neutral float-right" title="asio_http2.h" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="asio_http2_server.h.html" class="btn btn-neutral" title="asio_http2_server.h" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

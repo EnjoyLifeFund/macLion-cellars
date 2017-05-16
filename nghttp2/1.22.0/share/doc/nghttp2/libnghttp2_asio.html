@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>libnghttp2_asio: High level HTTP/2 C++ library &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="Python API Reference" href="python-apiref.html"/>
+        <link rel="prev" title="nghttp2_version" href="nghttp2_version.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libnghttp2_asio: High level HTTP/2 C++ library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#server-api">Server API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#serving-static-files-and-enabling-ssl-tls">Serving static files and enabling SSL/TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#server-push">Server push</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-multi-threading">Enable multi-threading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#client-api">Client API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#recieve-server-push-and-enable-ssl-tls">Recieve server push and enable SSL/TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-concurrent-requests">Multiple concurrent requests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>libnghttp2_asio: High level HTTP/2 C++ library</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libnghttp2-asio-high-level-http-2-c-library">
+<h1>libnghttp2_asio: High level HTTP/2 C++ library<a class="headerlink" href="#libnghttp2-asio-high-level-http-2-c-library" title="Permalink to this headline">¶</a></h1>
+<p>libnghttp2_asio is C++ library built on top of libnghttp2 and provides
+high level abstraction API to build HTTP/2 applications.  It depends
+on Boost::ASIO library and OpenSSL.  Currently libnghttp2_asio
+provides server and client side API.</p>
+<p>libnghttp2_asio is not built by default.  Use <code class="docutils literal"><span class="pre">--enable-asio-lib</span></code>
+configure flag to build libnghttp2_asio.  The required Boost libraries
+are:</p>
+<ul class="simple">
+<li>Boost::Asio</li>
+<li>Boost::System</li>
+<li>Boost::Thread</li>
+</ul>
+<p>We have 3 header files for this library:</p>
+<ul class="simple">
+<li><a class="reference internal" href="asio_http2_server.h.html"><span class="doc">asio_http2_server.h</span></a></li>
+<li><a class="reference internal" href="asio_http2_client.h.html"><span class="doc">asio_http2_client.h</span></a></li>
+<li><a class="reference internal" href="asio_http2.h.html"><span class="doc">asio_http2.h</span></a></li>
+</ul>
+<p>asio_http2.h is included from the other two files.</p>
+<p>To build a program with libnghttp2_asio, link to the following
+libraries:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">lnghttp2_asio</span> <span class="o">-</span><span class="n">lboost_system</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">boost::asio::ssl</span></code> is used in application code, OpenSSL is also
+required in link line:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">lnghttp2_asio</span> <span class="o">-</span><span class="n">lboost_system</span> <span class="o">-</span><span class="n">lssl</span> <span class="o">-</span><span class="n">lcrypto</span>
+</pre></div>
+</div>
+<div class="section" id="server-api">
+<h2>Server API<a class="headerlink" href="#server-api" title="Permalink to this headline">¶</a></h2>
+<p>To use server API, first include following header file:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2_server.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Also take a look at that header file <a class="reference internal" href="asio_http2_server.h.html"><span class="doc">asio_http2_server.h</span></a>.</p>
+<p>Server API is designed to build HTTP/2 server very easily to utilize
+C++11 anonymous function and closure.  The bare minimum example of
+HTTP/2 server looks like this:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="o">::</span><span class="n">server</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+  <span class="n">http2</span> <span class="n">server</span><span class="p">;</span>
+
+  <span class="n">server</span><span class="p">.</span><span class="n">handle</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="n">request</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">write_head</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="s">&quot;hello, world</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">listen_and_serve</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="s">&quot;3000&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ec</span><span class="p">.</span><span class="n">message</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First we instantiate <code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::http2</span></code> object.
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::http2::handle</span></code> function registers
+pattern and its handler function.  In this example, we register &quot;/&quot; as
+pattern, which matches all requests.  Then call
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::http2::listen_and_serve</span></code> function with
+address and port to listen to.</p>
+<p>The <code class="docutils literal"><span class="pre">req</span></code> and <code class="docutils literal"><span class="pre">res</span></code> represent HTTP request and response
+respectively.  <code class="docutils literal"><span class="pre">nghttp2::asio_http2_::server::response::write_head</span></code>
+constructs HTTP response header fields.  The first argument is HTTP
+status code, in the above example, which is 200.  The second argument,
+which is omitted in the above example, is additional header fields to
+send.</p>
+<p><code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::response::end</span></code> sends response body.
+In the above example, we send string &quot;hello, world&quot;.</p>
+<p>The life time of req and res object ends after the callback set by
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::response::on_close</span></code> function.
+Application must not use those objects after this call.</p>
+<div class="section" id="serving-static-files-and-enabling-ssl-tls">
+<h3>Serving static files and enabling SSL/TLS<a class="headerlink" href="#serving-static-files-and-enabling-ssl-tls" title="Permalink to this headline">¶</a></h3>
+<p>In this example, we serve a couple of static files and also enable
+SSL/TLS.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2_server.h&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="o">::</span><span class="n">server</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span> <span class="n">tls</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span><span class="o">::</span><span class="n">sslv23</span><span class="p">);</span>
+
+  <span class="n">tls</span><span class="p">.</span><span class="n">use_private_key_file</span><span class="p">(</span><span class="s">&quot;server.key&quot;</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span><span class="o">::</span><span class="n">pem</span><span class="p">);</span>
+  <span class="n">tls</span><span class="p">.</span><span class="n">use_certificate_chain_file</span><span class="p">(</span><span class="s">&quot;server.crt&quot;</span><span class="p">);</span>
+
+  <span class="n">configure_tls_context_easy</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">tls</span><span class="p">);</span>
+
+  <span class="n">http2</span> <span class="n">server</span><span class="p">;</span>
+
+  <span class="n">server</span><span class="p">.</span><span class="n">handle</span><span class="p">(</span><span class="s">&quot;/index.html&quot;</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="n">request</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">write_head</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="n">file_generator</span><span class="p">(</span><span class="s">&quot;index.html&quot;</span><span class="p">));</span>
+  <span class="p">});</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">listen_and_serve</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">tls</span><span class="p">,</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="s">&quot;3000&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ec</span><span class="p">.</span><span class="n">message</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We first create <code class="docutils literal"><span class="pre">boost::asio::ssl::context</span></code> object and set path to
+private key file and certificate file.
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::configure_tls_context_easy</span></code> function
+configures SSL/TLS context object for HTTP/2 server use, including NPN
+callbacks.</p>
+<p>In the above example, if request path is &quot;/index.html&quot;, we serve
+index.html file in the current working directory.
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::response::end</span></code> has overload to take
+function of type <code class="docutils literal"><span class="pre">nghttp2::asio_http2::generator_cb</span></code> and application
+pass its implementation to generate response body.  For the
+convenience, libnghttp2_asio library provides
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::file_generator</span></code> function to generate function
+to server static file.  If other resource is requested, server
+automatically responds with 404 status code.</p>
+</div>
+<div class="section" id="server-push">
+<h3>Server push<a class="headerlink" href="#server-push" title="Permalink to this headline">¶</a></h3>
+<p>Server push is also supported.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2_server.h&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="o">::</span><span class="n">server</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span> <span class="n">tls</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span><span class="o">::</span><span class="n">sslv23</span><span class="p">);</span>
+
+  <span class="n">tls</span><span class="p">.</span><span class="n">use_private_key_file</span><span class="p">(</span><span class="s">&quot;server.key&quot;</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span><span class="o">::</span><span class="n">pem</span><span class="p">);</span>
+  <span class="n">tls</span><span class="p">.</span><span class="n">use_certificate_chain_file</span><span class="p">(</span><span class="s">&quot;server.crt&quot;</span><span class="p">);</span>
+
+  <span class="n">configure_tls_context_easy</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">tls</span><span class="p">);</span>
+
+  <span class="n">http2</span> <span class="n">server</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">style_css</span> <span class="o">=</span> <span class="s">&quot;h1 { color: green; }&quot;</span><span class="p">;</span>
+
+  <span class="n">server</span><span class="p">.</span><span class="n">handle</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">style_css</span><span class="p">](</span><span class="k">const</span> <span class="n">request</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">push</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="s">&quot;/style.css&quot;</span><span class="p">);</span>
+    <span class="n">push</span><span class="o">-&gt;</span><span class="n">write_head</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="n">push</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">(</span><span class="n">style_css</span><span class="p">);</span>
+
+    <span class="n">res</span><span class="p">.</span><span class="n">write_head</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="sa">R</span><span class="s">&quot;</span><span class="dl">(</span><span class="s"></span>
+<span class="s">&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;</span>
+<span class="s">&lt;title&gt;HTTP/2 FTW&lt;/title&gt;&lt;body&gt;</span>
+<span class="s">&lt;link href=&quot;/style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</span>
+<span class="s">&lt;h1&gt;This should be green&lt;/h1&gt;</span>
+<span class="s">&lt;/body&gt;&lt;/html&gt;</span>
+<span class="dl">)</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="n">server</span><span class="p">.</span><span class="n">handle</span><span class="p">(</span><span class="s">&quot;/style.css&quot;</span><span class="p">,</span>
+                <span class="p">[</span><span class="o">&amp;</span><span class="n">style_css</span><span class="p">](</span><span class="k">const</span> <span class="n">request</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">write_head</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(</span><span class="n">style_css</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">listen_and_serve</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">tls</span><span class="p">,</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="s">&quot;3000&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ec</span><span class="p">.</span><span class="n">message</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When client requested any resource other than &quot;/style.css&quot;, we push
+&quot;/style.css&quot;.  To push resource, call
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::response::push</span></code> function with desired
+method and path.  It returns another response object and use its
+functions to send push response.</p>
+</div>
+<div class="section" id="enable-multi-threading">
+<h3>Enable multi-threading<a class="headerlink" href="#enable-multi-threading" title="Permalink to this headline">¶</a></h3>
+<p>Enabling multi-threading is very easy.  Just call
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::http2::num_threads</span></code> function with the
+desired number of threads:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="n">http2</span> <span class="n">server</span><span class="p">;</span>
+
+<span class="c1">// Use 4 native threads</span>
+<span class="n">server</span><span class="p">.</span><span class="n">num_threads</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="client-api">
+<h2>Client API<a class="headerlink" href="#client-api" title="Permalink to this headline">¶</a></h2>
+<p>To use client API, first include following header file:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2_client.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Also take a look at that header file <a class="reference internal" href="asio_http2_client.h.html"><span class="doc">asio_http2_client.h</span></a>.</p>
+<p>Here is the sample client code to access HTTP/2 server and print out
+response header fields and response body to the console screen:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2_client.h&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ip</span><span class="o">::</span><span class="n">tcp</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="o">::</span><span class="n">client</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="n">io_service</span><span class="p">;</span>
+
+  <span class="c1">// connect to localhost:3000</span>
+  <span class="n">session</span> <span class="n">sess</span><span class="p">(</span><span class="n">io_service</span><span class="p">,</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="s">&quot;3000&quot;</span><span class="p">);</span>
+
+  <span class="n">sess</span><span class="p">.</span><span class="n">on_connect</span><span class="p">([</span><span class="o">&amp;</span><span class="n">sess</span><span class="p">](</span><span class="n">tcp</span><span class="o">::</span><span class="n">resolver</span><span class="o">::</span><span class="n">iterator</span> <span class="n">endpoint_it</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">req</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">submit</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="s">&quot;http://localhost:3000/&quot;</span><span class="p">);</span>
+
+    <span class="n">req</span><span class="o">-&gt;</span><span class="n">on_response</span><span class="p">([](</span><span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// print status code and response header fields.</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;HTTP/2 &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res</span><span class="p">.</span><span class="n">status_code</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">kv</span> <span class="p">:</span> <span class="n">res</span><span class="p">.</span><span class="n">header</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">kv</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">kv</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">value</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+      <span class="n">res</span><span class="p">.</span><span class="n">on_data</span><span class="p">([](</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">len</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+
+    <span class="n">req</span><span class="o">-&gt;</span><span class="n">on_close</span><span class="p">([</span><span class="o">&amp;</span><span class="n">sess</span><span class="p">](</span><span class="kt">uint32_t</span> <span class="n">error_code</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// shutdown session after first request was done.</span>
+      <span class="n">sess</span><span class="p">.</span><span class="n">shutdown</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="n">sess</span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ec</span><span class="p">.</span><span class="n">message</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="n">io_service</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::session</span></code> object takes
+<code class="docutils literal"><span class="pre">boost::asio::io_service</span></code> object and remote server address.  When
+connection is made, the callback function passed to
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::on_connect</span></code> is invoked with connected
+address as its parameter.  After this callback call, use
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::session::submit</span></code> to send request to the
+server.  You can submit multiple requests at once without waiting for
+the completion of previous request.</p>
+<p>The life time of req and res object ends after the callback set by
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::request::on_close</span></code> function.
+Application must not use those objects after this call.</p>
+<p>Normally, client does not stop even after all requests are done unless
+connection is lost.  To stop client, call
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::server::session::shutdown()</span></code>.</p>
+<div class="section" id="recieve-server-push-and-enable-ssl-tls">
+<h3>Recieve server push and enable SSL/TLS<a class="headerlink" href="#recieve-server-push-and-enable-ssl-tls" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2_client.h&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ip</span><span class="o">::</span><span class="n">tcp</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="o">::</span><span class="n">client</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="n">io_service</span><span class="p">;</span>
+
+  <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span> <span class="n">tls</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ssl</span><span class="o">::</span><span class="n">context</span><span class="o">::</span><span class="n">sslv23</span><span class="p">);</span>
+  <span class="n">tls</span><span class="p">.</span><span class="n">set_default_verify_paths</span><span class="p">();</span>
+  <span class="c1">// disabled to make development easier...</span>
+  <span class="c1">// tls_ctx.set_verify_mode(boost::asio::ssl::verify_peer);</span>
+  <span class="n">configure_tls_context</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="n">tls</span><span class="p">);</span>
+
+  <span class="c1">// connect to localhost:3000</span>
+  <span class="n">session</span> <span class="n">sess</span><span class="p">(</span><span class="n">io_service</span><span class="p">,</span> <span class="n">tls</span><span class="p">,</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="s">&quot;3000&quot;</span><span class="p">);</span>
+
+  <span class="n">sess</span><span class="p">.</span><span class="n">on_connect</span><span class="p">([</span><span class="o">&amp;</span><span class="n">sess</span><span class="p">](</span><span class="n">tcp</span><span class="o">::</span><span class="n">resolver</span><span class="o">::</span><span class="n">iterator</span> <span class="n">endpoint_it</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">req</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">submit</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="s">&quot;http://localhost:3000/&quot;</span><span class="p">);</span>
+
+    <span class="n">req</span><span class="o">-&gt;</span><span class="n">on_response</span><span class="p">([</span><span class="o">&amp;</span><span class="n">sess</span><span class="p">](</span><span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;response received!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="n">res</span><span class="p">.</span><span class="n">on_data</span><span class="p">([</span><span class="o">&amp;</span><span class="n">sess</span><span class="p">](</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">len</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+
+    <span class="n">req</span><span class="o">-&gt;</span><span class="n">on_push</span><span class="p">([](</span><span class="k">const</span> <span class="n">request</span> <span class="o">&amp;</span><span class="n">push</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;push request received!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="n">push</span><span class="p">.</span><span class="n">on_response</span><span class="p">([](</span><span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;push response received!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">on_data</span><span class="p">([](</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">len</span><span class="p">);</span>
+          <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">});</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="n">sess</span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ec</span><span class="p">.</span><span class="n">message</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="n">io_service</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above sample code demonstrates how to enable SSL/TLS and receive
+server push.  Currently,
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::configure_tls_context</span></code> function setups
+NPN callbacks for SSL/TLS context for HTTP/2 use.</p>
+<p>To receive server push, use
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::request::on_push</span></code> function to set
+callback function which is invoked when server push request is
+arrived.  The callback function takes
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::request</span></code> object, which contains the
+pushed request.  To get server push response, set callback using
+<code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::request::on_response</span></code>.</p>
+<p>As stated in the previous section, client does not stop automatically
+as long as HTTP/2 session is fine and connection is alive.  We don't
+call <code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::session::shutdown</span></code> in this
+example, so the program does not terminate after all responses are
+received.  Hit Ctrl-C to terminate the program.</p>
+</div>
+<div class="section" id="multiple-concurrent-requests">
+<h3>Multiple concurrent requests<a class="headerlink" href="#multiple-concurrent-requests" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;nghttp2/asio_http2_client.h&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">ip</span><span class="o">::</span><span class="n">tcp</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">nghttp2</span><span class="o">::</span><span class="n">asio_http2</span><span class="o">::</span><span class="n">client</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">asio</span><span class="o">::</span><span class="n">io_service</span> <span class="n">io_service</span><span class="p">;</span>
+
+  <span class="c1">// connect to localhost:3000</span>
+  <span class="n">session</span> <span class="n">sess</span><span class="p">(</span><span class="n">io_service</span><span class="p">,</span> <span class="s">&quot;localhost&quot;</span><span class="p">,</span> <span class="s">&quot;3000&quot;</span><span class="p">);</span>
+
+  <span class="n">sess</span><span class="p">.</span><span class="n">on_connect</span><span class="p">([</span><span class="o">&amp;</span><span class="n">sess</span><span class="p">](</span><span class="n">tcp</span><span class="o">::</span><span class="n">resolver</span><span class="o">::</span><span class="n">iterator</span> <span class="n">endpoint_it</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="n">ec</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">printer</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="n">response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">res</span><span class="p">.</span><span class="n">on_data</span><span class="p">([](</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">len</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">count</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">req</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">submit</span><span class="p">(</span><span class="n">ec</span><span class="p">,</span> <span class="s">&quot;GET&quot;</span><span class="p">,</span>
+                             <span class="s">&quot;http://localhost:3000/&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+
+      <span class="n">req</span><span class="o">-&gt;</span><span class="n">on_response</span><span class="p">(</span><span class="n">printer</span><span class="p">);</span>
+      <span class="n">req</span><span class="o">-&gt;</span><span class="n">on_close</span><span class="p">([</span><span class="o">&amp;</span><span class="n">sess</span><span class="p">,</span> <span class="n">count</span><span class="p">](</span><span class="kt">uint32_t</span> <span class="n">error_code</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">--*</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// shutdown session after |num| requests were done.</span>
+          <span class="n">sess</span><span class="p">.</span><span class="n">shutdown</span><span class="p">();</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="n">sess</span><span class="p">.</span><span class="n">on_error</span><span class="p">([](</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">system</span><span class="o">::</span><span class="n">error_code</span> <span class="o">&amp;</span><span class="n">ec</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ec</span><span class="p">.</span><span class="n">message</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="n">io_service</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is the sample to send 3 requests at once.  Depending on the
+server settings, these requests are processed out-of-order.  In this
+example, we have a trick to shutdown session after all requests were
+done.  We made <code class="docutils literal"><span class="pre">count</span></code> object which is shared pointer to int and is
+initialized to 3.  On each request closure (the invocation of the
+callback set by <code class="docutils literal"><span class="pre">nghttp2::asio_http2::client::request::on_close</span></code>),
+we decrement the count.  If count becomes 0, we are sure that all
+requests have been done and initiate shutdown.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="python-apiref.html" class="btn btn-neutral float-right" title="Python API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nghttp2_version.html" class="btn btn-neutral" title="nghttp2_version" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nghttpx - HTTP/2 proxy - HOW-TO &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="h2load - HTTP/2 benchmarking tool - HOW-TO" href="h2load-howto.html"/>
+        <link rel="prev" title="h2load(1)" href="h2load.1.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nghttpx - HTTP/2 proxy - HOW-TO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#default-mode">Default mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#http-2-proxy-mode">HTTP/2 proxy mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alpn-support">ALPN support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disable-frontend-ssl-tls">Disable frontend SSL/TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-backend-ssl-tls">Enable backend SSL/TLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-ssl-tls-on-memcached-connection">Enable SSL/TLS on memcached connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-additional-server-certificates">Specifying additional server certificates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-additional-ca-certificate">Specifying additional CA certificate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-write-rate-limit">Read/write rate limit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rewriting-location-header-field">Rewriting location header field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hot-swapping">Hot swapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#re-opening-log-files">Re-opening log files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiple-frontend-addresses">Multiple frontend addresses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiple-backend-addresses">Multiple backend addresses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynamic-hostname-lookup">Dynamic hostname lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-proxy-protocol">Enable PROXY protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#psk-cipher-suites">PSK cipher suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#migration-from-nghttpx-v1-18-x-or-earlier">Migration from nghttpx v1.18.x or earlier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#migration-from-nghttpx-v1-8-0-or-earlier">Migration from nghttpx v1.8.0 or earlier</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>nghttpx - HTTP/2 proxy - HOW-TO</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nghttpx-http-2-proxy-how-to">
+<h1>nghttpx - HTTP/2 proxy - HOW-TO<a class="headerlink" href="#nghttpx-http-2-proxy-how-to" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="nghttpx.1.html"><span class="doc">nghttpx(1)</span></a> is a proxy translating protocols between HTTP/2 and
+other protocols (e.g., HTTP/1, SPDY).  It operates in several modes
+and each mode may require additional programs to work with.  This
+article describes each operation mode and explains the intended
+use-cases.  It also covers some useful options later.</p>
+<div class="section" id="default-mode">
+<h2>Default mode<a class="headerlink" href="#default-mode" title="Permalink to this headline">¶</a></h2>
+<p>If nghttpx is invoked without <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-s"><code class="xref std std-option docutils literal"><span class="pre">--http2-proxy</span></code></a>, it operates in
+default mode.  In this mode, it works as reverse proxy (gateway) for
+both HTTP/2 and HTTP/1 clients to backend servers.  This is also known
+as &quot;HTTP/2 router&quot;.  If nghttpx is linked with spdylay library and
+frontend connection is SSL/TLS, the frontend also supports SPDY
+protocol.</p>
+<p>By default, frontend connection is encrypted using SSL/TLS.  So
+server's private key and certificate must be supplied to the command
+line (or through configuration file).  In this case, the frontend
+protocol selection will be done via ALPN or NPN.</p>
+<p>To turn off encryption on frontend connection, use <code class="docutils literal"><span class="pre">no-tls</span></code> keyword
+in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a> option.  In this case, SPDY protocol is not
+available even if spdylay library is liked to nghttpx.  HTTP/2 and
+HTTP/1 are available on the frontend, and an HTTP/1 connection can be
+upgraded to HTTP/2 using HTTP Upgrade.  Starting HTTP/2 connection by
+sending HTTP/2 connection preface is also supported.</p>
+<p>nghttpx can listen on multiple frontend addresses.  This is achieved
+by using multiple <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a> options.  For each frontend
+address, TLS can be enabled or disabled.</p>
+<p>By default, backend connections are not encrypted.  To enable TLS
+encryption on backend connections, use <code class="docutils literal"><span class="pre">tls</span></code> keyword in
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option.  Using patterns and <code class="docutils literal"><span class="pre">proto</span></code> keyword in
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option, backend application protocol can be
+specified per host/request path pattern.  It means that you can use
+both HTTP/2 and HTTP/1 in backend connections at the same time.  Note
+that default backend protocol is HTTP/1.1.  To use HTTP/2 in backend,
+you have to specify <code class="docutils literal"><span class="pre">h2</span></code> in <code class="docutils literal"><span class="pre">proto</span></code> keyword in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a>
+explicitly.</p>
+<p>The backend is supposed to be Web server.  For example, to make
+nghttpx listen to encrypted HTTP/2 requests at port 8443, and a
+backend Web server is configured to listen to HTTP request at port
+8080 in the same host, run nghttpx command-line like this:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ nghttpx -f0.0.0.0,8443 -b127.0.0.1,8080 /path/to/server.key /path/to/server.crt
+</pre></div>
+</div>
+<p>Then HTTP/2 enabled client can access to the nghttpx in HTTP/2.  For
+example, you can send GET request to the server using nghttp:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ nghttp -nv https://localhost:8443/
+</pre></div>
+</div>
+</div>
+<div class="section" id="http-2-proxy-mode">
+<h2>HTTP/2 proxy mode<a class="headerlink" href="#http-2-proxy-mode" title="Permalink to this headline">¶</a></h2>
+<p>If nghttpx is invoked with <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-s"><code class="xref std std-option docutils literal"><span class="pre">--http2-proxy</span></code></a> (or its shorthand
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-s"><code class="xref std std-option docutils literal"><span class="pre">-s</span></code></a>) option, it operates in HTTP/2 proxy mode.  The supported
+protocols in frontend and backend connections are the same in <a class="reference internal" href="#default-mode">default
+mode</a>.  The difference is that this mode acts like forward proxy and
+assumes the backend is HTTP proxy server (e.g., Squid, Apache Traffic
+Server).  HTTP/1 request must include absolute URI in request line.</p>
+<p>By default, frontend connection is encrypted.  So this mode is also
+called secure proxy.  If nghttpx is linked with spdylay, it supports
+SPDY protocols and it works as so called SPDY proxy.</p>
+<p>To turn off encryption on frontend connection, use <code class="docutils literal"><span class="pre">no-tls</span></code> keyword
+in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a> option.</p>
+<p>The backend must be HTTP proxy server.  nghttpx supports multiple
+backend server addresses.  It translates incoming requests to HTTP
+request to backend server.  The backend server performs real proxy
+work for each request, for example, dispatching requests to the origin
+server and caching contents.</p>
+<p>The backend connection is not encrypted by default.  To enable
+encryption, use <code class="docutils literal"><span class="pre">tls</span></code> keyword in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option.  The
+default backend protocol is HTTP/1.1.  To use HTTP/2 in backend
+connection, use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option, and specify <code class="docutils literal"><span class="pre">h2</span></code> in
+<code class="docutils literal"><span class="pre">proto</span></code> keyword explicitly.</p>
+<p>For example, to make nghttpx listen to encrypted HTTP/2 requests at
+port 8443, and a backend HTTP proxy server is configured to listen to
+HTTP/1 request at port 8080 in the same host, run nghttpx command-line
+like this:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ nghttpx -s -f&#39;*,8443&#39; -b127.0.0.1,8080 /path/to/server.key /path/to/server.crt
+</pre></div>
+</div>
+<p>At the time of this writing, Firefox 41 and Chromium v46 can use
+nghttpx as HTTP/2 proxy.</p>
+<p>To make Firefox or Chromium use nghttpx as HTTP/2 or SPDY proxy, user
+has to create proxy.pac script file like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">FindProxyForURL</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">host</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">&quot;HTTPS SERVERADDR:PORT&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">SERVERADDR</span></code> and <code class="docutils literal"><span class="pre">PORT</span></code> is the hostname/address and port of the
+machine nghttpx is running.  Please note that both Firefox and
+Chromium require valid certificate for secure proxy.</p>
+<p>For Firefox, open Preference window and select Advanced then click
+Network tab.  Clicking Connection Settings button will show the
+dialog.  Select &quot;Automatic proxy configuration URL&quot; and enter the path
+to proxy.pac file, something like this:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>file:///path/to/proxy.pac
+</pre></div>
+</div>
+<p>For Chromium, use following command-line:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ google-chrome --proxy-pac-url=file:///path/to/proxy.pac --use-npn
+</pre></div>
+</div>
+<p>As HTTP/1 proxy server, Squid may work as out-of-box.  Traffic server
+requires to be configured as forward proxy.  Here is the minimum
+configuration items to edit:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>CONFIG proxy.config.reverse_proxy.enabled INT 0
+CONFIG proxy.config.url_remap.remap_required INT 0
+</pre></div>
+</div>
+<p>Consult Traffic server <a class="reference external" href="http://trafficserver.readthedocs.org/en/latest/admin-guide/configuration/transparent-forward-proxying.en.html">documentation</a>
+to know how to configure traffic server as forward proxy and its
+security implications.</p>
+</div>
+<div class="section" id="alpn-support">
+<h2>ALPN support<a class="headerlink" href="#alpn-support" title="Permalink to this headline">¶</a></h2>
+<p>ALPN support requires OpenSSL &gt;= 1.0.2.</p>
+</div>
+<div class="section" id="disable-frontend-ssl-tls">
+<h2>Disable frontend SSL/TLS<a class="headerlink" href="#disable-frontend-ssl-tls" title="Permalink to this headline">¶</a></h2>
+<p>The frontend connections are encrypted with SSL/TLS by default.  To
+turn off SSL/TLS, use <code class="docutils literal"><span class="pre">no-tls</span></code> keyword in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a>
+option.  If this option is used, the private key and certificate are
+not required to run nghttpx.</p>
+</div>
+<div class="section" id="enable-backend-ssl-tls">
+<h2>Enable backend SSL/TLS<a class="headerlink" href="#enable-backend-ssl-tls" title="Permalink to this headline">¶</a></h2>
+<p>The backend connections are not encrypted by default.  To enable
+SSL/TLS encryption, use <code class="docutils literal"><span class="pre">tls</span></code> keyword in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option.</p>
+</div>
+<div class="section" id="enable-ssl-tls-on-memcached-connection">
+<h2>Enable SSL/TLS on memcached connection<a class="headerlink" href="#enable-ssl-tls-on-memcached-connection" title="Permalink to this headline">¶</a></h2>
+<p>By default, memcached connection is not encrypted.  To enable
+encryption, use <code class="docutils literal"><span class="pre">tls</span></code> keyword in
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-tls-ticket-key-memcached"><code class="xref std std-option docutils literal"><span class="pre">--tls-ticket-key-memcached</span></code></a> for TLS ticket key, and
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-tls-session-cache-memcached"><code class="xref std std-option docutils literal"><span class="pre">--tls-session-cache-memcached</span></code></a> for TLS session cache.</p>
+</div>
+<div class="section" id="specifying-additional-server-certificates">
+<h2>Specifying additional server certificates<a class="headerlink" href="#specifying-additional-server-certificates" title="Permalink to this headline">¶</a></h2>
+<p>nghttpx accepts additional server private key and certificate pairs
+using <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-subcert"><code class="xref std std-option docutils literal"><span class="pre">--subcert</span></code></a> option.  It can be used multiple times.</p>
+</div>
+<div class="section" id="specifying-additional-ca-certificate">
+<h2>Specifying additional CA certificate<a class="headerlink" href="#specifying-additional-ca-certificate" title="Permalink to this headline">¶</a></h2>
+<p>By default, nghttpx tries to read CA certificate from system.  But
+depending on the system you use, this may fail or is not supported.
+To specify CA certificate manually, use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-cacert"><code class="xref std std-option docutils literal"><span class="pre">--cacert</span></code></a> option.
+The specified file must be PEM format and can contain multiple
+certificates.</p>
+<p>By default, nghttpx validates server's certificate.  If you want to
+turn off this validation, knowing this is really insecure and what you
+are doing, you can use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-k"><code class="xref std std-option docutils literal"><span class="pre">--insecure</span></code></a> option to disable
+certificate validation.</p>
+</div>
+<div class="section" id="read-write-rate-limit">
+<h2>Read/write rate limit<a class="headerlink" href="#read-write-rate-limit" title="Permalink to this headline">¶</a></h2>
+<p>nghttpx supports transfer rate limiting on frontend connections.  You
+can do rate limit per frontend connection for reading and writing
+individually.</p>
+<p>To perform rate limit for reading, use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-read-rate"><code class="xref std std-option docutils literal"><span class="pre">--read-rate</span></code></a> and
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-read-burst"><code class="xref std std-option docutils literal"><span class="pre">--read-burst</span></code></a> options.  For writing, use
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-write-rate"><code class="xref std std-option docutils literal"><span class="pre">--write-rate</span></code></a> and <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-write-burst"><code class="xref std std-option docutils literal"><span class="pre">--write-burst</span></code></a>.</p>
+<p>Please note that rate limit is performed on top of TCP and nothing to
+do with HTTP/2 flow control.</p>
+</div>
+<div class="section" id="rewriting-location-header-field">
+<h2>Rewriting location header field<a class="headerlink" href="#rewriting-location-header-field" title="Permalink to this headline">¶</a></h2>
+<p>nghttpx automatically rewrites location response header field if the
+following all conditions satisfy:</p>
+<ul class="simple">
+<li>In the default mode (<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-s"><code class="xref std std-option docutils literal"><span class="pre">--http2-proxy</span></code></a> is not used)</li>
+<li><a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-no-location-rewrite"><code class="xref std std-option docutils literal"><span class="pre">--no-location-rewrite</span></code></a> is not used</li>
+<li>URI in location header field is an absolute URI</li>
+<li>URI in location header field includes non empty host component.</li>
+<li>host (without port) in URI in location header field must match the
+host appearing in <code class="docutils literal"><span class="pre">:authority</span></code> or <code class="docutils literal"><span class="pre">host</span></code> header field.</li>
+</ul>
+<p>When rewrite happens, URI scheme is replaced with the ones used in
+frontend, and authority is replaced with which appears in
+<code class="docutils literal"><span class="pre">:authority</span></code>, or <code class="docutils literal"><span class="pre">host</span></code> request header field.  <code class="docutils literal"><span class="pre">:authority</span></code>
+header field has precedence over <code class="docutils literal"><span class="pre">host</span></code>.</p>
+</div>
+<div class="section" id="hot-swapping">
+<h2>Hot swapping<a class="headerlink" href="#hot-swapping" title="Permalink to this headline">¶</a></h2>
+<p>nghttpx supports hot swapping using signals.  The hot swapping in
+nghttpx is multi step process.  First send USR2 signal to nghttpx
+process.  It will do fork and execute new executable, using same
+command-line arguments and environment variables.</p>
+<p>As of nghttpx version 1.20.0, that is all you have to do.  The new
+master process sends QUIT signal to the original process, when it is
+ready to serve requests, to shut it down gracefully.</p>
+<p>For earlier versions of nghttpx, you have to do one more thing.  At
+this point, both current and new processes can accept requests.  To
+gracefully shutdown current process, send QUIT signal to current
+nghttpx process.  When all existing frontend connections are done, the
+current process will exit.  At this point, only new nghttpx process
+exists and serves incoming requests.</p>
+<p>If you want to just reload configuration file without executing new
+binary, send SIGHUP to nghttpx master process.</p>
+</div>
+<div class="section" id="re-opening-log-files">
+<h2>Re-opening log files<a class="headerlink" href="#re-opening-log-files" title="Permalink to this headline">¶</a></h2>
+<p>When rotating log files, it is desirable to re-open log files after
+log rotation daemon renamed existing log files.  To tell nghttpx to
+re-open log files, send USR1 signal to nghttpx process.  It will
+re-open files specified by <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-accesslog-file"><code class="xref std std-option docutils literal"><span class="pre">--accesslog-file</span></code></a> and
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-errorlog-file"><code class="xref std std-option docutils literal"><span class="pre">--errorlog-file</span></code></a> options.</p>
+</div>
+<div class="section" id="multiple-frontend-addresses">
+<h2>Multiple frontend addresses<a class="headerlink" href="#multiple-frontend-addresses" title="Permalink to this headline">¶</a></h2>
+<p>nghttpx can listen on multiple frontend addresses.  To specify them,
+just use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a> (or its shorthand <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">-f</span></code></a>) option
+repeatedly.  TLS can be enabled or disabled per frontend address
+basis.  For example, to listen on port 443 with TLS enabled, and on
+port 80 without TLS:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>frontend=*,443
+frontend=*,80;no-tls
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-backend-addresses">
+<h2>Multiple backend addresses<a class="headerlink" href="#multiple-backend-addresses" title="Permalink to this headline">¶</a></h2>
+<p>nghttpx supports multiple backend addresses.  To specify them, just
+use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> (or its shorthand <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">-b</span></code></a>) option
+repeatedly.  For example, to use <code class="docutils literal"><span class="pre">192.168.0.10:8080</span></code> and
+<code class="docutils literal"><span class="pre">192.168.0.11:8080</span></code>, use command-line like this:
+<code class="docutils literal"><span class="pre">-b192.168.0.10,8080</span> <span class="pre">-b192.168.0.11,8080</span></code>.  In configuration file,
+this looks like:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=192.168.0.10,8080
+backend=192.168.0.11,8008
+</pre></div>
+</div>
+<p>nghttpx can route request to different backend according to request
+host and path.  For example, to route request destined to host
+<code class="docutils literal"><span class="pre">doc.example.com</span></code> to backend server <code class="docutils literal"><span class="pre">docserv:3000</span></code>, you can write
+like so:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=docserv,3000;doc.example.com/
+</pre></div>
+</div>
+<p>When you write this option in command-line, you should enclose
+argument with single or double quotes, since the character <code class="docutils literal"><span class="pre">;</span></code> has a
+special meaning in shell.</p>
+<p>To route, request to request path whose prefix is <code class="docutils literal"><span class="pre">/foo</span></code> to backend
+server <code class="docutils literal"><span class="pre">[::1]:8080</span></code>, you can write like so:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=::1,8080;/foo
+</pre></div>
+</div>
+<p>Of course, you can specify both host and request path at the same
+time:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=192.168.0.10,8080;example.com/foo
+</pre></div>
+</div>
+<p>We can use <code class="docutils literal"><span class="pre">*</span></code> in the left most position of host to achieve wildcard
+suffix match.  If <code class="docutils literal"><span class="pre">*</span></code> is the left most character, then the remaining
+string should match the request host suffix.  <code class="docutils literal"><span class="pre">*</span></code> must match at
+least one character.  For example, <code class="docutils literal"><span class="pre">*.example.com</span></code> matches
+<code class="docutils literal"><span class="pre">www.example.com</span></code> and <code class="docutils literal"><span class="pre">dev.example.com</span></code>, and does not match
+<code class="docutils literal"><span class="pre">example.com</span></code> and <code class="docutils literal"><span class="pre">nghttp2.org</span></code>.  The exact match (without <code class="docutils literal"><span class="pre">*</span></code>)
+always takes precedence over wildcard match.</p>
+<p>One important thing you have to remember is that we have to specify
+default routing pattern for so called &quot;catch all&quot; pattern.  To write
+&quot;catch all&quot; pattern, just specify backend server address, without
+pattern.</p>
+<p>Usually, host is the value of <code class="docutils literal"><span class="pre">Host</span></code> header field.  In HTTP/2, the
+value of <code class="docutils literal"><span class="pre">:authority</span></code> pseudo header field is used.</p>
+<p>When you write multiple backend addresses sharing the same routing
+pattern, they are used as load balancing.  For example, to use 2
+servers <code class="docutils literal"><span class="pre">serv1:3000</span></code> and <code class="docutils literal"><span class="pre">serv2:3000</span></code> for request host
+<code class="docutils literal"><span class="pre">example.com</span></code> and path <code class="docutils literal"><span class="pre">/myservice</span></code>, you can write like so:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=serv1,3000;example.com/myservice
+backend=serv2,3000;example.com/myservice
+</pre></div>
+</div>
+<p>You can also specify backend application protocol in
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option using <code class="docutils literal"><span class="pre">proto</span></code> keyword after pattern.
+Utilizing this allows ngttpx to route certain request to HTTP/2, other
+requests to HTTP/1.  For example, to route requests to <code class="docutils literal"><span class="pre">/ws/</span></code> in
+backend HTTP/1.1 connection, and use backend HTTP/2 for other
+requests, do this:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=serv1,3000;/;proto=h2
+backend=serv1,3000;/ws/;proto=http/1.1
+</pre></div>
+</div>
+<p>The default backend protocol is HTTP/1.1.</p>
+<p>TLS can be enabled per pattern basis:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=serv1,8443;/;proto=h2;tls
+backend=serv2,8080;/ws/;proto=http/1.1
+</pre></div>
+</div>
+<p>In the above case, connection to serv1 will be encrypted by TLS.  On
+the other hand, connection to serv2 will not be encrypted by TLS.</p>
+</div>
+<div class="section" id="dynamic-hostname-lookup">
+<h2>Dynamic hostname lookup<a class="headerlink" href="#dynamic-hostname-lookup" title="Permalink to this headline">¶</a></h2>
+<p>By default, nghttpx performs backend hostname lookup at start up, or
+configuration reload, and keeps using them in its entire session.  To
+make nghttpx perform hostname lookup dynamically, use <code class="docutils literal"><span class="pre">dns</span></code>
+parameter in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option, like so:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=foo.example.com;;dns
+</pre></div>
+</div>
+<p>nghttpx will cache resolved addresses for certain period of time.  To
+change this cache period, use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-dns-cache-timeout"><code class="xref std std-option docutils literal"><span class="pre">--dns-cache-timeout</span></code></a>.</p>
+</div>
+<div class="section" id="enable-proxy-protocol">
+<h2>Enable PROXY protocol<a class="headerlink" href="#enable-proxy-protocol" title="Permalink to this headline">¶</a></h2>
+<p>PROXY protocol can be enabled per frontend.  In order to enable PROXY
+protocol, use <code class="docutils literal"><span class="pre">proxyproto</span></code> parameter in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a> option,
+like so:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>frontend=*,443;proxyproto
+</pre></div>
+</div>
+</div>
+<div class="section" id="psk-cipher-suites">
+<h2>PSK cipher suites<a class="headerlink" href="#psk-cipher-suites" title="Permalink to this headline">¶</a></h2>
+<p>nghttpx supports pre-shared key (PSK) cipher suites for both frontend
+and backend TLS connections.  For frontend connection, use
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-psk-secrets"><code class="xref std std-option docutils literal"><span class="pre">--psk-secrets</span></code></a> option to specify a file which contains PSK
+identity and secrets.  The format of the file is
+<code class="docutils literal"><span class="pre">&lt;identity&gt;:&lt;hex-secret&gt;</span></code>, where <code class="docutils literal"><span class="pre">&lt;identity&gt;</span></code> is PSK identity, and
+<code class="docutils literal"><span class="pre">&lt;hex-secret&gt;</span></code> is PSK secret in hex, like so:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>client1:9567800e065e078085c241d54a01c6c3f24b3bab71a606600f4c6ad2c134f3b9
+client2:b1376c3f8f6dcf7c886c5bdcceecd1e6f1d708622b6ddd21bda26ebd0c0bca99
+</pre></div>
+</div>
+<p>nghttpx server accepts any of the identity and secret pairs in the
+file.  The default cipher suite list does not contain PSK cipher
+suites.  In order to use PSK, PSK cipher suite must be enabled by
+using <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-ciphers"><code class="xref std std-option docutils literal"><span class="pre">--ciphers</span></code></a> option.  The desired PSK cipher suite may be
+listed in <a class="reference external" href="https://tools.ietf.org/html/rfc7540#appendix-A">HTTP/2 cipher black list</a>.  In order to use
+such PSK cipher suite with HTTP/2, disable HTTP/2 cipher black list by
+using <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-no-http2-cipher-black-list"><code class="xref std std-option docutils literal"><span class="pre">--no-http2-cipher-black-list</span></code></a> option.  But you should
+understand its implications.</p>
+<p>At the time of writing, even if only PSK cipher suites are specified
+in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-ciphers"><code class="xref std std-option docutils literal"><span class="pre">--ciphers</span></code></a> option, certificate and private key are still
+required.</p>
+<p>For backend connection, use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-client-psk-secrets"><code class="xref std std-option docutils literal"><span class="pre">--client-psk-secrets</span></code></a> option to
+specify a file which contains single PSK identity and secret.  The
+format is the same as the file used by <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-psk-secrets"><code class="xref std std-option docutils literal"><span class="pre">--psk-secrets</span></code></a>
+described above, but only first identity and secret pair is solely
+used, like so:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>client2:b1376c3f8f6dcf7c886c5bdcceecd1e6f1d708622b6ddd21bda26ebd0c0bca99
+</pre></div>
+</div>
+<p>The default cipher suite list does not contain PSK cipher suites.  In
+order to use PSK, PSK cipher suite must be enabled by using
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-client-ciphers"><code class="xref std std-option docutils literal"><span class="pre">--client-ciphers</span></code></a> option.  The desired PSK cipher suite may
+be listed in <a class="reference external" href="https://tools.ietf.org/html/rfc7540#appendix-A">HTTP/2 cipher black list</a>.  In order to use
+such PSK cipher suite with HTTP/2, disable HTTP/2 cipher black list by
+using <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-client-no-http2-cipher-black-list"><code class="xref std std-option docutils literal"><span class="pre">--client-no-http2-cipher-black-list</span></code></a> option.  But you
+should understand its implications.</p>
+</div>
+<div class="section" id="migration-from-nghttpx-v1-18-x-or-earlier">
+<h2>Migration from nghttpx v1.18.x or earlier<a class="headerlink" href="#migration-from-nghttpx-v1-18-x-or-earlier" title="Permalink to this headline">¶</a></h2>
+<p>As of nghttpx v1.19.0, <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-ciphers"><code class="xref std std-option docutils literal"><span class="pre">--ciphers</span></code></a> option only changes cipher
+list for frontend TLS connection.  In order to change cipher list for
+backend connection, use <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-client-ciphers"><code class="xref std std-option docutils literal"><span class="pre">--client-ciphers</span></code></a> option.</p>
+<p>Similarly, <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-no-http2-cipher-black-list"><code class="xref std std-option docutils literal"><span class="pre">--no-http2-cipher-black-list</span></code></a> option only disables
+HTTP/2 cipher black list for frontend connection.  In order to disable
+HTTP/2 cipher black list for backend connection, use
+<a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-client-no-http2-cipher-black-list"><code class="xref std std-option docutils literal"><span class="pre">--client-no-http2-cipher-black-list</span></code></a> option.</p>
+<p><code class="docutils literal"><span class="pre">--accept-proxy-protocol</span></code> option was deprecated.  Instead, use
+<code class="docutils literal"><span class="pre">proxyproto</span></code> parameter in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a> option to enable
+PROXY protocol support per frontend.</p>
+</div>
+<div class="section" id="migration-from-nghttpx-v1-8-0-or-earlier">
+<h2>Migration from nghttpx v1.8.0 or earlier<a class="headerlink" href="#migration-from-nghttpx-v1-8-0-or-earlier" title="Permalink to this headline">¶</a></h2>
+<p>As of nghttpx 1.9.0, <code class="docutils literal"><span class="pre">--frontend-no-tls</span></code> and <code class="docutils literal"><span class="pre">--backend-no-tls</span></code>
+have been removed.</p>
+<p>To disable encryption on frontend connection, use <code class="docutils literal"><span class="pre">no-tls</span></code> keyword
+in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-f"><code class="xref std std-option docutils literal"><span class="pre">--frontend</span></code></a> potion:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>frontend=*,3000;no-tls
+</pre></div>
+</div>
+<p>The TLS encryption is now disabled on backend connection in all modes
+by default.  To enable encryption on backend connection, use <code class="docutils literal"><span class="pre">tls</span></code>
+keyword in <a class="reference internal" href="nghttpx.1.html#cmdoption-nghttpx-b"><code class="xref std std-option docutils literal"><span class="pre">--backend</span></code></a> option:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=127.0.0.1,8080;tls
+</pre></div>
+</div>
+<p>As of nghttpx 1.9.0, <code class="docutils literal"><span class="pre">--http2-bridge</span></code>, <code class="docutils literal"><span class="pre">--client</span></code> and
+<code class="docutils literal"><span class="pre">--client-proxy</span></code> options have been removed.  These functionality can
+be used using combinations of options.</p>
+<p>Use following option instead of <code class="docutils literal"><span class="pre">--http2-bridge</span></code>:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>backend=&lt;ADDR&gt;,&lt;PORT&gt;;;proto=h2;tls
+</pre></div>
+</div>
+<p>Use following options instead of <code class="docutils literal"><span class="pre">--client</span></code>:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>frontend=&lt;ADDR&gt;,&lt;PORT&gt;;no-tls
+backend=&lt;ADDR&gt;,&lt;PORT&gt;;;proto=h2;tls
+</pre></div>
+</div>
+<p>Use following options instead of <code class="docutils literal"><span class="pre">--client-proxy</span></code>:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>http2-proxy=yes
+frontend=&lt;ADDR&gt;,&lt;PORT&gt;;no-tls
+backend=&lt;ADDR&gt;,&lt;PORT&gt;;;proto=h2;tls
+</pre></div>
+</div>
+<p>We also removed <code class="docutils literal"><span class="pre">--backend-http2-connections-per-worker</span></code> option.  It
+was present because previously the number of backend h2 connection was
+statically configured, and defaulted to 1.  Now the number of backend
+h2 connection is increased on demand.  We know the maximum number of
+concurrent streams per connection.  When we push as many request as
+the maximum concurrency to the one connection, we create another new
+connection so that we can distribute load and avoid delay the request
+processing.  This is done automatically without any configuration.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="h2load-howto.html" class="btn btn-neutral float-right" title="h2load - HTTP/2 benchmarking tool - HOW-TO" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="h2load.1.html" class="btn btn-neutral" title="h2load(1)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

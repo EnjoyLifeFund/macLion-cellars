@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nghttp2_hd_inflate_change_table_size &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="up" title="API Reference" href="apiref.html"/>
+        <link rel="next" title="nghttp2_hd_inflate_del" href="nghttp2_hd_inflate_del.html"/>
+        <link rel="prev" title="nghttp2_hd_deflate_new2" href="nghttp2_hd_deflate_new2.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="apiref.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html">Types (structs, unions and typedefs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_check_header_name.html">nghttp2_check_header_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_check_header_value.html">nghttp2_check_header_value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_bound.html">nghttp2_hd_deflate_bound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_change_table_size.html">nghttp2_hd_deflate_change_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_del.html">nghttp2_hd_deflate_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_dynamic_table_size.html">nghttp2_hd_deflate_get_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_max_dynamic_table_size.html">nghttp2_hd_deflate_get_max_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_num_table_entries.html">nghttp2_hd_deflate_get_num_table_entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_get_table_entry.html">nghttp2_hd_deflate_get_table_entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_hd.html">nghttp2_hd_deflate_hd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_hd_vec.html">nghttp2_hd_deflate_hd_vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_new.html">nghttp2_hd_deflate_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_deflate_new2.html">nghttp2_hd_deflate_new2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">nghttp2_hd_inflate_change_table_size</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_del.html">nghttp2_hd_inflate_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_end_headers.html">nghttp2_hd_inflate_end_headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_dynamic_table_size.html">nghttp2_hd_inflate_get_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_max_dynamic_table_size.html">nghttp2_hd_inflate_get_max_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_num_table_entries.html">nghttp2_hd_inflate_get_num_table_entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_get_table_entry.html">nghttp2_hd_inflate_get_table_entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_hd.html">nghttp2_hd_inflate_hd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_hd2.html">nghttp2_hd_inflate_hd2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_new.html">nghttp2_hd_inflate_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_hd_inflate_new2.html">nghttp2_hd_inflate_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_http2_strerror.html">nghttp2_http2_strerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_is_fatal.html">nghttp2_is_fatal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_nv_compare_name.html">nghttp2_nv_compare_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_del.html">nghttp2_option_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_new.html">nghttp2_option_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_builtin_recv_extension_type.html">nghttp2_option_set_builtin_recv_extension_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_deflate_dynamic_table_size.html">nghttp2_option_set_max_deflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_reserved_remote_streams.html">nghttp2_option_set_max_reserved_remote_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_max_send_header_block_length.html">nghttp2_option_set_max_send_header_block_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_auto_ping_ack.html">nghttp2_option_set_no_auto_ping_ack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_auto_window_update.html">nghttp2_option_set_no_auto_window_update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_closed_streams.html">nghttp2_option_set_no_closed_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_http_messaging.html">nghttp2_option_set_no_http_messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_no_recv_client_magic.html">nghttp2_option_set_no_recv_client_magic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_peer_max_concurrent_streams.html">nghttp2_option_set_peer_max_concurrent_streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_option_set_user_recv_extension_type.html">nghttp2_option_set_user_recv_extension_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_pack_settings_payload.html">nghttp2_pack_settings_payload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_check_default.html">nghttp2_priority_spec_check_default</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_default_init.html">nghttp2_priority_spec_default_init</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_priority_spec_init.html">nghttp2_priority_spec_init</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_decref.html">nghttp2_rcbuf_decref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_get_buf.html">nghttp2_rcbuf_get_buf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_rcbuf_incref.html">nghttp2_rcbuf_incref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_select_next_protocol.html">nghttp2_select_next_protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_del.html">nghttp2_session_callbacks_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_new.html">nghttp2_session_callbacks_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_before_frame_send_callback.html">nghttp2_session_callbacks_set_before_frame_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_data_source_read_length_callback.html">nghttp2_session_callbacks_set_data_source_read_length_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_error_callback.html">nghttp2_session_callbacks_set_error_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_frame_callback.html">nghttp2_session_callbacks_set_on_begin_frame_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_begin_headers_callback.html">nghttp2_session_callbacks_set_on_begin_headers_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_data_chunk_recv_callback.html">nghttp2_session_callbacks_set_on_data_chunk_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_extension_chunk_recv_callback.html">nghttp2_session_callbacks_set_on_extension_chunk_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_not_send_callback.html">nghttp2_session_callbacks_set_on_frame_not_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_recv_callback.html">nghttp2_session_callbacks_set_on_frame_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_frame_send_callback.html">nghttp2_session_callbacks_set_on_frame_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_header_callback.html">nghttp2_session_callbacks_set_on_header_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_header_callback2.html">nghttp2_session_callbacks_set_on_header_callback2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_frame_recv_callback.html">nghttp2_session_callbacks_set_on_invalid_frame_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_header_callback.html">nghttp2_session_callbacks_set_on_invalid_header_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_invalid_header_callback2.html">nghttp2_session_callbacks_set_on_invalid_header_callback2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_on_stream_close_callback.html">nghttp2_session_callbacks_set_on_stream_close_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_pack_extension_callback.html">nghttp2_session_callbacks_set_pack_extension_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_recv_callback.html">nghttp2_session_callbacks_set_recv_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_select_padding_callback.html">nghttp2_session_callbacks_set_select_padding_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_send_callback.html">nghttp2_session_callbacks_set_send_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_send_data_callback.html">nghttp2_session_callbacks_set_send_data_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_callbacks_set_unpack_extension_callback.html">nghttp2_session_callbacks_set_unpack_extension_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_change_stream_priority.html">nghttp2_session_change_stream_priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_check_request_allowed.html">nghttp2_session_check_request_allowed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_check_server_session.html">nghttp2_session_check_server_session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new.html">nghttp2_session_client_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new2.html">nghttp2_session_client_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_client_new3.html">nghttp2_session_client_new3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume.html">nghttp2_session_consume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume_connection.html">nghttp2_session_consume_connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_consume_stream.html">nghttp2_session_consume_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_create_idle_stream.html">nghttp2_session_create_idle_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_del.html">nghttp2_session_del</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_find_stream.html">nghttp2_session_find_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_effective_local_window_size.html">nghttp2_session_get_effective_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_effective_recv_data_length.html">nghttp2_session_get_effective_recv_data_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_hd_deflate_dynamic_table_size.html">nghttp2_session_get_hd_deflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_hd_inflate_dynamic_table_size.html">nghttp2_session_get_hd_inflate_dynamic_table_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_last_proc_stream_id.html">nghttp2_session_get_last_proc_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_local_settings.html">nghttp2_session_get_local_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_local_window_size.html">nghttp2_session_get_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_next_stream_id.html">nghttp2_session_get_next_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_outbound_queue_size.html">nghttp2_session_get_outbound_queue_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_remote_settings.html">nghttp2_session_get_remote_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_remote_window_size.html">nghttp2_session_get_remote_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_root_stream.html">nghttp2_session_get_root_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_effective_local_window_size.html">nghttp2_session_get_stream_effective_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_effective_recv_data_length.html">nghttp2_session_get_stream_effective_recv_data_length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_local_close.html">nghttp2_session_get_stream_local_close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_local_window_size.html">nghttp2_session_get_stream_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_remote_close.html">nghttp2_session_get_stream_remote_close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_remote_window_size.html">nghttp2_session_get_stream_remote_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_get_stream_user_data.html">nghttp2_session_get_stream_user_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_mem_recv.html">nghttp2_session_mem_recv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_mem_send.html">nghttp2_session_mem_send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_recv.html">nghttp2_session_recv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_resume_data.html">nghttp2_session_resume_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_send.html">nghttp2_session_send</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new.html">nghttp2_session_server_new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new2.html">nghttp2_session_server_new2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_server_new3.html">nghttp2_session_server_new3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_local_window_size.html">nghttp2_session_set_local_window_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_next_stream_id.html">nghttp2_session_set_next_stream_id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_set_stream_user_data.html">nghttp2_session_set_stream_user_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_terminate_session.html">nghttp2_session_terminate_session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_terminate_session2.html">nghttp2_session_terminate_session2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_upgrade.html">nghttp2_session_upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_upgrade2.html">nghttp2_session_upgrade2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_want_read.html">nghttp2_session_want_read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_session_want_write.html">nghttp2_session_want_write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_set_debug_vprintf_callback.html">nghttp2_set_debug_vprintf_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_first_child.html">nghttp2_stream_get_first_child</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_next_sibling.html">nghttp2_stream_get_next_sibling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_parent.html">nghttp2_stream_get_parent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_previous_sibling.html">nghttp2_stream_get_previous_sibling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_state.html">nghttp2_stream_get_state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_sum_dependency_weight.html">nghttp2_stream_get_sum_dependency_weight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_stream_get_weight.html">nghttp2_stream_get_weight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_strerror.html">nghttp2_strerror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_altsvc.html">nghttp2_submit_altsvc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_data.html">nghttp2_submit_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_extension.html">nghttp2_submit_extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_goaway.html">nghttp2_submit_goaway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_headers.html">nghttp2_submit_headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_ping.html">nghttp2_submit_ping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_priority.html">nghttp2_submit_priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_push_promise.html">nghttp2_submit_push_promise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_request.html">nghttp2_submit_request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_response.html">nghttp2_submit_response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_rst_stream.html">nghttp2_submit_rst_stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_settings.html">nghttp2_submit_settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_shutdown_notice.html">nghttp2_submit_shutdown_notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_trailer.html">nghttp2_submit_trailer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_submit_window_update.html">nghttp2_submit_window_update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nghttp2_version.html">nghttp2_version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="apiref.html">API Reference</a> &raquo;</li>
+      
+    <li>nghttp2_hd_inflate_change_table_size</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nghttp2-hd-inflate-change-table-size">
+<h1>nghttp2_hd_inflate_change_table_size<a class="headerlink" href="#nghttp2-hd-inflate-change-table-size" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><em>#include &lt;nghttp2/nghttp2.h&gt;</em></p>
+<dl class="function">
+<dt id="c.nghttp2_hd_inflate_change_table_size">
+int <code class="descname">nghttp2_hd_inflate_change_table_size</code><span class="sig-paren">(</span><a class="reference internal" href="types.html#c.nghttp2_hd_inflater" title="nghttp2_hd_inflater">nghttp2_hd_inflater</a><em>&nbsp;*inflater</em>, size_t<em>&nbsp;settings_max_dynamic_table_size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.nghttp2_hd_inflate_change_table_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes header table size in the <em>inflater</em>.  This may trigger
+eviction in the dynamic table.</p>
+<p>The <em>settings_max_dynamic_table_size</em> should be the value
+transmitted in SETTINGS_HEADER_TABLE_SIZE.</p>
+<p>This function must not be called while header block is being
+inflated.  In other words, this function must be called after
+initialization of <em>inflater</em>, but before calling
+<a class="reference internal" href="nghttp2_hd_inflate_hd2.html#c.nghttp2_hd_inflate_hd2" title="nghttp2_hd_inflate_hd2"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_hd2()</span></code></a>, or after
+<a class="reference internal" href="nghttp2_hd_inflate_end_headers.html#c.nghttp2_hd_inflate_end_headers" title="nghttp2_hd_inflate_end_headers"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_end_headers()</span></code></a>.  Otherwise,
+<a class="reference internal" href="enums.html#c.NGHTTP2_ERR_INVALID_STATE" title="NGHTTP2_ERR_INVALID_STATE"><code class="xref c c-func docutils literal"><span class="pre">NGHTTP2_ERR_INVALID_STATE()</span></code></a> was returned.</p>
+<p>This function returns 0 if it succeeds, or one of the following
+negative error codes:</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="enums.html#c.NGHTTP2_ERR_NOMEM" title="NGHTTP2_ERR_NOMEM"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_NOMEM</span></code></a></dt>
+<dd>Out of memory.</dd>
+<dt><a class="reference internal" href="enums.html#c.NGHTTP2_ERR_INVALID_STATE" title="NGHTTP2_ERR_INVALID_STATE"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_ERR_INVALID_STATE</span></code></a></dt>
+<dd>The function is called while header block is being inflated.
+Probably, application missed to call
+<a class="reference internal" href="nghttp2_hd_inflate_end_headers.html#c.nghttp2_hd_inflate_end_headers" title="nghttp2_hd_inflate_end_headers"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_hd_inflate_end_headers()</span></code></a>.</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nghttp2_hd_inflate_del.html" class="btn btn-neutral float-right" title="nghttp2_hd_inflate_del" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nghttp2_hd_deflate_new2.html" class="btn btn-neutral" title="nghttp2_hd_deflate_new2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

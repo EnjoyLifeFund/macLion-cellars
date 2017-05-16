@@ -1,0 +1,560 @@
+This is texinfo.info, produced by texi2any version 6.3 from
+texinfo.texi.
+
+This manual is for GNU Texinfo (version 6.3, 30 July 2016), a
+documentation system that can produce both online information and a
+printed manual from a single source using semantic markup.
+
+   Copyright (C) 1988, 1990, 1991, 1992, 1993, 1995, 1996, 1997, 1998,
+1999, 2001, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
+2012, 2013, 2014, 2015, 2016 Free Software Foundation, Inc.
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.3 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover Texts
+     being "A GNU Manual", and with the Back-Cover Texts as in (a)
+     below. A copy of the license is included in the section entitled
+     "GNU Free Documentation License".
+
+     (a) The FSF's Back-Cover Text is: "You have the freedom to copy and
+     modify this GNU manual. Buying copies from the FSF supports it in
+     developing GNU and promoting software freedom."
+INFO-DIR-SECTION Texinfo documentation system
+START-INFO-DIR-ENTRY
+* Texinfo: (texinfo).           The GNU documentation format.
+* install-info: (texinfo)Invoking install-info. Update info/dir entries.
+* makeinfo: (texinfo)Invoking makeinfo.         Translate Texinfo source.
+* pod2texi: (pod2texi)Invoking pod2texi.        Translate Perl POD to Texinfo.
+* texi2dvi: (texinfo)Format with texi2dvi.      Print Texinfo documents.
+* texi2pdf: (texinfo)PDF Output.                PDF output for Texinfo.
+* pdftexi2dvi: (texinfo)PDF Output.             PDF output for Texinfo.
+* texindex: (texinfo)Format with tex/texindex.  Sort Texinfo index files.
+END-INFO-DIR-ENTRY
+
+
+Indirect:
+texinfo.info-1: 1785
+texinfo.info-2: 302415
+texinfo.info-3: 604212
+
+Tag Table:
+(Indirect)
+Node: Top1785
+Node: Copying Conditions28594
+Node: Overview30503
+Ref: Using Texinfo30655
+Node: Reporting Bugs33464
+Node: Output Formats35014
+Node: Info Files39839
+Node: Printed Books41840
+Node: Adding Output Formats43868
+Node: History46298
+Node: Writing a Texinfo File51345
+Node: Conventions51908
+Ref: Formatting Commands52065
+Ref: Conventions-Footnote-155842
+Node: Comments56451
+Node: Minimum58166
+Ref: Minimum-Footnote-159846
+Node: Short Sample60052
+Node: Beginning and Ending a File63957
+Ref: Beginning a File64070
+Node: Sample Beginning65234
+Node: Texinfo File Header66770
+Node: First Line68066
+Node: Start of Header69145
+Node: @setfilename70123
+Ref: setfilename70329
+Node: @settitle72938
+Ref: settitle73132
+Node: End of Header74356
+Node: Document Permissions74642
+Ref: Software Copying Permissions75133
+Node: @copying75727
+Ref: copying75909
+Node: @insertcopying78391
+Ref: insertcopying78579
+Node: Titlepage & Copyright Page79604
+Node: @titlepage80899
+Ref: titlepage81043
+Ref: @titlepage-Footnote-183369
+Node: @titlefont @center @sp83656
+Ref: titlefont center sp83877
+Node: @title @subtitle @author85349
+Ref: title subtitle author85573
+Node: Copyright87805
+Node: Heading Generation89704
+Ref: end titlepage89855
+Node: Contents91424
+Node: The Top Node93602
+Node: Top Node Example94792
+Node: Master Menu Parts95215
+Node: Global Document Commands97097
+Node: @documentdescription97996
+Ref: documentdescription98192
+Node: @setchapternewpage98816
+Ref: setchapternewpage99056
+Node: @headings101750
+Ref: headings on off101934
+Node: @paragraphindent103745
+Ref: paragraphindent103992
+Node: @firstparagraphindent104872
+Ref: firstparagraphindent105116
+Node: @exampleindent106142
+Ref: exampleindent106341
+Node: Ending a File107254
+Ref: File End107672
+Node: Nodes108118
+Ref: node108245
+Ref: @node108245
+Node: Texinfo Document Structure110157
+Ref: Two Paths110308
+Node: Node Names112708
+Ref: Node Line Tips112978
+Node: Writing a Node114807
+Node: Node Line Requirements117992
+Node: First Node122146
+Node: @top Command124336
+Ref: top command124510
+Ref: makeinfo top124510
+Ref: makeinfo top command124510
+Node: Node Menu Illustration125300
+Node: makeinfo Pointer Creation129681
+Node: Menus131524
+Node: Writing a Menu132169
+Node: Menu Example134307
+Node: Menu Location135811
+Node: Menu Parts136708
+Node: Less Cluttered Menu Entry138498
+Node: Other Info Files139119
+Node: Chapter Structuring140508
+Ref: Structuring140652
+Node: Tree Structuring141670
+Node: Structuring Command Types143204
+Node: @chapter145544
+Ref: chapter145746
+Node: @unnumbered @appendix146871
+Ref: unnumbered & appendix147124
+Node: @majorheading @chapheading148195
+Ref: majorheading & chapheading148446
+Node: @section149173
+Ref: section149399
+Node: @unnumberedsec @appendixsec @heading150355
+Ref: unnumberedsec appendixsec heading150584
+Node: @subsection151792
+Ref: subsection152052
+Node: @unnumberedsubsec @appendixsubsec @subheading152519
+Ref: unnumberedsubsec appendixsubsec subheading152737
+Node: @subsubsection153686
+Ref: subsubsection153916
+Node: @part155313
+Node: Raise/lower sections157571
+Node: Cross References159632
+Node: References160674
+Node: Cross Reference Commands162371
+Node: Cross Reference Parts163592
+Ref: Reference Syntax163777
+Node: @xref167722
+Ref: xref167877
+Node: One Argument168220
+Node: Two Arguments168633
+Node: Three Arguments169415
+Node: Four and Five Arguments171546
+Node: Referring to a Manual as a Whole174121
+Ref: Top Node Naming174309
+Node: @ref175969
+Ref: ref176106
+Node: @pxref177074
+Ref: pxref177190
+Node: @anchor178770
+Ref: anchor178980
+Node: @inforef180833
+Ref: inforef181035
+Node: @url182194
+Ref: uref182382
+Ref: url182739
+Node: @url Examples183674
+Node: URL Line Breaking185291
+Node: @url PDF Output Format186505
+Node: PDF Colors187591
+Node: @cite188874
+Ref: cite188995
+Node: Marking Text189326
+Node: Indicating189991
+Node: Useful Highlighting191491
+Node: @code193156
+Ref: code193305
+Node: @kbd196933
+Ref: kbd197081
+Node: @key198841
+Ref: key198967
+Node: @samp200302
+Ref: samp200423
+Node: @verb201801
+Ref: verb201938
+Node: @var203084
+Ref: var203238
+Node: @env204829
+Ref: env204979
+Node: @file205345
+Ref: file205479
+Node: @command205958
+Ref: command206109
+Node: @option206667
+Ref: option206813
+Node: @dfn207110
+Ref: dfn207233
+Node: @abbr208038
+Ref: abbr208202
+Node: @acronym209462
+Ref: acronym209630
+Node: @indicateurl212279
+Ref: indicateurl212468
+Node: @email213023
+Ref: email213197
+Node: Emphasis213882
+Node: @emph @strong214716
+Ref: emph & strong214874
+Node: Smallcaps215754
+Node: Fonts216894
+Node: Quotations and Examples219417
+Node: Block Enclosing Commands221246
+Node: @quotation223552
+Ref: quotation223750
+Node: @indentedblock226043
+Node: @example227014
+Ref: example227183
+Node: @verbatim229312
+Ref: verbatim229474
+Node: @lisp231181
+Ref: lisp231355
+Node: @display231873
+Ref: display232063
+Node: @format232599
+Ref: format232801
+Node: @exdent233254
+Ref: exdent233458
+Node: @flushleft @flushright234390
+Ref: flushleft & flushright234583
+Node: @raggedright235670
+Ref: raggedright235871
+Node: @noindent236954
+Ref: noindent237140
+Node: @indent238812
+Ref: indent238990
+Node: @cartouche239953
+Ref: cartouche240135
+Node: @small...240933
+Ref: small241087
+Node: Lists and Tables242800
+Node: Introducing Lists243487
+Node: @itemize245149
+Ref: itemize245337
+Node: @enumerate247810
+Ref: enumerate248024
+Node: Two-column Tables250355
+Node: @table251041
+Ref: table251193
+Ref: @asis251810
+Node: @ftable @vtable254021
+Ref: ftable vtable254182
+Node: @itemx255133
+Ref: itemx255307
+Node: Multi-column Tables256372
+Node: Multitable Column Widths257079
+Node: Multitable Rows258558
+Node: Special Displays260980
+Node: Floats261771
+Node: @float262659
+Ref: float262841
+Ref: fig:ex1263343
+Node: @caption @shortcaption264620
+Ref: caption shortcaption264796
+Node: @listoffloats266301
+Ref: listoffloats266498
+Node: Images267806
+Node: Image Syntax268241
+Node: Image Scaling272247
+Node: Footnotes273979
+Ref: Footnotes-Footnote-1274601
+Node: Footnote Commands274882
+Ref: Footnote Commands-Footnote-1277092
+Node: Footnote Styles277129
+Node: Indices279765
+Node: Predefined Indices281035
+Node: Indexing Commands283120
+Node: Index Entries285938
+Node: Printing Indices & Menus288359
+Node: Combining Indices291371
+Node: @syncodeindex292733
+Ref: syncodeindex292932
+Node: @synindex294448
+Ref: synindex294611
+Node: New Indices295025
+Node: Insertions297365
+Node: Special Characters298462
+Ref: Braces Atsign298656
+Ref: Atsign Braces Comma298656
+Node: Inserting an Atsign299323
+Node: Inserting Braces299917
+Node: Inserting a Comma302415
+Node: Inserting a Backslash303633
+Node: Inserting a Hashsign304877
+Node: Inserting Quote Characters306108
+Node: Inserting Space307872
+Node: Multiple Spaces308461
+Node: Not Ending a Sentence309569
+Node: Ending a Sentence311384
+Node: @frenchspacing313898
+Ref: frenchspacing314113
+Node: @dmn315281
+Ref: dmn315452
+Node: Inserting Accents316429
+Node: Inserting Quotation Marks319157
+Node: Inserting Subscripts and Superscripts323113
+Node: Inserting Math324367
+Ref: math324598
+Node: Glyphs for Text326849
+Ref: Glyphs327009
+Ref: TeX and copyright327009
+Node: @TeX @LaTeX327952
+Ref: tex328126
+Node: @copyright328761
+Ref: copyright symbol328927
+Node: @registeredsymbol329206
+Ref: registered symbol329380
+Node: @dots329534
+Ref: dots329719
+Ref: Dots Bullets329719
+Node: @bullet330539
+Ref: bullet330670
+Node: @euro330953
+Ref: euro331132
+Node: @pounds332225
+Ref: pounds332396
+Node: @textdegree332543
+Ref: textdegree332721
+Node: @minus332853
+Ref: minus333039
+Node: @geq @leq333980
+Ref: geq leq334172
+Node: Glyphs for Programming334373
+Node: Glyphs Summary335616
+Node: @result336328
+Ref: result336536
+Node: @expansion336875
+Ref: expansion337083
+Node: @print337870
+Ref: Print Glyph338075
+Node: @error338787
+Ref: Error Glyph338998
+Node: @equiv339730
+Ref: Equivalence339921
+Node: @point340501
+Ref: Point Glyph340715
+Node: Click Sequences342116
+Node: Inserting Unicode343137
+Node: Breaks345068
+Node: Break Commands346499
+Node: Line Breaks347369
+Node: @- @hyphenation348123
+Ref: - and hyphenation348332
+Node: @allowcodebreaks349454
+Ref: allowcodebreaks349662
+Node: @w350670
+Ref: w350829
+Node: @tie351835
+Ref: tie351999
+Node: @sp352742
+Ref: sp352883
+Node: @page353165
+Ref: page353304
+Node: @group353558
+Ref: group353707
+Node: @need355318
+Ref: need355463
+Node: Definition Commands356070
+Node: Def Cmd Template357731
+Node: Def Cmd Continuation Lines360453
+Node: Optional Arguments362071
+Node: @deffnx363421
+Ref: deffnx363640
+Node: Def Cmds in Detail364407
+Node: Functions Commands365528
+Node: Variables Commands368383
+Node: Typed Functions370527
+Node: Typed Variables374481
+Node: Data Types376201
+Node: Abstract Objects377487
+Node: Object-Oriented Variables378096
+Node: Object-Oriented Methods380729
+Node: Def Cmd Conventions384663
+Node: Sample Function Definition385234
+Node: Internationalization388055
+Node: @documentlanguage388716
+Ref: documentlanguage388938
+Node: @documentencoding391713
+Ref: documentencoding391913
+Node: Conditionals395024
+Node: Conditional Commands396396
+Node: Conditional Not Commands399141
+Node: Raw Formatter Commands400428
+Node: Inline Conditionals403997
+Node: @set @clear @value405919
+Ref: set clear value406167
+Node: @set @value407397
+Ref: set value407543
+Node: @ifset @ifclear409534
+Ref: ifset ifclear409724
+Node: @inlineifset @inlineifclear411689
+Node: @value Example412480
+Ref: value Example412635
+Node: Testing for Texinfo Commands414647
+Node: Conditional Nesting417232
+Node: Defining New Texinfo Commands418787
+Node: Defining Macros420422
+Node: Invoking Macros422756
+Node: Macro Details426398
+Node: @alias431771
+Ref: alias431945
+Node: @definfoenclose433468
+Ref: definfoenclose433696
+Node: External Macro Processors436297
+Node: #line Directive437617
+Node: #line and TeX439071
+Node: #line Syntax Details440549
+Node: Include Files441809
+Node: Using Include Files442868
+Node: texinfo-multiple-files-update444139
+Node: Include Files Requirements446503
+Node: Sample Include File447760
+Node: @verbatiminclude448956
+Ref: verbatiminclude449192
+Node: Include Files Evolution450069
+Node: Hardcopy452054
+Node: Use TeX454348
+Node: Format with texi2dvi454805
+Node: Format with tex/texindex460840
+Ref: Names of index files461811
+Node: Formatting Partial Documents464283
+Node: Details of texindex465390
+Node: Print with lpr467522
+Node: Within Emacs468810
+Node: Texinfo Mode Printing469773
+Node: Compile-Command473439
+Node: Requirements Summary474305
+Node: Preparing for TeX475433
+Node: Overfull hboxes479134
+Node: @smallbook481256
+Ref: smallbook481440
+Node: A4 Paper482480
+Node: @pagesizes483377
+Ref: pagesizes483599
+Node: Cropmarks and Magnification484476
+Node: PDF Output486569
+Node: Obtaining TeX488244
+Node: Generic Translator texi2any488654
+Node: Reference Implementation490373
+Node: Invoking texi2any492663
+Ref: Invoking makeinfo492909
+Ref: makeinfo Options493445
+Ref: texi2any Options493445
+Ref: Splitting Output506519
+Node: texi2any Printed Output508847
+Node: Pointer Validation510968
+Node: Customization Variables512618
+Node: Customization Variables for @-Commands514181
+Node: Customization Variables and Options515623
+Node: HTML Customization Variables519384
+Node: Other Customization Variables530623
+Ref: INFO_SPECIAL_CHARS_QUOTE533672
+Node: Internationalization of Document Strings544283
+Node: Invoking pod2texi548138
+Node: texi2html549356
+Node: Creating and Installing Info Files552552
+Node: Creating an Info File552965
+Node: makeinfo Advantages553979
+Ref: makeinfo advantages554142
+Node: makeinfo in Emacs554662
+Node: texinfo-format commands557118
+Node: Batch Formatting558554
+Node: Tag and Split Files559750
+Node: Installing an Info File563157
+Node: Directory File563992
+Node: New Info File565794
+Ref: New Info File-Footnote-1566910
+Node: Other Info Directories566992
+Node: Installing Dir Entries571108
+Node: Invoking install-info574315
+Node: Generating HTML581033
+Node: HTML Translation581975
+Node: HTML Splitting585299
+Node: HTML CSS587751
+Node: HTML Xref591737
+Node: HTML Xref Link Basics593059
+Node: HTML Xref Node Name Expansion596315
+Node: HTML Xref Command Expansion599291
+Node: HTML Xref 8-bit Character Expansion604212
+Node: HTML Xref Mismatch606611
+Node: HTML Xref Configuration608316
+Node: HTML Xref Link Preservation611946
+Node: @-Command Details613807
+Node: Command Syntax614190
+Node: Command List617554
+Node: Command Contexts662417
+Node: Obsolete @-Commands664273
+Node: Tips665201
+Ref: texi-elements-by-size674636
+Node: Sample Texinfo Files676449
+Node: Short Sample Texinfo File676921
+Node: GNU Sample Texts678466
+Node: Verbatim Copying License683701
+Node: All-permissive Copying License684803
+Node: Texinfo Mode685844
+Node: Texinfo Mode Overview686890
+Node: Emacs Editing687661
+Node: Inserting689805
+Node: Showing the Structure694082
+Node: Updating Nodes and Menus696353
+Node: Updating Commands697415
+Node: Updating Requirements703402
+Node: Other Updating Commands705692
+Node: Info Formatting708953
+Node: Printing710100
+Node: Texinfo Mode Summary712410
+Node: Headings717088
+Node: Headings Introduced717745
+Node: Heading Format719627
+Node: Heading Choice722077
+Node: Custom Headings723423
+Node: Catching Mistakes729100
+Node: makeinfo Preferred730411
+Node: Debugging with Info731293
+Node: Debugging with TeX734643
+Node: Using texinfo-show-structure738878
+Node: Using occur741965
+Node: Running Info-validate743509
+Ref: Running Info-Validate743676
+Node: Using Info-validate744574
+Node: Unsplit746384
+Node: Tagifying747442
+Node: Splitting748303
+Node: Info Format Specification749937
+Node: Info Format General Layout751938
+Node: Info Format Whole Manual752493
+Node: Info Format Preamble753461
+Node: Info Format Indirect Table754417
+Node: Info Format Tag Table755955
+Node: Info Format Local Variables757546
+Node: Info Format Regular Nodes758027
+Node: Info Format Text Constructs760597
+Node: Info Format Menu760997
+Node: Info Format Image761856
+Node: Info Format Printindex763117
+Node: Info Format Cross Reference764283
+Node: GNU Free Documentation License767097
+Node: Command and Variable Index792278
+Node: General Index835936
+
+End Tag Table

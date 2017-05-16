@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>h2load(1) &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="nghttpx - HTTP/2 proxy - HOW-TO" href="nghttpx-howto.html"/>
+        <link rel="prev" title="nghttpx(1)" href="nghttpx.1.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">h2load(1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">OPTIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output">OUTPUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flow-control">FLOW CONTROL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>h2load(1)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="h2load-1">
+<h1>h2load(1)<a class="headerlink" href="#h2load-1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>h2load</strong> [OPTIONS]... [URI]...</p>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>benchmarking tool for HTTP/2 and SPDY server</p>
+<dl class="describe">
+<dt>
+<code class="descname">&lt;URI&gt;</code></dt>
+<dd><p>Specify URI to access.   Multiple URIs can be specified.
+URIs are used  in this order for each  client.  All URIs
+are used, then  first URI is used and then  2nd URI, and
+so  on.  The  scheme, host  and port  in the  subsequent
+URIs, if present,  are ignored.  Those in  the first URI
+are used solely.  Definition of a base URI overrides all
+scheme, host or port values.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="options">
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="option">
+<dt id="cmdoption-h2load-n">
+<code class="descname">-n</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--requests</code><code class="descclassname">=&lt;N&gt;</code><a class="headerlink" href="#cmdoption-h2load-n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of  requests across all  clients.  If it  is used
+with <a class="reference internal" href="#cmdoption-h2load-timing-script-file"><code class="xref std std-option docutils literal"><span class="pre">--timing-script-file</span></code></a> option,  this option specifies
+the number of requests  each client performs rather than
+the number of requests across all clients.</p>
+<p>Default: <code class="docutils literal"><span class="pre">1</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-c">
+<code class="descname">-c</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--clients</code><code class="descclassname">=&lt;N&gt;</code><a class="headerlink" href="#cmdoption-h2load-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number  of concurrent  clients.   With  <a class="reference internal" href="#cmdoption-h2load-r"><code class="xref std std-option docutils literal"><span class="pre">-r</span></code></a> option,  this
+specifies the maximum number of connections to be made.</p>
+<p>Default: <code class="docutils literal"><span class="pre">1</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-t">
+<code class="descname">-t</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--threads</code><code class="descclassname">=&lt;N&gt;</code><a class="headerlink" href="#cmdoption-h2load-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of native threads.</p>
+<p>Default: <code class="docutils literal"><span class="pre">1</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-i">
+<code class="descname">-i</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--input-file</code><code class="descclassname">=&lt;PATH&gt;</code><a class="headerlink" href="#cmdoption-h2load-i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of a file with multiple URIs are separated by EOLs.
+This option will disable URIs getting from command-line.
+If '-' is given as &lt;PATH&gt;, URIs will be read from stdin.
+URIs are used  in this order for each  client.  All URIs
+are used, then  first URI is used and then  2nd URI, and
+so  on.  The  scheme, host  and port  in the  subsequent
+URIs, if present,  are ignored.  Those in  the first URI
+are used solely.  Definition of a base URI overrides all
+scheme, host or port values.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-m">
+<code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--max-concurrent-streams</code><code class="descclassname">=&lt;N&gt;</code><a class="headerlink" href="#cmdoption-h2load-m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max  concurrent  streams  to issue  per  session.   When
+http/1.1  is used,  this  specifies the  number of  HTTP
+pipelining requests in-flight.</p>
+<p>Default: <code class="docutils literal"><span class="pre">1</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-w">
+<code class="descname">-w</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--window-bits</code><code class="descclassname">=&lt;N&gt;</code><a class="headerlink" href="#cmdoption-h2load-w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the stream level initial window size to (2**&lt;N&gt;)-1.
+For SPDY, 2**&lt;N&gt; is used instead.</p>
+<p>Default: <code class="docutils literal"><span class="pre">30</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-connection-window-bits">
+<code class="descname">-W</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--connection-window-bits</code><code class="descclassname">=&lt;N&gt;</code><a class="headerlink" href="#cmdoption-h2load-connection-window-bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets  the  connection  level   initial  window  size  to
+(2**&lt;N&gt;)-1.  For SPDY, if &lt;N&gt;  is strictly less than 16,
+this option  is ignored.   Otherwise 2**&lt;N&gt; is  used for
+SPDY.</p>
+<p>Default: <code class="docutils literal"><span class="pre">30</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-h">
+<code class="descname">-H</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--header</code><code class="descclassname">=&lt;HEADER&gt;</code><a class="headerlink" href="#cmdoption-h2load-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add/Override a header to the requests.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-ciphers">
+<code class="descname">--ciphers</code><code class="descclassname">=&lt;SUITE&gt;</code><a class="headerlink" href="#cmdoption-h2load-ciphers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set allowed  cipher list.  The  format of the  string is
+described in OpenSSL ciphers(1).</p>
+<p>Default: <code class="docutils literal"><span class="pre">ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-p">
+<code class="descname">-p</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--no-tls-proto</code><code class="descclassname">=&lt;PROTOID&gt;</code><a class="headerlink" href="#cmdoption-h2load-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify ALPN identifier of the  protocol to be used when
+accessing http URI without SSL/TLS.
+Available protocols: h2c and
+http/1.1</p>
+<p>Default: <code class="docutils literal"><span class="pre">h2c</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-d">
+<code class="descname">-d</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--data</code><code class="descclassname">=&lt;PATH&gt;</code><a class="headerlink" href="#cmdoption-h2load-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Post FILE to  server.  The request method  is changed to
+POST.   For  http/1.1 connection,  if  <a class="reference internal" href="#cmdoption-h2load-d"><code class="xref std std-option docutils literal"><span class="pre">-d</span></code></a>  is used,  the
+maximum number of in-flight pipelined requests is set to
+1.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-r">
+<code class="descname">-r</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--rate</code><code class="descclassname">=&lt;N&gt;</code><a class="headerlink" href="#cmdoption-h2load-r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies  the  fixed  rate  at  which  connections  are
+created.   The   rate  must   be  a   positive  integer,
+representing the  number of  connections to be  made per
+rate period.   The maximum  number of connections  to be
+made  is  given  in  <a class="reference internal" href="#cmdoption-h2load-c"><code class="xref std std-option docutils literal"><span class="pre">-c</span></code></a>   option.   This  rate  will  be
+distributed among  threads as  evenly as  possible.  For
+example,  with   <a class="reference internal" href="#cmdoption-h2load-t"><code class="xref std std-option docutils literal"><span class="pre">-t</span></code></a>2  and   <a class="reference internal" href="#cmdoption-h2load-r"><code class="xref std std-option docutils literal"><span class="pre">-r</span></code></a>4,  each  thread   gets  2
+connections per period.  When the rate is 0, the program
+will run  as it  normally does, creating  connections at
+whatever variable rate it  wants.  The default value for
+this option is 0.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-rate-period">
+<code class="descname">--rate-period</code><code class="descclassname">=&lt;DURATION&gt;</code><a class="headerlink" href="#cmdoption-h2load-rate-period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the time  period between creating connections.
+The period  must be a positive  number, representing the
+length of the period in time.  This option is ignored if
+the rate option is not used.  The default value for this
+option is 1s.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-connection-active-timeout">
+<code class="descname">-T</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--connection-active-timeout</code><code class="descclassname">=&lt;DURATION&gt;</code><a class="headerlink" href="#cmdoption-h2load-connection-active-timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies  the maximum  time that  h2load is  willing to
+keep a  connection open,  regardless of the  activity on
+said connection.  &lt;DURATION&gt; must be a positive integer,
+specifying the amount of time  to wait.  When no timeout
+value is  set (either  active or inactive),  h2load will
+keep  a  connection  open indefinitely,  waiting  for  a
+response.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-connection-inactivity-timeout">
+<code class="descname">-N</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--connection-inactivity-timeout</code><code class="descclassname">=&lt;DURATION&gt;</code><a class="headerlink" href="#cmdoption-h2load-connection-inactivity-timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the amount  of time that h2load  is willing to
+wait to see activity  on a given connection.  &lt;DURATION&gt;
+must  be a  positive integer,  specifying the  amount of
+time  to wait.   When no  timeout value  is set  (either
+active or inactive), h2load  will keep a connection open
+indefinitely, waiting for a response.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-timing-script-file">
+<code class="descname">--timing-script-file</code><code class="descclassname">=&lt;PATH&gt;</code><a class="headerlink" href="#cmdoption-h2load-timing-script-file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of a file containing one or more lines separated by
+EOLs.  Each script line is composed of two tab-separated
+fields.  The first field represents the time offset from
+the start of execution, expressed as a positive value of
+milliseconds  with microsecond  resolution.  The  second
+field represents the URI.  This option will disable URIs
+getting from  command-line.  If '-' is  given as &lt;PATH&gt;,
+script lines will be read  from stdin.  Script lines are
+used in order for each client.   If <a class="reference internal" href="#cmdoption-h2load-n"><code class="xref std std-option docutils literal"><span class="pre">-n</span></code></a> is given, it must
+be less  than or  equal to the  number of  script lines,
+larger values are clamped to the number of script lines.
+If <a class="reference internal" href="#cmdoption-h2load-n"><code class="xref std std-option docutils literal"><span class="pre">-n</span></code></a> is not given,  the number of requests will default
+to the  number of  script lines.   The scheme,  host and
+port defined in  the first URI are  used solely.  Values
+contained  in  other  URIs,  if  present,  are  ignored.
+Definition of a  base URI overrides all  scheme, host or
+port values.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-b">
+<code class="descname">-B</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--base-uri</code><code class="descclassname">=(&lt;URI&gt;|unix:&lt;PATH&gt;)</code><a class="headerlink" href="#cmdoption-h2load-b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify URI from which the scheme, host and port will be
+used  for  all requests.   The  base  URI overrides  all
+values  defined either  at  the command  line or  inside
+input files.  If argument  starts with &quot;unix:&quot;, then the
+rest  of the  argument will  be treated  as UNIX  domain
+socket path.   The connection is made  through that path
+instead of TCP.   In this case, scheme  is inferred from
+the first  URI appeared  in the  command line  or inside
+input files as usual.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-npn-list">
+<code class="descname">--npn-list</code><code class="descclassname">=&lt;LIST&gt;</code><a class="headerlink" href="#cmdoption-h2load-npn-list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comma delimited list of  ALPN protocol identifier sorted
+in the  order of preference.  That  means most desirable
+protocol comes  first.  This  is used  in both  ALPN and
+NPN.  The parameter must be  delimited by a single comma
+only  and any  white spaces  are  treated as  a part  of
+protocol string.</p>
+<p>Default: <code class="docutils literal"><span class="pre">h2,h2-16,h2-14,http/1.1</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-h1">
+<code class="descname">--h1</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-h2load-h1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short        hand         for        <a class="reference internal" href="#cmdoption-h2load-npn-list"><code class="xref std std-option docutils literal"><span class="pre">--npn-list</span></code></a>=http/1.1
+<a class="reference internal" href="#cmdoption-h2load-p"><code class="xref std std-option docutils literal"><span class="pre">--no-tls-proto</span></code></a>=http/1.1,    which   effectively    force
+http/1.1 for both http and https URI.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-header-table-size">
+<code class="descname">--header-table-size</code><code class="descclassname">=&lt;SIZE&gt;</code><a class="headerlink" href="#cmdoption-h2load-header-table-size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify decoder header table size.</p>
+<p>Default: <code class="docutils literal"><span class="pre">4K</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-encoder-header-table-size">
+<code class="descname">--encoder-header-table-size</code><code class="descclassname">=&lt;SIZE&gt;</code><a class="headerlink" href="#cmdoption-h2load-encoder-header-table-size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify encoder header table size.  The decoder (server)
+specifies  the maximum  dynamic table  size it  accepts.
+Then the negotiated dynamic table size is the minimum of
+this option value and the value which server specified.</p>
+<p>Default: <code class="docutils literal"><span class="pre">4K</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-v">
+<code class="descname">-v</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--verbose</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-h2load-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output debug information.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-version">
+<code class="descname">--version</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-h2load-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display version information and exit.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h2load-help">
+<code class="descname">-h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-h2load-help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display this help and exit.</p>
+</dd></dl>
+
+<p>The &lt;SIZE&gt; argument is an integer and an optional unit (e.g., 10K is
+10 * 1024).  Units are K, M and G (powers of 1024).</p>
+<p>The &lt;DURATION&gt; argument is an integer and an optional unit (e.g., 1s
+is 1 second and 500ms is 500 milliseconds).  Units are h, m, s or ms
+(hours, minutes, seconds and milliseconds, respectively).  If a unit
+is omitted, a second is used as unit.</p>
+</div>
+<div class="section" id="output">
+<span id="h2load-1-output"></span><h2>OUTPUT<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>requests</dt>
+<dd><dl class="first last docutils">
+<dt>total</dt>
+<dd>The number of requests h2load was instructed to make.</dd>
+<dt>started</dt>
+<dd>The number of requests h2load has started.</dd>
+<dt>done</dt>
+<dd>The number of requests completed.</dd>
+<dt>succeeded</dt>
+<dd>The number of requests completed successfully.  Only HTTP status
+code 2xx or3xx are considered as success.</dd>
+<dt>failed</dt>
+<dd>The number of requests failed, including HTTP level failures
+(non-successful HTTP status code).</dd>
+<dt>errored</dt>
+<dd>The number of requests failed, except for HTTP level failures.
+This is the subset of the number reported in <code class="docutils literal"><span class="pre">failed</span></code> and most
+likely the network level failures or stream was reset by
+RST_STREAM.</dd>
+<dt>timeout</dt>
+<dd>The number of requests whose connection timed out before they were
+completed.   This  is  the  subset   of  the  number  reported  in
+<code class="docutils literal"><span class="pre">errored</span></code>.</dd>
+</dl>
+</dd>
+<dt>status codes</dt>
+<dd>The number of status code h2load received.</dd>
+<dt>traffic</dt>
+<dd><dl class="first last docutils">
+<dt>total</dt>
+<dd>The number of bytes received from the server &quot;on the wire&quot;.  If
+requests were made via TLS, this value is the number of decrypted
+bytes.</dd>
+<dt>headers</dt>
+<dd>The  number  of response  header  bytes  from the  server  without
+decompression.  The  <code class="docutils literal"><span class="pre">space</span> <span class="pre">savings</span></code> shows efficiency  of header
+compression.  Let <code class="docutils literal"><span class="pre">decompressed(headers)</span></code> to the number of bytes
+used for header fields after decompression.  The <code class="docutils literal"><span class="pre">space</span> <span class="pre">savings</span></code>
+is calculated  by (1 - <code class="docutils literal"><span class="pre">headers</span></code>  / <code class="docutils literal"><span class="pre">decompressed(headers)</span></code>) *
+100.  For HTTP/1.1, this is usually  0.00%, since it does not have
+header compression.  For HTTP/2 and SPDY, it shows some insightful
+numbers.</dd>
+<dt>data</dt>
+<dd>The number of response body bytes received from the server.</dd>
+</dl>
+</dd>
+<dt>time for request</dt>
+<dd><dl class="first last docutils">
+<dt>min</dt>
+<dd>The minimum time taken for request and response.</dd>
+<dt>max</dt>
+<dd>The maximum time taken for request and response.</dd>
+<dt>mean</dt>
+<dd>The mean time taken for request and response.</dd>
+<dt>sd</dt>
+<dd>The standard deviation of the time taken for request and response.</dd>
+<dt>+/- sd</dt>
+<dd>The fraction of the number of requests within standard deviation
+range (mean +/- sd) against total number of successful requests.</dd>
+</dl>
+</dd>
+<dt>time for connect</dt>
+<dd><dl class="first last docutils">
+<dt>min</dt>
+<dd>The minimum time taken to connect to a server.</dd>
+<dt>max</dt>
+<dd>The maximum time taken to connect to a server.</dd>
+<dt>mean</dt>
+<dd>The mean time taken to connect to a server.</dd>
+<dt>sd</dt>
+<dd>The standard deviation of the time taken to connect to a server.</dd>
+<dt>+/- sd</dt>
+<dd>The  fraction  of  the   number  of  connections  within  standard
+deviation range (mean  +/- sd) against total  number of successful
+connections.</dd>
+</dl>
+</dd>
+<dt>time for 1st byte (of (decrypted in case of TLS) application data)</dt>
+<dd><dl class="first last docutils">
+<dt>min</dt>
+<dd>The minimum time taken to get 1st byte from a server.</dd>
+<dt>max</dt>
+<dd>The maximum time taken to get 1st byte from a server.</dd>
+<dt>mean</dt>
+<dd>The mean time taken to get 1st byte from a server.</dd>
+<dt>sd</dt>
+<dd>The standard deviation of the time taken to get 1st byte from a
+server.</dd>
+<dt>+/- sd</dt>
+<dd>The fraction of the number of connections within standard
+deviation range (mean +/- sd) against total number of successful
+connections.</dd>
+</dl>
+</dd>
+<dt>req/s</dt>
+<dd><dl class="first last docutils">
+<dt>min</dt>
+<dd>The minimum request per second among all clients.</dd>
+<dt>max</dt>
+<dd>The maximum request per second among all clients.</dd>
+<dt>mean</dt>
+<dd>The mean request per second among all clients.</dd>
+<dt>sd</dt>
+<dd>The standard deviation of request per second among all clients.
+server.</dd>
+<dt>+/- sd</dt>
+<dd>The fraction of the number of connections within standard
+deviation range (mean +/- sd) against total number of successful
+connections.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="flow-control">
+<h2>FLOW CONTROL<a class="headerlink" href="#flow-control" title="Permalink to this headline">¶</a></h2>
+<p>h2load sets large flow control window by default, and effectively
+disables flow control to avoid under utilization of server
+performance.  To set smaller flow control window, use <a class="reference internal" href="#cmdoption-h2load-w"><code class="xref std std-option docutils literal"><span class="pre">-w</span></code></a> and
+<a class="reference internal" href="#cmdoption-h2load-connection-window-bits"><code class="xref std std-option docutils literal"><span class="pre">-W</span></code></a> options.  For example, use <code class="docutils literal"><span class="pre">-w16</span> <span class="pre">-W16</span></code> to set default
+window size described in HTTP/2 and SPDY protocol specification.</p>
+</div>
+<div class="section" id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><em class="manpage">nghttp(1)</em>, <em class="manpage">nghttpd(1)</em>, <em class="manpage">nghttpx(1)</em></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nghttpx-howto.html" class="btn btn-neutral float-right" title="nghttpx - HTTP/2 proxy - HOW-TO" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nghttpx.1.html" class="btn btn-neutral" title="nghttpx(1)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

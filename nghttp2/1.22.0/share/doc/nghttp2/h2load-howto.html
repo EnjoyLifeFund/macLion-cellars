@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>h2load - HTTP/2 benchmarking tool - HOW-TO &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="Programmers&#39; Guide" href="programmers-guide.html"/>
+        <link rel="prev" title="nghttpx - HTTP/2 proxy - HOW-TO" href="nghttpx-howto.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">h2load - HTTP/2 benchmarking tool - HOW-TO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-from-source">Compiling from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flow-control">Flow Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#selecting-protocol-for-clear-text">Selecting protocol for clear text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiple-uris">Multiple URIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unix-domain-socket">UNIX domain socket</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="programmers-guide.html">Programmers' Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>h2load - HTTP/2 benchmarking tool - HOW-TO</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="h2load-http-2-benchmarking-tool-how-to">
+<h1>h2load - HTTP/2 benchmarking tool - HOW-TO<a class="headerlink" href="#h2load-http-2-benchmarking-tool-how-to" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="h2load.1.html"><span class="doc">h2load(1)</span></a> is benchmarking tool for HTTP/2 and HTTP/1.1.  If
+built with spdylay (<a class="reference external" href="http://tatsuhiro-t.github.io/spdylay/">http://tatsuhiro-t.github.io/spdylay/</a>) library, it
+also supports SPDY protocol.  It supports SSL/TLS and clear text for
+all supported protocols.</p>
+<div class="section" id="compiling-from-source">
+<h2>Compiling from source<a class="headerlink" href="#compiling-from-source" title="Permalink to this headline">¶</a></h2>
+<p>h2load is compiled alongside nghttp2 and requires that the
+<code class="docutils literal"><span class="pre">--enable-apps</span></code> flag is passed to <code class="docutils literal"><span class="pre">./configure</span></code> and <a class="reference external" href="https://github.com/nghttp2/nghttp2#requirements">required
+dependencies</a> are
+available during compilation. For details on compiling, see <a class="reference external" href="https://github.com/nghttp2/nghttp2#building-from-git">nghttp2:
+Building from Git</a>.</p>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>In order to set benchmark settings, specify following 3 options.</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="h2load.1.html#cmdoption-h2load-n"><code class="xref std std-option docutils literal"><span class="pre">-n</span></code></a></dt>
+<dd>The number of total requests.  Default: 1</dd>
+<dt><a class="reference internal" href="h2load.1.html#cmdoption-h2load-c"><code class="xref std std-option docutils literal"><span class="pre">-c</span></code></a></dt>
+<dd>The number of concurrent clients.  Default: 1</dd>
+<dt><a class="reference internal" href="h2load.1.html#cmdoption-h2load-m"><code class="xref std std-option docutils literal"><span class="pre">-m</span></code></a></dt>
+<dd>The max concurrent streams to issue per client.  Default: 1</dd>
+</dl>
+<p>For SSL/TLS connection, the protocol will be negotiated via ALPN/NPN.
+You can set specific protocols in <a class="reference internal" href="h2load.1.html#cmdoption-h2load-npn-list"><code class="xref std std-option docutils literal"><span class="pre">--npn-list</span></code></a> option.  For
+cleartext connection, the default protocol is HTTP/2.  To change the
+protocol in cleartext connection, use <a class="reference internal" href="h2load.1.html#cmdoption-h2load-p"><code class="xref std std-option docutils literal"><span class="pre">--no-tls-proto</span></code></a> option.
+For convenience, <a class="reference internal" href="h2load.1.html#cmdoption-h2load-h1"><code class="xref std std-option docutils literal"><span class="pre">--h1</span></code></a> option forces HTTP/1.1 for both
+cleartext and SSL/TLS connections.</p>
+<p>Here is a command-line to perform benchmark to URI https://localhost
+using total 100000 requests, 100 concurrent clients and 10 max
+concurrent streams:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>$ h2load -n100000 -c100 -m10 https://localhost
+</pre></div>
+</div>
+<p>The benchmarking result looks like this:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>finished in 7.08s, 141164.80 req/s, 555.33MB/s
+requests: 1000000 total, 1000000 started, 1000000 done, 1000000 succeeded, 0 failed, 0 errored, 0 timeout
+status codes: 1000000 2xx, 0 3xx, 0 4xx, 0 5xx
+traffic: 4125025824 bytes total, 11023424 bytes headers (space savings 93.07%), 4096000000 bytes data
+                     min         max         mean         sd        +/- sd
+time for request:    15.31ms    146.85ms     69.78ms      9.26ms    92.43%
+time for connect:     1.08ms     25.04ms     10.71ms      9.80ms    64.00%
+time to 1st byte:    25.36ms    184.96ms     79.11ms     53.97ms    78.00%
+req/s (client)  :    1412.04     1447.84     1426.52       10.57    63.00%
+</pre></div>
+</div>
+<p>See the h2load manual page <a class="reference internal" href="h2load.1.html#h2load-1-output"><span class="std std-ref">OUTPUT</span></a> section for the
+explanation of the above numbers.</p>
+</div>
+<div class="section" id="flow-control">
+<h2>Flow Control<a class="headerlink" href="#flow-control" title="Permalink to this headline">¶</a></h2>
+<p>HTTP/2 and SPDY/3 or later employ flow control and it may affect
+benchmarking results.  By default, h2load uses large enough flow
+control window, which effectively disables flow control.  To adjust
+receiver flow control window size, there are following options:</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="h2load.1.html#cmdoption-h2load-w"><code class="xref std std-option docutils literal"><span class="pre">-w</span></code></a></dt>
+<dd>Sets  the stream  level  initial  window size  to
+(2**&lt;N&gt;)-1.  For SPDY, 2**&lt;N&gt; is used instead.</dd>
+<dt><a class="reference internal" href="h2load.1.html#cmdoption-h2load-connection-window-bits"><code class="xref std std-option docutils literal"><span class="pre">-W</span></code></a></dt>
+<dd>Sets the connection level  initial window size to
+(2**&lt;N&gt;)-1.  For  SPDY, if  &lt;N&gt; is  strictly less
+than  16,  this  option  is  ignored.   Otherwise
+2**&lt;N&gt; is used for SPDY.</dd>
+</dl>
+</div>
+<div class="section" id="multi-threading">
+<h2>Multi-Threading<a class="headerlink" href="#multi-threading" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes benchmarking client itself becomes a bottleneck.  To remedy
+this situation, use <a class="reference internal" href="h2load.1.html#cmdoption-h2load-t"><code class="xref std std-option docutils literal"><span class="pre">-t</span></code></a> option to specify the number of native
+thread to use.</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="h2load.1.html#cmdoption-h2load-t"><code class="xref std std-option docutils literal"><span class="pre">-t</span></code></a></dt>
+<dd>The number of native threads. Default: 1</dd>
+</dl>
+</div>
+<div class="section" id="selecting-protocol-for-clear-text">
+<h2>Selecting protocol for clear text<a class="headerlink" href="#selecting-protocol-for-clear-text" title="Permalink to this headline">¶</a></h2>
+<p>By default, if http:// URI is given, HTTP/2 protocol is used.  To
+change the protocol to use for clear text, use <a class="reference internal" href="h2load.1.html#cmdoption-h2load-p"><code class="xref std std-option docutils literal"><span class="pre">-p</span></code></a> option.</p>
+</div>
+<div class="section" id="multiple-uris">
+<h2>Multiple URIs<a class="headerlink" href="#multiple-uris" title="Permalink to this headline">¶</a></h2>
+<p>If multiple URIs are specified, they are used in round robin manner.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please note that h2load uses scheme, host and port in the first URI
+and ignores those parts in the rest of the URIs.</p>
+</div>
+</div>
+<div class="section" id="unix-domain-socket">
+<h2>UNIX domain socket<a class="headerlink" href="#unix-domain-socket" title="Permalink to this headline">¶</a></h2>
+<p>To request against UNIX domain socket, use <a class="reference internal" href="h2load.1.html#cmdoption-h2load-b"><code class="xref std std-option docutils literal"><span class="pre">--base-uri</span></code></a>, and
+specify <code class="docutils literal"><span class="pre">unix:</span></code> followed by the path to UNIX domain socket.  For
+example, if UNIX domain socket is <code class="docutils literal"><span class="pre">/tmp/nghttpx.sock</span></code>, use
+<code class="docutils literal"><span class="pre">--base-uri=unix:/tmp/nghttpx.sock</span></code>.  h2load uses scheme, host and
+port in the first URI in command-line or input file.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="programmers-guide.html" class="btn btn-neutral float-right" title="Programmers&#39; Guide" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nghttpx-howto.html" class="btn btn-neutral" title="nghttpx - HTTP/2 proxy - HOW-TO" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

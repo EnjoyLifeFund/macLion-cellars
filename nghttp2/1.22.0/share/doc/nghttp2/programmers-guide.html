@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Programmers&#39; Guide &mdash; nghttp2 1.22.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="nghttp2 1.22.0 documentation" href="index.html"/>
+        <link rel="next" title="API Reference" href="apiref.html"/>
+        <link rel="prev" title="h2load - HTTP/2 benchmarking tool - HOW-TO" href="h2load-howto.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> nghttp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.22.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="package_README.html">nghttp2 - HTTP/2 C Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-android-binary.html">Building Android binary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-client.html">Tutorial: HTTP/2 client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-server.html">Tutorial: HTTP/2 server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-hpack.html">Tutorial: HPACK API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp.1.html">nghttp(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpd.1.html">nghttpd(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx.1.html">nghttpx(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load.1.html">h2load(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttpx-howto.html">nghttpx - HTTP/2 proxy - HOW-TO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h2load-howto.html">h2load - HTTP/2 benchmarking tool - HOW-TO</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Programmers' Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#http-messaging">HTTP Messaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-order-of-transmission-of-the-http-2-frames">The order of transmission of the HTTP/2 frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implement-user-defined-http-2-non-critical-extensions">Implement user defined HTTP/2 non-critical extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use-built-in-http-2-extension-frame-handlers">How to use built-in HTTP/2 extension frame handlers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="apiref.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libnghttp2_asio.html">libnghttp2_asio: High level HTTP/2 C++ library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-apiref.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2.h.html">nghttp2.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nghttp2ver.h.html">nghttp2ver.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_server.h.html">asio_http2_server.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2_client.h.html">asio_http2_client.h</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asio_http2.h.html">asio_http2.h</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2">Source</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/nghttp2/nghttp2/issues">Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://nghttp2.org/">nghttp2.org</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">nghttp2</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Programmers' Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="programmers-guide">
+<h1>Programmers' Guide<a class="headerlink" href="#programmers-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>The most notable point in nghttp2 library architecture is it does not
+perform any I/O.  nghttp2 only performs HTTP/2 protocol stuff based on
+input byte strings.  It will calls callback functions set by
+applications while processing input.  The output of nghttp2 is just
+byte string.  An application is responsible to send these output to
+the remote peer.  The callback functions may be called while producing
+output.</p>
+<p>Not doing I/O makes embedding nghttp2 library in the existing code
+base very easy.  Usually, the existing applications have its own I/O
+event loops.  It is very hard to use nghttp2 in that situation if
+nghttp2 does its own I/O.  It also makes light weight language wrapper
+for nghttp2 easy with the same reason.  The down side is that an
+application author has to write more code to write complete
+application using nghttp2.  This is especially true for simple &quot;toy&quot;
+application.  For the real applications, however, this is not the
+case.  This is because you probably want to support HTTP/1 which
+nghttp2 does not provide, and to do that, you will need to write your
+own HTTP/1 stack or use existing third-party library, and bind them
+together with nghttp2 and I/O event loop.  In this point, not
+performing I/O in nghttp2 has more point than doing it.</p>
+<p>The primary object that an application uses is <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a>
+object, which is opaque struct and its details are hidden in order to
+ensure the upgrading its internal architecture without breaking the
+backward compatibility.  An application can set callbacks to
+<a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> object through the dedicated object and
+functions, and it also interacts with it via many API function calls.</p>
+<p>An application can create as many <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> object as it
+wants.  But single <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> object must be used by a
+single thread at the same time.  This is not so hard to enforce since
+most event-based architecture applications use is single thread per
+core, and handling one connection I/O is done by single thread.</p>
+<p>To feed input to <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> object, one can use
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> or <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> functions.
+They behave similarly, and the difference is that
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> will use <code class="xref c c-type docutils literal"><span class="pre">nghttp2_read_callback</span></code> to get
+input.  On the other hand, <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> will take
+input as its parameter.  If in doubt, use <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a>
+since it is simpler, and could be faster since it avoids calling
+callback function.</p>
+<p>To get output from <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> object, one can use
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> or <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a>.  The
+difference between them is that the former uses
+<a class="reference internal" href="types.html#c.nghttp2_send_callback" title="nghttp2_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_send_callback</span></code></a> to pass output to an application.  On
+the other hand, the latter returns the output to the caller.  If in
+doubt, use <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> since it is simpler.  But
+<a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> might be easier to use if the output buffer
+an application has is fixed sized.</p>
+<p>In general, an application should call <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a>
+when it gets input from underlying connection.  Since there is great
+chance to get something pushed into transmission queue while the call
+of <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a>, it is recommended to call
+<a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> after <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a>.</p>
+<p>There is a question when we are safe to close HTTP/2 session without
+waiting for the closure of underlying connection.  We offer 2 API
+calls for this: <a class="reference internal" href="nghttp2_session_want_read.html#c.nghttp2_session_want_read" title="nghttp2_session_want_read"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_want_read()</span></code></a> and
+<a class="reference internal" href="nghttp2_session_want_write.html#c.nghttp2_session_want_write" title="nghttp2_session_want_write"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_want_write()</span></code></a>.  If they both return 0, application
+can destroy <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a>, and then close the underlying
+connection.  But make sure that the buffered output has been
+transmitted to the peer before closing the connection when
+<a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> is used, since
+<a class="reference internal" href="nghttp2_session_want_write.html#c.nghttp2_session_want_write" title="nghttp2_session_want_write"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_want_write()</span></code></a> does not take into account the
+transmission of the buffered data outside of <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a>.</p>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<p>To use the public APIs, include <code class="docutils literal"><span class="pre">nghttp2/nghttp2.h</span></code>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;nghttp2/nghttp2.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>The header files are also available online: <a class="reference internal" href="nghttp2.h.html"><span class="doc">nghttp2.h</span></a> and
+<a class="reference internal" href="nghttp2ver.h.html"><span class="doc">nghttp2ver.h</span></a>.</p>
+</div>
+<div class="section" id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>Do not call <a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a>, <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a>,
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> or <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> from the
+nghttp2 callback functions directly or indirectly. It will lead to the
+crash.  You can submit requests or frames in the callbacks then call
+these functions outside the callbacks.</p>
+<p><a class="reference internal" href="nghttp2_session_send.html#c.nghttp2_session_send" title="nghttp2_session_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_send()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_send.html#c.nghttp2_session_mem_send" title="nghttp2_session_mem_send"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_send()</span></code></a> send first
+24 bytes of client magic string (MAGIC)
+(<a class="reference internal" href="macros.html#c.NGHTTP2_CLIENT_MAGIC" title="NGHTTP2_CLIENT_MAGIC"><code class="xref c c-macro docutils literal"><span class="pre">NGHTTP2_CLIENT_MAGIC</span></code></a>) on client configuration.  The
+applications are responsible to send SETTINGS frame as part of
+connection preface using <a class="reference internal" href="nghttp2_submit_settings.html#c.nghttp2_submit_settings" title="nghttp2_submit_settings"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_settings()</span></code></a>.  Similarly,
+<a class="reference internal" href="nghttp2_session_recv.html#c.nghttp2_session_recv" title="nghttp2_session_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_recv()</span></code></a> and <a class="reference internal" href="nghttp2_session_mem_recv.html#c.nghttp2_session_mem_recv" title="nghttp2_session_mem_recv"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_mem_recv()</span></code></a> consume
+MAGIC on server configuration unless
+<a class="reference internal" href="nghttp2_option_set_no_recv_client_magic.html#c.nghttp2_option_set_no_recv_client_magic" title="nghttp2_option_set_no_recv_client_magic"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_no_recv_client_magic()</span></code></a> is used with nonzero
+option value.</p>
+</div>
+<div class="section" id="http-messaging">
+<span id="id1"></span><h2>HTTP Messaging<a class="headerlink" href="#http-messaging" title="Permalink to this headline">¶</a></h2>
+<p>By default, nghttp2 library checks HTTP messaging rules described in
+<a class="reference external" href="https://tools.ietf.org/html/draft-ietf-httpbis-http2-17#section-8">HTTP/2 specification, section 8</a>.
+Everything described in that section is not validated however.  We
+briefly describe what the library does in this area.  In the following
+description, without loss of generality we omit CONTINUATION frame
+since they must follow HEADERS frame and are processed atomically.  In
+other words, they are just one big HEADERS frame.  To disable these
+validations, use <a class="reference internal" href="nghttp2_option_set_no_http_messaging.html#c.nghttp2_option_set_no_http_messaging" title="nghttp2_option_set_no_http_messaging"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_no_http_messaging()</span></code></a>.</p>
+<p>For HTTP request, including those carried by PUSH_PROMISE, HTTP
+message starts with one HEADERS frame containing request headers.  It
+is followed by zero or more DATA frames containing request body, which
+is followed by zero or one HEADERS containing trailer headers.  The
+request headers must include &quot;:scheme&quot;, &quot;:method&quot; and &quot;:path&quot; pseudo
+header fields unless &quot;:method&quot; is not &quot;CONNECT&quot;.  &quot;:authority&quot; is
+optional, but nghttp2 requires either &quot;:authority&quot; or &quot;Host&quot; header
+field must be present.  If &quot;:method&quot; is &quot;CONNECT&quot;, the request headers
+must include &quot;:method&quot; and &quot;:authority&quot; and must omit &quot;:scheme&quot; and
+&quot;:path&quot;.</p>
+<p>For HTTP response, HTTP message starts with zero or more HEADERS
+frames containing non-final response (status code 1xx).  They are
+followed by one HEADERS frame containing final response headers
+(non-1xx).  It is followed by zero or more DATA frames containing
+response body, which is followed by zero or one HEADERS containing
+trailer headers.  The non-final and final response headers must
+contain &quot;:status&quot; pseudo header field containing 3 digits only.</p>
+<p>All request and response headers must include exactly one valid value
+for each pseudo header field.  Additionally nghttp2 requires all
+request headers must not include more than one &quot;Host&quot; header field.</p>
+<p>HTTP/2 prohibits connection-specific header fields.  The following
+header fields must not appear: &quot;Connection&quot;, &quot;Keep-Alive&quot;,
+&quot;Proxy-Connection&quot;, &quot;Transfer-Encoding&quot; and &quot;Upgrade&quot;.  Additionally,
+&quot;TE&quot; header field must not include any value other than &quot;trailers&quot;.</p>
+<p>Each header field name and value must obey the field-name and
+field-value production rules described in <a class="reference external" href="https://tools.ietf.org/html/rfc7230#section-3.2">RFC 7230, section
+3.2.</a>.
+Additionally, all field name must be lower cased.  While the pseudo
+header fields must satisfy these rules, we just ignore illegal regular
+headers (this means that these header fields are not passed to
+application callback).  If application wants to treat these headers as
+error, use <a class="reference external" href="https://nghttp2.org/documentation/types.html#c.nghttp2_on_invalid_header_callback">nghttp2_on_invalid_header_callback</a>.</p>
+<p>For &quot;http&quot; or &quot;https&quot; URIs, &quot;:path&quot; pseudo header fields must start
+with &quot;/&quot;.  The only exception is OPTIONS request, in that case, &quot;*&quot; is
+allowed in &quot;:path&quot; pseudo header field to represent system-wide
+OPTIONS request.</p>
+<p>With the above validations, nghttp2 library guarantees that header
+field name passed to <a class="reference internal" href="types.html#c.nghttp2_on_header_callback" title="nghttp2_on_header_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_on_header_callback()</span></code></a> is not empty.
+Also required pseudo headers are all present and not empty.</p>
+<p>nghttp2 enforces &quot;Content-Length&quot; validation as well.  All request or
+response headers must not contain more than one &quot;Content-Length&quot;
+header field.  If &quot;Content-Length&quot; header field is present, it must be
+parsed as 64 bit signed integer.  The sum of data length in the
+following DATA frames must match with the number in &quot;Content-Length&quot;
+header field if it is present (this does not include padding bytes).</p>
+<p>RFC 7230 says that server must not send &quot;Content-Length&quot; in any
+response with 1xx, and 204 status code.  It also says that
+&quot;Content-Length&quot; is not allowed in any response with 200 status code
+to a CONNECT request.  nghttp2 enforces them as well.</p>
+<p>Any deviation results in stream error of type PROTOCOL_ERROR.  If
+error is found in PUSH_PROMISE frame, stream error is raised against
+promised stream.</p>
+</div>
+<div class="section" id="the-order-of-transmission-of-the-http-2-frames">
+<h2>The order of transmission of the HTTP/2 frames<a class="headerlink" href="#the-order-of-transmission-of-the-http-2-frames" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the internals of libnghttp2 about the
+scheduling of transmission of HTTP/2 frames.  This is pretty much
+internal stuff, so the details could change in the future versions of
+the library.</p>
+<p>libnghttp2 categorizes HTTP/2 frames into 4 categories: urgent,
+regular, syn_stream, and data in the order of higher priority.</p>
+<p>The urgent category includes PING and SETTINGS.  They are sent with
+highest priority.  The order inside the category is FIFO.</p>
+<p>The regular category includes frames other than PING, SETTINGS, DATA,
+and HEADERS which does not create stream (which counts toward
+concurrent stream limit).  The order inside the category is FIFO.</p>
+<p>The syn_stream category includes HEADERS frame which creates stream,
+that counts toward the concurrent stream limit.</p>
+<p>The data category includes DATA frame, and the scheduling among DATA
+frames are determined by HTTP/2 dependency tree.</p>
+<p>If the application wants to send frames in the specific order, and the
+default transmission order does not fit, it has to schedule frames by
+itself using the callbacks (e.g.,
+<a class="reference internal" href="types.html#c.nghttp2_on_frame_send_callback" title="nghttp2_on_frame_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_send_callback</span></code></a>).</p>
+<p>RST_STREAM has special side effect when it is submitted by
+<a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a>.  It cancels all pending HEADERS and
+DATA frames whose stream ID matches the one in the RST_STREAM frame.
+This may cause unexpected behaviour for the application in some cases.
+For example, suppose that application wants to send RST_STREAM after
+sending response HEADERS and DATA.  Because of the reason we mentioned
+above, the following code does not work:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">nghttp2_submit_response</span><span class="p">(...)</span>
+<span class="n">nghttp2_submit_rst_stream</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<p>RST_STREAM cancels HEADERS (and DATA), and just RST_STREAM is sent.
+The correct way is use <a class="reference internal" href="types.html#c.nghttp2_on_frame_send_callback" title="nghttp2_on_frame_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_send_callback</span></code></a>, and
+after HEADERS and DATA frames are sent, issue
+<a class="reference internal" href="nghttp2_submit_rst_stream.html#c.nghttp2_submit_rst_stream" title="nghttp2_submit_rst_stream"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_rst_stream()</span></code></a>.  FYI,
+<a class="reference internal" href="types.html#c.nghttp2_on_frame_not_send_callback" title="nghttp2_on_frame_not_send_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_not_send_callback</span></code></a> tells you why frames are
+not sent.</p>
+</div>
+<div class="section" id="implement-user-defined-http-2-non-critical-extensions">
+<h2>Implement user defined HTTP/2 non-critical extensions<a class="headerlink" href="#implement-user-defined-http-2-non-critical-extensions" title="Permalink to this headline">¶</a></h2>
+<p>As of nghttp2 v1.8.0, we have added HTTP/2 non-critical extension
+framework, which lets application send and receive user defined custom
+HTTP/2 non-critical extension frames.  nghttp2 also offers built-in
+functionality to send and receive official HTTP/2 extension frames
+(e.g., ALTSVC frame).  For these built-in handler, refer to the next
+section.</p>
+<p>To send extension frame, use <a class="reference internal" href="nghttp2_submit_extension.html#c.nghttp2_submit_extension" title="nghttp2_submit_extension"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_extension()</span></code></a>, and
+implement <a class="reference internal" href="types.html#c.nghttp2_pack_extension_callback" title="nghttp2_pack_extension_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_pack_extension_callback</span></code></a>.  The callback
+implements how to encode data into wire format.  The callback must be
+set to <a class="reference internal" href="types.html#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a> using
+<a class="reference internal" href="nghttp2_session_callbacks_set_pack_extension_callback.html#c.nghttp2_session_callbacks_set_pack_extension_callback" title="nghttp2_session_callbacks_set_pack_extension_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_pack_extension_callback()</span></code></a>.</p>
+<p>For example, we will illustrate how to send <a class="reference external" href="https://tools.ietf.org/html/draft-ietf-httpbis-alt-svc-14">ALTSVC</a> frame.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">origin</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">field</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">alt_svc</span><span class="p">;</span>
+
+<span class="kt">ssize_t</span> <span class="nf">pack_extension_callback</span><span class="p">(</span><span class="n">nghttp2_session</span> <span class="o">*</span><span class="n">session</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span>
+                                <span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="k">const</span> <span class="n">nghttp2_frame</span> <span class="o">*</span><span class="n">frame</span><span class="p">,</span>
+                                <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">alt_svc</span> <span class="o">*</span><span class="n">altsvc</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="n">alt_svc</span> <span class="o">*</span><span class="p">)</span><span class="n">frame</span><span class="o">-&gt;</span><span class="n">ext</span><span class="p">.</span><span class="n">payload</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">originlen</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">);</span>
+  <span class="kt">size_t</span> <span class="n">fieldlen</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">field</span><span class="p">);</span>
+
+  <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">originlen</span> <span class="o">+</span> <span class="n">fieldlen</span> <span class="o">||</span> <span class="n">originlen</span> <span class="o">&gt;</span> <span class="mh">0xffff</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">NGHTTP2_ERR_CANCEL</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="n">buf</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">p</span><span class="o">++</span> <span class="o">=</span> <span class="n">originlen</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">p</span><span class="o">++</span> <span class="o">=</span> <span class="n">originlen</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">;</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">,</span> <span class="n">originlen</span><span class="p">);</span>
+  <span class="n">p</span> <span class="o">+=</span> <span class="n">originlen</span><span class="p">;</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">field</span><span class="p">,</span> <span class="n">fieldlen</span><span class="p">);</span>
+  <span class="n">p</span> <span class="o">+=</span> <span class="n">fieldlen</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="n">p</span> <span class="o">-</span> <span class="n">buf</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This implements <a class="reference internal" href="types.html#c.nghttp2_pack_extension_callback" title="nghttp2_pack_extension_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_pack_extension_callback</span></code></a>.  We have to
+set this callback to <a class="reference internal" href="types.html#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">nghttp2_session_callbacks_set_pack_extension_callback</span><span class="p">(</span>
+    <span class="n">callbacks</span><span class="p">,</span> <span class="n">pack_extension_callback</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To send ALTSVC frame, call <a class="reference internal" href="nghttp2_submit_extension.html#c.nghttp2_submit_extension" title="nghttp2_submit_extension"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_extension()</span></code></a>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="k">const</span> <span class="n">alt_svc</span> <span class="n">altsvc</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;example.com&quot;</span><span class="p">,</span> <span class="s">&quot;h2=</span><span class="se">\&quot;</span><span class="s">:8000</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">};</span>
+
+<span class="n">nghttp2_submit_extension</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="mh">0xa</span><span class="p">,</span> <span class="n">NGHTTP2_FLAG_NONE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                         <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">altsvc</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Notice that ALTSVC is use frame type <code class="docutils literal"><span class="pre">0xa</span></code>.</p>
+<p>To receive extension frames, implement 2 callbacks:
+<a class="reference internal" href="types.html#c.nghttp2_unpack_extension_callback" title="nghttp2_unpack_extension_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_unpack_extension_callback</span></code></a> and
+<a class="reference internal" href="types.html#c.nghttp2_on_extension_chunk_recv_callback" title="nghttp2_on_extension_chunk_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_extension_chunk_recv_callback</span></code></a>.
+<a class="reference internal" href="types.html#c.nghttp2_unpack_extension_callback" title="nghttp2_unpack_extension_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_unpack_extension_callback</span></code></a> implements the way how to
+decode wire format.  <a class="reference internal" href="types.html#c.nghttp2_on_extension_chunk_recv_callback" title="nghttp2_on_extension_chunk_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_extension_chunk_recv_callback</span></code></a>
+implements how to buffer the incoming extension payload.  These
+callbacks must be set using
+<a class="reference internal" href="nghttp2_session_callbacks_set_unpack_extension_callback.html#c.nghttp2_session_callbacks_set_unpack_extension_callback" title="nghttp2_session_callbacks_set_unpack_extension_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_unpack_extension_callback()</span></code></a> and
+<a class="reference internal" href="nghttp2_session_callbacks_set_on_extension_chunk_recv_callback.html#c.nghttp2_session_callbacks_set_on_extension_chunk_recv_callback" title="nghttp2_session_callbacks_set_on_extension_chunk_recv_callback"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_session_callbacks_set_on_extension_chunk_recv_callback()</span></code></a>
+respectively.  The application also must tell the library which
+extension frame type it is willing to receive using
+<a class="reference internal" href="nghttp2_option_set_user_recv_extension_type.html#c.nghttp2_option_set_user_recv_extension_type" title="nghttp2_option_set_user_recv_extension_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_user_recv_extension_type()</span></code></a>.  Note that the
+application has to create <a class="reference internal" href="types.html#c.nghttp2_option" title="nghttp2_option"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_option</span></code></a> object for that
+purpose, and initialize session with it.</p>
+<p>We use ALTSVC again to illustrate how to receive extension frames.  We
+use different <code class="docutils literal"><span class="pre">alt_svc</span></code> struct than the previous one.</p>
+<p>First implement 2 callbacks.  We store incoming ALTSVC payload to
+global variable <code class="docutils literal"><span class="pre">altsvc_buffer</span></code>.  Don't do this in production code
+since this is not thread safe:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">origin</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">originlen</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">field</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">fieldlen</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">alt_svc</span><span class="p">;</span>
+
+<span class="cm">/* buffers incoming ALTSVC payload */</span>
+<span class="kt">uint8_t</span> <span class="n">altsvc_buffer</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
+<span class="cm">/* The length of byte written to altsvc_buffer */</span>
+<span class="kt">size_t</span> <span class="n">altsvc_bufferlen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">on_extension_chunk_recv_callback</span><span class="p">(</span><span class="n">nghttp2_session</span> <span class="o">*</span><span class="n">session</span><span class="p">,</span>
+                                     <span class="k">const</span> <span class="n">nghttp2_frame_hd</span> <span class="o">*</span><span class="n">hd</span><span class="p">,</span>
+                                     <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span>
+                                     <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">altsvc_buffer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">altsvc_bufferlen</span> <span class="o">+</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">altsvc_bufferlen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">NGHTTP2_ERR_CANCEL</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">altsvc_buffer</span> <span class="o">+</span> <span class="n">altsvc_bufferlen</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+  <span class="n">altsvc_bufferlen</span> <span class="o">+=</span> <span class="n">len</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">unpack_extension_callback</span><span class="p">(</span><span class="n">nghttp2_session</span> <span class="o">*</span><span class="n">session</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">payload</span><span class="p">,</span>
+                              <span class="k">const</span> <span class="n">nghttp2_frame_hd</span> <span class="o">*</span><span class="n">hd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">origin</span><span class="p">,</span> <span class="o">*</span><span class="n">field</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">originlen</span><span class="p">,</span> <span class="n">fieldlen</span><span class="p">;</span>
+  <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">end</span><span class="p">;</span>
+  <span class="n">alt_svc</span> <span class="o">*</span><span class="n">altsvc</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">altsvc_bufferlen</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">altsvc_bufferlen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">NGHTTP2_ERR_CANCEL</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="n">altsvc_buffer</span><span class="p">;</span>
+  <span class="n">end</span> <span class="o">=</span> <span class="n">altsvc_buffer</span> <span class="o">+</span> <span class="n">altsvc_bufferlen</span><span class="p">;</span>
+
+  <span class="n">originlen</span> <span class="o">=</span> <span class="p">((</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="n">p</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">originlen</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">altsvc_bufferlen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">NGHTTP2_ERR_CANCEL</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">origin</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+  <span class="n">field</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">originlen</span><span class="p">;</span>
+  <span class="n">fieldlen</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">field</span><span class="p">;</span>
+
+  <span class="n">altsvc</span> <span class="o">=</span> <span class="p">(</span><span class="n">alt_svc</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">alt_svc</span><span class="p">));</span>
+  <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">origin</span> <span class="o">=</span> <span class="n">origin</span><span class="p">;</span>
+  <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">originlen</span> <span class="o">=</span> <span class="n">originlen</span><span class="p">;</span>
+  <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="p">;</span>
+  <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">fieldlen</span> <span class="o">=</span> <span class="n">fieldlen</span><span class="p">;</span>
+
+  <span class="o">*</span><span class="n">payload</span> <span class="o">=</span> <span class="n">altsvc</span><span class="p">;</span>
+
+  <span class="n">altsvc_bufferlen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Set these callbacks to <a class="reference internal" href="types.html#c.nghttp2_session_callbacks" title="nghttp2_session_callbacks"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session_callbacks</span></code></a>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">nghttp2_session_callbacks_set_on_extension_chunk_recv_callback</span><span class="p">(</span>
+    <span class="n">callbacks</span><span class="p">,</span> <span class="n">on_extension_chunk_recv_callback</span><span class="p">);</span>
+
+<span class="n">nghttp2_session_callbacks_set_unpack_extension_callback</span><span class="p">(</span>
+    <span class="n">callbacks</span><span class="p">,</span> <span class="n">unpack_extension_callback</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">unpack_extension_callback</span></code> above, we set unpacked <code class="docutils literal"><span class="pre">alt_svc</span></code>
+object to <code class="docutils literal"><span class="pre">*payload</span></code>.  nghttp2 library then, calls
+<a class="reference internal" href="types.html#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a>, and <code class="docutils literal"><span class="pre">*payload</span></code> will be
+available as <code class="docutils literal"><span class="pre">frame-&gt;ext.payload</span></code>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">on_frame_recv_callback</span><span class="p">(</span><span class="n">nghttp2_session</span> <span class="o">*</span><span class="n">session</span><span class="p">,</span>
+                           <span class="k">const</span> <span class="n">nghttp2_frame</span> <span class="o">*</span><span class="n">frame</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">switch</span> <span class="p">(</span><span class="n">frame</span><span class="o">-&gt;</span><span class="n">hd</span><span class="p">.</span><span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="k">case</span> <span class="mh">0xa</span><span class="o">:</span> <span class="p">{</span>
+    <span class="n">alt_svc</span> <span class="o">*</span><span class="n">altsvc</span> <span class="o">=</span> <span class="p">(</span><span class="n">alt_svc</span> <span class="o">*</span><span class="p">)</span><span class="n">frame</span><span class="o">-&gt;</span><span class="n">ext</span><span class="p">.</span><span class="n">payload</span><span class="p">;</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;ALTSVC frame received</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot; origin: %.*s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">originlen</span><span class="p">,</span> <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">);</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot; field : %.*s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">fieldlen</span><span class="p">,</span> <span class="n">altsvc</span><span class="o">-&gt;</span><span class="n">field</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">altsvc</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, application should set the extension frame types it is
+willing to receive:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">nghttp2_option_set_user_recv_extension_type</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="mh">0xa</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="types.html#c.nghttp2_option" title="nghttp2_option"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_option</span></code></a> must be set to <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> on
+its creation:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">nghttp2_session_client_new2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">session</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">user_data</span><span class="p">,</span> <span class="n">option</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-use-built-in-http-2-extension-frame-handlers">
+<h2>How to use built-in HTTP/2 extension frame handlers<a class="headerlink" href="#how-to-use-built-in-http-2-extension-frame-handlers" title="Permalink to this headline">¶</a></h2>
+<p>In the previous section, we talked about the user defined HTTP/2
+extension frames.  In this section, we talk about HTTP/2 extension
+frame support built into nghttp2 library.</p>
+<p>As of this writing, nghttp2 supports ALTSVC extension frame.  To send
+ALTSVC frame, use <a class="reference internal" href="nghttp2_submit_altsvc.html#c.nghttp2_submit_altsvc" title="nghttp2_submit_altsvc"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_submit_altsvc()</span></code></a> function.</p>
+<p>To receive ALTSVC frame through built-in functionality, application
+has to use <a class="reference internal" href="nghttp2_option_set_builtin_recv_extension_type.html#c.nghttp2_option_set_builtin_recv_extension_type" title="nghttp2_option_set_builtin_recv_extension_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_builtin_recv_extension_type()</span></code></a> to
+indicate the willingness of receiving ALTSVC frame:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">nghttp2_option_set_builtin_recv_extension_type</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">NGHTTP2_ALTSVC</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This is very similar to the case when we used to receive user defined
+frames.</p>
+<p>If the same frame type is set using
+<a class="reference internal" href="nghttp2_option_set_builtin_recv_extension_type.html#c.nghttp2_option_set_builtin_recv_extension_type" title="nghttp2_option_set_builtin_recv_extension_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_builtin_recv_extension_type()</span></code></a> and
+<a class="reference internal" href="nghttp2_option_set_user_recv_extension_type.html#c.nghttp2_option_set_user_recv_extension_type" title="nghttp2_option_set_user_recv_extension_type"><code class="xref c c-func docutils literal"><span class="pre">nghttp2_option_set_user_recv_extension_type()</span></code></a>, the latter takes
+precedence.  Application can implement its own frame handler rather
+than using built-in handler.</p>
+<p>The <a class="reference internal" href="types.html#c.nghttp2_option" title="nghttp2_option"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_option</span></code></a> must be set to <a class="reference internal" href="types.html#c.nghttp2_session" title="nghttp2_session"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_session</span></code></a> on
+its creation, like so:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">nghttp2_session_client_new2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">session</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">user_data</span><span class="p">,</span> <span class="n">option</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When ALTSVC is received, <a class="reference internal" href="types.html#c.nghttp2_on_frame_recv_callback" title="nghttp2_on_frame_recv_callback"><code class="xref c c-type docutils literal"><span class="pre">nghttp2_on_frame_recv_callback</span></code></a> will
+be called as usual.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="apiref.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="h2load-howto.html" class="btn btn-neutral" title="h2load - HTTP/2 benchmarking tool - HOW-TO" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2012, 2015, 2016, Tatsuhiro Tsujikawa.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.22.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
