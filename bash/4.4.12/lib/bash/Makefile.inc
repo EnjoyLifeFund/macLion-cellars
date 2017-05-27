@@ -38,7 +38,7 @@ loadablesdir = ${libdir}/bash
 headersdir = $(includedir)/$(PACKAGE_NAME)
 
 topdir = ../..
-BUILD_DIR = /private/tmp/bash-20170515-20752-13zcb7m/bash-4.4
+BUILD_DIR = /private/tmp/bash-20170526-41807-qso54a/bash-4.4
 srcdir = .
 
 

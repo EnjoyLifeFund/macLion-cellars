@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CPACK" "1" "May 15, 2017" "3.8.1" "CMake"
+.TH "CPACK" "1" "May 26, 2017" "3.8.1" "CMake"
 .SH NAME
 cpack \- CPack Command-Line Reference
 .
@@ -43,7 +43,7 @@ cpack \-G <generator> [<options>]
 .UNINDENT
 .SH DESCRIPTION
 .sp
-The "cpack" executable is the CMake packaging program.
+The “cpack” executable is the CMake packaging program.
 CMake\-generated build trees created for projects that use the
 INSTALL_* commands have packaging support.  This program will generate
 the package.
@@ -68,7 +68,7 @@ names are specified in the Generators section.
 Specify the project configuration
 .sp
 This option specifies the configuration that the project was build
-with, for example \(aqDebug\(aq, \(aqRelease\(aq.
+with, for example ‘Debug’, ‘Release’.
 .TP
 .B \fB\-D <var>=<value>\fP
 Set a CPack variable.
@@ -109,7 +109,7 @@ override/define CPACK_PACKAGE_DIRECTORY
 .sp
 The directory where CPack will be doing its packaging work.The
 resulting package will be found there.  Inside this directoryCPack
-creates \(aq_CPack_Packages\(aq sub\-directory which is theCPack temporary
+creates ‘_CPack_Packages’ sub\-directory which is theCPack temporary
 directory.
 .TP
 .B \fB\-\-vendor <vendor name>\fP

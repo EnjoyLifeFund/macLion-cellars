@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CMAKE-QT" "7" "May 15, 2017" "3.8.1" "CMake"
+.TH "CMAKE-QT" "7" "May 26, 2017" "3.8.1" "CMake"
 .SH NAME
 cmake-qt \- CMake Qt Features Reference
 .
@@ -34,7 +34,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .sp
 CMake can find and use Qt 4 and Qt 5 libraries.  The Qt 4 libraries are found
 by the \fBFindQt4\fP find\-module shipped with CMake, whereas the
-Qt 5 libraries are found using "Config\-file Packages" shipped with Qt 5. See
+Qt 5 libraries are found using “Config\-file Packages” shipped with Qt 5. See
 \fBcmake\-packages(7)\fP for more information about CMake packages, and
 see \fI\%the Qt cmake manual\fP
 for your Qt version.
@@ -98,7 +98,7 @@ invoked for, and for the appropriate build configuration.
 .sp
 The generated \fBmoc_*.cpp\fP and \fB*.moc\fP files are placed in the
 \fB<CMAKE_CURRENT_BINARY_DIR>/<TARGETNAME>_autogen/include\fP directory which is
-automatically added to the target\(aqs \fBINCLUDE_DIRECTORIES\fP\&.
+automatically added to the target’s \fBINCLUDE_DIRECTORIES\fP\&.
 (This differs from CMake 3.7 and below; see their documentation for details.)
 .sp
 The \fBAUTOMOC\fP target property may be pre\-set for all
@@ -121,7 +121,7 @@ be executed to generate the appropriate file.
 .sp
 The generated generated \fBui_*.h\fP files are placed in the
 \fB<CMAKE_CURRENT_BINARY_DIR>/<TARGETNAME>_autogen/include\fP directory which is
-automatically added to the target\(aqs \fBINCLUDE_DIRECTORIES\fP\&.
+automatically added to the target’s \fBINCLUDE_DIRECTORIES\fP\&.
 (This differs from CMake 3.7 and below; see their documentation for details.)
 .sp
 The \fBAUTOUIC\fP target property may be pre\-set for all following

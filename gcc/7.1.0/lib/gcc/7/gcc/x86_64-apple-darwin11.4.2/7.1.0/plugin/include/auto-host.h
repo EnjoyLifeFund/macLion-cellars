@@ -1137,7 +1137,7 @@
 
 /* Define to 1 if you have the <ext/hash_map> header file. */
 #ifndef USED_FOR_TARGET
-/* #undef HAVE_EXT_HASH_MAP */
+#define HAVE_EXT_HASH_MAP 1
 #endif
 
 
@@ -1858,7 +1858,7 @@
 
 /* Define to 1 if you have the <unordered_map> header file. */
 #ifndef USED_FOR_TARGET
-#define HAVE_UNORDERED_MAP 1
+/* #undef HAVE_UNORDERED_MAP */
 #endif
 
 

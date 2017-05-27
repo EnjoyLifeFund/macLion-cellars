@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "CMAKE-POLICIES" "7" "May 15, 2017" "3.8.1" "CMake"
+.TH "CMAKE-POLICIES" "7" "May 26, 2017" "3.8.1" "CMake"
 .SH NAME
 cmake-policies \- CMake Policies Reference
 .
@@ -146,7 +146,7 @@ honor config\-specific compiler flags too.  This policy provides compatibility
 for projects that do not expect config\-specific compiler flags to be used.
 .sp
 The \fBOLD\fP behavior of this policy is to ignore config\-specific flag
-variables like \fBCMAKE_<LANG>_FLAGS_DEBUG\fP and only use CMake\(aqs
+variables like \fBCMAKE_<LANG>_FLAGS_DEBUG\fP and only use CMake’s
 built\-in defaults for the current compiler and platform.
 .sp
 The \fBNEW\fP behavior of this policy is to honor config\-specific flag
@@ -432,8 +432,8 @@ file timestamp only when its content changes.  With this approach
 the generation rule must have a separate output file that is always
 updated with a new timestamp that is newer than any dependencies of
 the rule so that the build tool re\-runs the rule only when the input
-changes.  We refer to the separate output file as a rule\(aqs \fIwitness\fP
-and the generated file as a rule\(aqs \fIbyproduct\fP\&.
+changes.  We refer to the separate output file as a rule’s \fIwitness\fP
+and the generated file as a rule’s \fIbyproduct\fP\&.
 .sp
 Byproducts may not be listed as outputs because their timestamps are
 allowed to be older than the inputs.  No build tools (like \fBmake\fP)
@@ -1112,14 +1112,14 @@ and may be removed in a future version of CMake.
 .sp
 \fBMACOSX_RPATH\fP is enabled by default.
 .sp
-CMake 2.8.12 and newer has support for using \fB@rpath\fP in a target\(aqs install
+CMake 2.8.12 and newer has support for using \fB@rpath\fP in a target’s install
 name.  This was enabled by setting the target property
 \fBMACOSX_RPATH\fP\&.  The \fB@rpath\fP in an install name is a more
 flexible and powerful mechanism than \fB@executable_path\fP or \fB@loader_path\fP
 for locating shared libraries.
 .sp
 CMake 3.0 and later prefer this property to be ON by default.  Projects
-wanting \fB@rpath\fP in a target\(aqs install name may remove any setting of
+wanting \fB@rpath\fP in a target’s install name may remove any setting of
 the \fBINSTALL_NAME_DIR\fP and \fBCMAKE_INSTALL_NAME_DIR\fP
 variables.
 .sp
@@ -1259,7 +1259,7 @@ character (_), dot(.), plus(+) and minus(\-).  As a special case, ALIAS
 targets and IMPORTED targets may contain two consequtive colons.
 .sp
 Target names reserved by one or more CMake generators are not allowed.
-Among others these include "all", "help" and "test".
+Among others these include “all”, “help” and “test”.
 .sp
 The OLD behavior for this policy is to allow creating targets with
 reserved names or which do not match the validity pattern.
@@ -1390,7 +1390,7 @@ and may be removed in a future version of CMake.
 The \fBoutput_required_files()\fP command should not be called.
 .sp
 This command was added in June 2001 to expose the then\-current CMake
-implicit dependency scanner.  CMake\(aqs real implicit dependency scanner
+implicit dependency scanner.  CMake’s real implicit dependency scanner
 has evolved since then but is not exposed through this command.  The
 scanning capabilities of this command are very limited and this
 functionality is better achieved through dedicated outside tools.
@@ -1707,7 +1707,7 @@ and may be removed in a future version of CMake.
 .sp
 INTERFACE_LINK_LIBRARIES defines the link interface.
 .sp
-CMake 2.8.11 constructed the \(aqlink interface\(aq of a target from
+CMake 2.8.11 constructed the ‘link interface’ of a target from
 properties matching \fB(IMPORTED_)?LINK_INTERFACE_LIBRARIES(_<CONFIG>)?\fP\&.
 The modern way to specify config\-sensitive content is to use generator
 expressions and the \fBIMPORTED_\fP prefix makes uniform processing of the
@@ -1908,7 +1908,7 @@ target_link_libraries() reports error if its only argument is not a target.
 .sp
 In CMake 2.8.2 and lower the target_link_libraries() command silently
 ignored if it was called with only one argument, and this argument
-wasn\(aqt a valid target.  In CMake 2.8.3 and above it reports an error
+wasn’t a valid target.  In CMake 2.8.3 and above it reports an error
 in this case.
 .sp
 This policy was introduced in CMake version 2.8.3.  CMake version
@@ -2007,10 +2007,10 @@ dereferenced arguments corresponding to variables, even those named
 like numbers or boolean constants, except for 0 and 1.  Numbers and
 boolean constants such as true, false, yes, no, on, off, y, n,
 notfound, ignore (all case insensitive) were recognized in some cases
-but not all.  For example, the code "if(TRUE)" might have evaluated as
+but not all.  For example, the code “if(TRUE)” might have evaluated as
 false.  Numbers such as 2 were recognized only in boolean expressions
-like "if(NOT 2)" (leading to false) but not as a single\-argument like
-"if(2)" (also leading to false).  Later versions of CMake prefer to
+like “if(NOT 2)” (leading to false) but not as a single\-argument like
+“if(2)” (also leading to false).  Later versions of CMake prefer to
 treat numbers and boolean constants literally, so they should not be
 used as variable names.
 .sp
@@ -2067,7 +2067,7 @@ and may be removed in a future version of CMake.
 Bad variable reference syntax is an error.
 .sp
 In CMake 2.6.2 and below, incorrect variable reference syntax such as
-a missing close\-brace ("${FOO") was reported but did not stop
+a missing close\-brace (“${FOO”) was reported but did not stop
 processing of CMake code.  This policy determines whether a bad
 variable reference is an error.  The OLD behavior for this policy is
 to warn about the error, leave the string untouched, and continue.
@@ -2131,8 +2131,8 @@ target_link_libraries(myexe /full/path/to/somelib)
 .UNINDENT
 .UNINDENT
 .sp
-where "somelib" is supposed to be a valid library file name such as
-"libsomelib.a" or "somelib.lib".  For Makefile generators this
+where “somelib” is supposed to be a valid library file name such as
+“libsomelib.a” or “somelib.lib”.  For Makefile generators this
 produces an error at build time because the dependency on the full
 path cannot be found.  For VS IDE and Xcode generators this used to
 work by accident because CMake would always split off the library
@@ -2345,7 +2345,7 @@ target_link_libraries(myexe /path/to/libA.so B)
 .UNINDENT
 .UNINDENT
 .sp
-where "B" is meant to find "/path/to/libB.so".  This code is wrong
+where “B” is meant to find “/path/to/libB.so”.  This code is wrong
 because the user is asking the linker to find library B but has not
 provided a linker search path (which may be added with the
 link_directories command).  However, with the old linking
@@ -2535,8 +2535,8 @@ cmake_minimum_required(VERSION <major>.<minor>)
 .UNINDENT
 .UNINDENT
 .sp
-where "<major>.<minor>" is the version of CMake you want to support
-(such as "2.6").  The command will ensure that at least the given
+where “<major>.<minor>” is the version of CMake you want to support
+(such as “2.6”).  The command will ensure that at least the given
 version of CMake is running and help newer versions be compatible with
 the project.  See documentation of cmake_minimum_required for details.
 .sp
